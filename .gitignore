@@ -6,6 +6,18 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 
+# Generated js
+*.js
+*.js.map
+
+# Visual studio
+.vs/
+*.njsproj
+*.njsproj.user
+*.sln
+
+package-lock.json
+
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
