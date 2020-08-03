@@ -2,6 +2,8 @@ import * as React from 'react';
 import { ItemDetails } from './ItemDetails';
 import { getItemInformation } from './itemInfo';
 
+const DEFAULT_IMAGE: string = require("../images/default.png");
+
 interface ItemDisplayProps {
     itemId: number;
     itemData: number;
@@ -11,8 +13,8 @@ interface ItemDisplayProps {
 
 function getImageLoc(itemId: number, itemData: number): string {
     let folder: string = getItemInformation(itemId, itemData).imageFolder;
-    if (folder == "") {
-        return "../images/default.png";
+    if (folder === "") {
+        return DEFAULT_IMAGE;
     }
     return document.location.href + "/images/" + folder + "/" + itemData.toString() + ".png";
 }
@@ -23,9 +25,11 @@ function getBorderColor(itemId: number, itemData: number) {
     }
     return "black";
 }
-const ItemDisplay: React.SFC<ItemDisplayProps> = (props) => {
+
+const ItemDisplay: React.FC<ItemDisplayProps> = (props) => {
     let [showDetails, changeShowDetails] = React.useState(false);
 
+    (window as any).getImageLoc = getImageLoc;
     let detailsDisplay = null;
     if (showDetails) {
         detailsDisplay = <ItemDetails
@@ -36,18 +40,15 @@ const ItemDisplay: React.SFC<ItemDisplayProps> = (props) => {
         />;
     }
 
-    return <div
+    return <button
         style={{
             width: "3em",
             height: "3em",
             position: "relative",
             margin: "0.5em",
-            display: "inline-block",
-            backgroundImage: `url(/images/default.png)`,
-            backgroundSize: "cover"
+            display: "inline-block"
         }}
         onClick={() => {
-            console.log("click");
             if (props.disableDetails) {
                 return;
             }
@@ -66,11 +67,13 @@ const ItemDisplay: React.SFC<ItemDisplayProps> = (props) => {
             onError={(e: any) => {
                 let source: string = e.target.src;
                 if (source.endsWith("base.png")) {
-                    e.target.src = ""
-                } else {
+                    e.target.src = DEFAULT_IMAGE
+                }
+                else {
                     e.target.src = source.replace(/[0-9]*\.png/, "base.png");
                 }
             }}
+            alt={getItemInformation(props.itemId, props.itemData).name}
         />
         <div
             style={{
@@ -84,7 +87,7 @@ const ItemDisplay: React.SFC<ItemDisplayProps> = (props) => {
             {props.amount === 1 ? null : props.amount}
         </div>
         {detailsDisplay}
-    </div>; 
+    </button>; 
 }
 ItemDisplay.displayName = "ItemDisplay";
 

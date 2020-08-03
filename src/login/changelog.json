@@ -1,0 +1,99 @@
+[
+  {
+    "date": "???",
+    "updates": [
+      "Reworked the entire frontend of the game. Welcome to the new experience!"
+    ]
+  },
+  {
+    "date": "July 17, 2020",
+    "updates": [
+      "Added guest accounts. Make one and have no need to remember a username and password.",
+      "Account usernames are now remembered."
+    ]
+  },
+  {
+    "date": "July 16, 2020 - Marketplace II",
+    "updates": [
+      "You can now pick up profits and return items that aren't selling from the marketplace."
+    ]
+  },
+  {
+    "date": "July 15, 2020 - Marketplace I",
+    "updates": [
+      "Added player marketplace. You can buy and sell items there.",
+      "Profits from sold items can not be acquired yet."
+    ]
+  },
+  {
+    "date": "July 12, 2020",
+    "updates": [
+      "Various backend changes",
+      "Armory reinforce coupon drops were reduced",
+      "Auto-challenge and mass destroy buttons don't appear until you clear a high enough floor"
+    ]
+  },
+  {
+    "date": "July 11, 2020",
+    "updates": [
+      "Added auto-challenge boss, which challenges the boss until you lose. You can close the browser window while challenging",
+      "Added a mass destroy equipment button to destroy all broken and damaged equipment"
+    ]
+  },
+  {
+    "date": "July 9, 2020",
+    "updates": [
+      "Added a gift system. Players who logged in today got a free gift"
+    ]
+  },
+  {
+    "date": "July 7, 2020",
+    "updates": [
+      "Added password changing",
+      "Added a new dungeon - the Armory. Explore it to get reinforce coupons and improve your gear"
+    ]
+  },
+  {
+    "date": "July 6, 2020",
+    "updates": [
+      "Added passwords and authentication to accounts. If you created an account before this, your password is \"password\"",
+      "When creating an account you can specify a recovery email. Only do this if you *really* care about your account, because while I *think* I have everything secured, I'm making no promises.",
+      "DON'T REUSE YOUR PASSWORD! ESPECIALLY DON'T MAKE IT YOUR BANK ACCOUNT PASSWORD."
+    ]
+  },
+  {
+    "date": "July 5, 2020",
+    "updates": [
+      "The site now uses https! Yay security!",
+      "Reduced mana gained from defeating bosses",
+      "Changed reinforcing to require reinforce coupons. Higher level coupons result in a higher success chance",
+      "Equips can now drop reinforced",
+      "Destroying a reinforced equipment now also gives a reinforce coupon"
+    ]
+  },
+  {
+    "date": "July 4, 2020",
+    "updates": [
+      "Added equipment reinforcing. The higher the reinforce level, the harder it is to reinforce more. Each level boosts equipment stats by 2%",
+      "Added new attribute: Attack attribute. Level it as high as you want, gaining +1 attack each level",
+      "Combat damage now has slight variation, both dealing and receiving damage."
+    ]
+  },
+  {
+    "date": "Older updates",
+    "updates": [
+      "Added a mana reward for defeating bosses",
+      "Added a small amount of starting mana",
+      "Added equipping items"
+    ]
+  },
+  {
+    "date": "Even older updates",
+    "updates": [
+      "Changed database. All previous progress is lost",
+      "Slight visual improvement (space on left side",
+      "Backend improvements to help performance",
+      "Inventory updates better when ranking up or destroying equipment"
+    ]
+  }
+]

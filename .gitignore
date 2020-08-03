@@ -9,6 +9,7 @@ lerna-debug.log*
 # Generated js
 *.js
 *.js.map
+build/
 
 # Visual studio
 .vs/

@@ -1,0 +1,9 @@
+h1 {
+    display: inline-block;
+    font-size: medium;
+    margin: 0
+}
+
+button {
+    all: unset;
+}

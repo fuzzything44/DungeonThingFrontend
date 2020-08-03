@@ -1,11 +1,12 @@
 import * as React from 'react';
+import { backgroundColorSecondary } from '../styles';
 
 interface ModalProps {
     onClose: () => void;
     title: string;
 }
 
-const Modal: React.SFC<ModalProps> = (props) => {
+const Modal: React.FC<ModalProps> = (props) => {
     return <div
         style={{
             display: "block",
@@ -21,9 +22,9 @@ const Modal: React.SFC<ModalProps> = (props) => {
     >
         <div
             onClick={e => e.stopPropagation()}
+            className="background-color"
             style={{
                 position: "fixed",
-                backgroundColor: "white",
                 display: "block",
                 top: "40%",
                 left: "50%",
@@ -43,15 +44,9 @@ const Modal: React.SFC<ModalProps> = (props) => {
                     marginBottom: "0.5em"
                 }}
             >
-                <h1 style={{
-                    display: "inline-block",
-                    fontSize: "medium",
-                    margin: "0"
-                }}
-                >
-                    {props.title}
-                </h1>
+                <h1>{props.title}</h1>
                 <button style={{
+                    ...backgroundColorSecondary,
                     display: "flex",
                     position: "absolute",
                     right: "1em",
@@ -60,9 +55,10 @@ const Modal: React.SFC<ModalProps> = (props) => {
                     border: "1px solid black",
                     borderRadius: "0.3em",
                     width: "1em",
-                    height: "1em",
+                    height: "0.7em",
                     justifyContent: "center",
-                    alignItems: "center"
+                    alignItems: "center",
+                    paddingBottom: "0.3em"
                 }}
                     onClick={props.onClose}
                 >

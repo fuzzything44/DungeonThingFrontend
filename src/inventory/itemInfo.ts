@@ -14,7 +14,11 @@ export function getItemInformation(id: number, data: number): FullItemInformatio
                     "Rank orbs are acquired through destroying equipment."
             };
         case 2:
-            return { name: "Reinforce coupon +" + data.toString(), imageFolder: "reinforce", description: "This is a coupon used to reinforce equipment, along with a small amount of mana. Higher rank coupons give a higher chance of success."};
+            return {
+                name: "Reinforce coupon +" + data.toString(),
+                imageFolder: "reinforce", 
+                description: "This is a coupon used to reinforce equipment, along with a small amount of mana. Higher rank coupons give a higher chance of success."
+            };
         default:
             return { name: "Unknown item " + id.toString() + " +" + data.toString(), imageFolder: "", description: "???" };
     }

@@ -1,19 +1,28 @@
 import React from 'react';
-import { ItemDisplay } from './inventory/ItemDisplay';
-import { InventoryDisplay } from './inventory/InventoryDisplay';
+import "./style.css";
+import { LoginPage } from './login/LoginPage';
+import { Switch, Route, Redirect, MemoryRouter } from 'react-router-dom'
+import { backgroundColor } from './styles';
+
+export const PAGES = {
+    LOGIN: "/login",
+    INTRODUCTION: "/intro",
+    COMBAT: "/combat"
+};
 
 function App() {
-    let displays: any[] = [];
-    for (let i = 1; i <= 30; i++) {
-        displays.push({ amount: i, itemId: 1, itemData: i });
-    }
-    for (let i = 1; i <= 30; i++) {
-        displays.push({ amount: i, itemId: 2, itemData: i });
-    }
-    displays.push({ amount: 3, itemId: 3, itemData: 2 });
     return (
-        <div style={{ margin: "2em" }}>
-            <InventoryDisplay items={displays} />
+        <div style={{ ...backgroundColor, padding: "2em", height: "calc(100vh - 4em)" }}>
+            <MemoryRouter>
+                <Switch>
+                    <Route exact path="/" ><Redirect to={PAGES.LOGIN} /></Route>
+                    <Route path={PAGES.LOGIN}><LoginPage /></Route>
+                    <Route path={PAGES.INTRODUCTION}>This is normally the introduction page</Route>
+                    <Route path={PAGES.COMBAT}>This is normally the combat page</Route>
+
+                    <Route>404<br/>Page not found</Route>
+                </Switch>
+            </MemoryRouter>
         </div>
   );
 }

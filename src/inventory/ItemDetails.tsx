@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Modal } from '../Modal';
+import { Modal } from '../Util/Modal';
 import { getItemInformation } from './itemInfo';
 import { ItemDisplay } from './ItemDisplay';
 
@@ -10,7 +10,7 @@ interface ItemDetailsProps {
     onClose: () => void
 }
 
-const ItemDetails: React.SFC<ItemDetailsProps> = (props) => {
+const ItemDetails: React.FC<ItemDetailsProps> = (props) => {
     return <Modal onClose={props.onClose} title={getItemInformation(props.itemId, props.itemData).name}>
         <div style={{ display: "flex", justifyContent: "center", paddingBottom: "3em" }}>
             <ItemDisplay itemId={props.itemId} itemData={props.itemData} amount={1} disableDetails={true} />
