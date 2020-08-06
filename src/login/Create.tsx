@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { TextInput, MAX_TEXTINPUT_WIDTH } from '../Util/TextInput';
-import { border, backgroundColorSecondary } from '../styles';
+import { border, backgroundSecondary, backgroundColor } from '../styles';
 import { callCreateAccount } from '../api/ApiObjects';
 import { ErrorBox } from '../Util/ErrorBox';
 import { Redirect } from 'react-router-dom';
@@ -32,7 +32,7 @@ const Create: React.FC<CreateProps> = (props) => {
         <br/>
         <button
             style={{
-                ...backgroundColorSecondary,
+                ...backgroundSecondary,
                 ...border,
                 marginTop: "1em",
                 borderRadius: "0.2em",
@@ -55,6 +55,7 @@ const Create: React.FC<CreateProps> = (props) => {
         <button
             style={{
                 ...border,
+                ...backgroundColor,
                 marginTop: "1em",
                 borderRadius: "0.2em",
                 padding: "0.1em",

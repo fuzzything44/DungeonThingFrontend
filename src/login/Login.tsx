@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom'
 
 import { TextInput, MAX_TEXTINPUT_WIDTH } from '../Util/TextInput';
 import { callLogin, callCreateAccount } from '../api/ApiObjects';
-import { backgroundColorSecondary, border } from '../styles';
+import { backgroundSecondary, border, outlineText } from '../styles';
 import { ErrorBox } from '../Util/ErrorBox';
 import { PAGES } from '../App';
 
@@ -25,7 +25,7 @@ const Login: React.FC<LoginProps> = (props) => {
         return <div style={{ textAlign: "center" }}>
             <button
                 style={{
-                    ...backgroundColorSecondary,
+                    ...backgroundSecondary,
                     ...border,
                     borderRadius: "0.3em",
                     padding: "0.5em",
@@ -70,7 +70,7 @@ const Login: React.FC<LoginProps> = (props) => {
                             }).catch(error => changeError(error.message));
                         }}
                         style={{
-                            ...backgroundColorSecondary,
+                            ...backgroundSecondary,
                             ...border,
                             marginTop: "0.5em",
                             paddingTop: "0.2em",
@@ -84,13 +84,13 @@ const Login: React.FC<LoginProps> = (props) => {
                     </button>
                 </div>
                 {/* Super hacky width stuff for mobile display */}
-                <div style={{ padding: "1em", width: window.innerWidth < 500 ? "10em" : undefined, textAlign: "center" }}>
+                <div style={{ ...outlineText, padding: "1em", width: window.innerWidth < 500 ? "10em" : undefined, textAlign: "center" }}>
                     or
                 </div>
                 <div>
                     <button
                         style={{
-                            ...backgroundColorSecondary,
+                            ...backgroundSecondary,
                             ...border,
                             borderRadius: "0.3em",
                             width: standardWidth,
@@ -105,7 +105,7 @@ const Login: React.FC<LoginProps> = (props) => {
                     <br />
                     <button
                         style={{
-                            ...backgroundColorSecondary,
+                            ...backgroundSecondary,
                             ...border,
                             borderRadius: "0.3em",
                             width: standardWidth,

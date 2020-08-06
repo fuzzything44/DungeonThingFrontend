@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ChangelogElement, RADIUS } from './ChangelogElement';
 import changelog from "./changelog.json";
-import { backgroundColorSecondary, border } from '../styles';
+import { backgroundSecondary, border, outlineText } from '../styles';
 
 interface ChangelogProps {
 }
@@ -27,15 +27,17 @@ const Changelog: React.FC<ChangelogProps> = (props) => {
     let reducedChangelog: ChangeLogElement[] = changelog.slice(0, showAmount);
 
     return <div>
-        <div style={{ textAlign: "center", margin: "0.5em" }}><h1 style={{ textAlign: "center" }}>Updates</h1></div>
+        <div style={{ ...outlineText, textAlign: "center", margin: "0.5em" }}><h1 style={{ textAlign: "center" }}>Updates</h1></div>
         <div>
             {reducedChangelog.map(elem => <ChangelogElement key={elem.date} changeDate={elem.date} changeItems={elem.updates} />)}
             {showAmount < changelog.length ? <div
                 style={{
-                    ...backgroundColorSecondary,
+                    ...backgroundSecondary,
                     ...border,
                     borderRadius: RADIUS,
                     margin: "0.5em",
+                    marginLeft: "2.5em",
+                    marginRight: "2.5em",
                     padding: "0.3em",
                     textAlign: "center"
                 }}
@@ -43,6 +45,7 @@ const Changelog: React.FC<ChangelogProps> = (props) => {
             >
                 <h1>{showAmount === 0 ? "Show recent updates" : "Show more updates"}</h1>
             </div> : null}
+            <div style={{ height: "2em" }} />
         </div>
     </div>;
 }

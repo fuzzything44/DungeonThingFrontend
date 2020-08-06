@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { ItemDetails } from './ItemDetails';
 import { getItemInformation } from './itemInfo';
+import { outlineText } from '../styles';
 
 const DEFAULT_IMAGE: string = require("../images/default.png");
 
@@ -77,10 +78,10 @@ const ItemDisplay: React.FC<ItemDisplayProps> = (props) => {
         />
         <div
             style={{
+                ...outlineText,
                 position: "absolute",
                 bottom: "0",
                 right: "0",
-                textShadow: "-1px 0 white, 0 1px white, 1px 0 white, 0 -1px white",
                 fontWeight: "bold"
             }}
         >

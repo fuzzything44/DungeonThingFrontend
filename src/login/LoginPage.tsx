@@ -1,21 +1,38 @@
 import * as React from 'react';
 import { Changelog } from './Changelog';
 import { LoginCreate } from './LoginCreate';
+import { outlineText, backgroundColor, border } from '../styles';
 
 const LoginPage: React.FC = () => {
-    return <div> 
+    return <div style={{ backgroundImage: `url(${require("../images/login.png")})`, minHeight: "100vh", backgroundSize: "10em", imageRendering: "pixelated" }}> 
         <div
             style={{
+                ...outlineText,
+                fontWeight: "bold",
                 textAlign: "center",
                 fontSize: "x-large",
-                fontWeight: "bold"
+                padding: "2em",
+                height: "5em"
             }}
         >
             Welcome to DungeonThing (name WIP)
         </div><br />
-        <LoginCreate />
+        <div
+            style={{
+                ...backgroundColor,
+                ...border,
+                borderRadius: "0.5em",
+                display: "inline-block",
+                padding: "2em",
+                position: "relative",
+                left: "50%",
+                marginRight: "-50%",
+                transform: "translate(-50%, -50%)"
+            }}
+        >
+            <LoginCreate />
+        </div>
         <div style={{ height: "2em" }} />
-        <hr style={{ maxWidth: "25em" }} />
         <div style={{ height: "1em" }} />
 
         <Changelog />

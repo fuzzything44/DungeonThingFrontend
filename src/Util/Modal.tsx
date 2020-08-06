@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { backgroundColorSecondary } from '../styles';
+import { backgroundSecondary, backgroundColor } from '../styles';
 
 interface ModalProps {
     onClose: () => void;
@@ -22,8 +22,8 @@ const Modal: React.FC<ModalProps> = (props) => {
     >
         <div
             onClick={e => e.stopPropagation()}
-            className="background-color"
             style={{
+                ...backgroundColor,
                 position: "fixed",
                 display: "block",
                 top: "40%",
@@ -46,7 +46,7 @@ const Modal: React.FC<ModalProps> = (props) => {
             >
                 <h1>{props.title}</h1>
                 <button style={{
-                    ...backgroundColorSecondary,
+                    ...backgroundSecondary,
                     display: "flex",
                     position: "absolute",
                     right: "1em",

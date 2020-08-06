@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { border, backgroundColor, errorColor } from '../styles';
+import { border, backgroundColor, errorColor, outlineText } from '../styles';
 
 interface TextInputProps {
     inputName: string;
@@ -12,8 +12,8 @@ interface TextInputProps {
 export const MAX_TEXTINPUT_WIDTH = "15em";
 const TextInput: React.FC<TextInputProps> = (props) => {
     return <div style={{ textAlign: "left", width: MAX_TEXTINPUT_WIDTH, paddingBottom: "0.4em"}}>
-        <span style={{ fontSize: "small" }}>{props.inputName}</span>
-        {props.required ? <span style={{ ...errorColor, fontSize: "small", float: "right" }}>(Required)</span> : null}
+        <span style={{ fontSize: "small", ...outlineText }}>{props.inputName}</span>
+        {props.required ? <span style={{ ...errorColor, ...outlineText, fontWeight: "bold", fontSize: "small", float: "right" }}>(Required)</span> : null}
         <br />
         <div>
             <input
