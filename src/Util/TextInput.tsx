@@ -11,12 +11,16 @@ interface TextInputProps {
 
 export const MAX_TEXTINPUT_WIDTH = "15em";
 const TextInput: React.FC<TextInputProps> = (props) => {
-    return <div style={{ textAlign: "left", width: MAX_TEXTINPUT_WIDTH, paddingBottom: "0.4em"}}>
-        <span style={{ fontSize: "small", ...outlineText }}>{props.inputName}</span>
-        {props.required ? <span style={{ ...errorColor, ...outlineText, fontWeight: "bold", fontSize: "small", float: "right" }}>(Required)</span> : null}
+    let inputId: string = props.inputName.replace(/\s/g, "-");
+    return <div style={{ textAlign: "left", width: MAX_TEXTINPUT_WIDTH, paddingBottom: "0.4em" }}>
+        <label htmlFor={inputId} style={{ fontSize: "small" }}>
+            <span>{props.inputName}</span>
+            {props.required ? <span style={{ ...errorColor, ...outlineText, fontWeight: "bold", fontSize: "small", float: "right" }}>(Required)</span> : null}
+        </label>
         <br />
         <div>
             <input
+                id={inputId}
                 type="text"
                 value={props.inputValue}
                 placeholder={props.example ? "ex. " + props.example : "" }

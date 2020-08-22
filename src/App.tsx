@@ -15,7 +15,7 @@ function App() {
         <div>
             <MemoryRouter>
                 <Switch>
-                    <Route exact path="/" ><Redirect to={PAGES.LOGIN} /></Route>
+                    <Route exact path="/" ><Redirect to={PAGES.COMBAT} /></Route>
                     <Route path={PAGES.LOGIN}><LoginPage /></Route>
                     <Route path={PAGES.INTRODUCTION}>This is normally the introduction page</Route>
                     <Route path={PAGES.COMBAT}><CombatPage /></Route>

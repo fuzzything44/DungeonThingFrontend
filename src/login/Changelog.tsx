@@ -23,14 +23,13 @@ localStorage["lastUpdate"] = changelog[0].date;
 
 const Changelog: React.FC<ChangelogProps> = (props) => {
     let [showAmount, updateShowAmount] = React.useState(unseenUpdates);
-    console.log(showAmount);
     let reducedChangelog: ChangeLogElement[] = changelog.slice(0, showAmount);
 
     return <div>
         <div style={{ ...outlineText, textAlign: "center", margin: "0.5em" }}><h1 style={{ textAlign: "center" }}>Updates</h1></div>
         <div>
             {reducedChangelog.map(elem => <ChangelogElement key={elem.date} changeDate={elem.date} changeItems={elem.updates} />)}
-            {showAmount < changelog.length ? <div
+            {showAmount < changelog.length ? <button
                 style={{
                     ...backgroundSecondary,
                     ...border,
@@ -39,12 +38,13 @@ const Changelog: React.FC<ChangelogProps> = (props) => {
                     marginLeft: "2.5em",
                     marginRight: "2.5em",
                     padding: "0.3em",
-                    textAlign: "center"
+                    textAlign: "center",
+                    width: "calc(100% - 6em)"
                 }}
                 onClick={() => updateShowAmount(showAmount + 5 + Math.floor(showAmount / 2) )}
             >
-                <h1>{showAmount === 0 ? "Show recent updates" : "Show more updates"}</h1>
-            </div> : null}
+                <h2>{showAmount === 0 ? "Show recent updates" : "Show more updates"}</h2>
+            </button> : null}
             <div style={{ height: "2em" }} />
         </div>
     </div>;

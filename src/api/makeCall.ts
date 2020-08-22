@@ -10,7 +10,6 @@ function realMakeCall(requests: any[]): Promise<any[]> {
     let body: any = {
         requests: requests
     }
-    console.log(body);
     if (charId > -1) {
         body.character = charId;
         body.auth = auth;
@@ -22,12 +21,10 @@ function realMakeCall(requests: any[]): Promise<any[]> {
         headers: header
     }).then(r => r.json()).then(data => {
         if (data["error"]) {
-            console.log("Response returned error");
-            alert(data["error"]);
             throw data["error"];
         }
         return data;
-    }).catch(e => { console.log(e); throw e; });
+    });
 }
 
 interface CallbackListElement {
@@ -53,7 +50,6 @@ export function makeCall<T>(request: object): Promise<T | { error: string }> {
 
                 let toMake = callsToMake;
                 callsToMake = [];
-                console.log(toMake);
                 realMakeCall(toMake.map(call => call.call)).then(results => {
                     results.forEach((result, index) => {
                         if (toMake[index].call["api"] === "login" || toMake[index].call["api"] === "create_account") {

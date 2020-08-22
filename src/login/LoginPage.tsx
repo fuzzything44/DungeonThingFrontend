@@ -4,7 +4,13 @@ import { LoginCreate } from './LoginCreate';
 import { outlineText, backgroundColor, border } from '../styles';
 
 const LoginPage: React.FC = () => {
-    return <div style={{ backgroundImage: `url(${require("../images/login.png")})`, minHeight: "100vh", backgroundSize: "10em", imageRendering: "pixelated" }}> 
+    return <div style={{
+        backgroundImage: `url(${require("../images/login.png")})`,
+        minHeight: "100vh",
+        minWidth: "100vw",
+        backgroundSize: "10em",
+        imageRendering: "pixelated"
+    }}> 
         <div
             style={{
                 ...outlineText,
@@ -17,7 +23,7 @@ const LoginPage: React.FC = () => {
         >
             Welcome to DungeonThing (name WIP)
         </div><br />
-        <div
+        <form
             style={{
                 ...backgroundColor,
                 ...border,
@@ -26,15 +32,15 @@ const LoginPage: React.FC = () => {
                 padding: "2em",
                 position: "relative",
                 left: "50%",
+                top: "5em",
                 marginRight: "-50%",
                 transform: "translate(-50%, -50%)"
             }}
         >
             <LoginCreate />
-        </div>
+        </form>
         <div style={{ height: "2em" }} />
         <div style={{ height: "1em" }} />
-
         <Changelog />
     </div>;
 }

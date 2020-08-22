@@ -12,7 +12,7 @@ export const backgroundSecondary = {
 }
 
 export const errorColor = {
-    color: "red"
+    color: "#e61616"
 };
 
 export const errorBackground = {

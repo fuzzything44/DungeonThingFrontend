@@ -54,6 +54,7 @@ const Login: React.FC<LoginProps> = (props) => {
             </button>
         </div>;
     } else {
+        console.log("Screen width: " + window.innerWidth);
         const standardWidth = "calc(" + MAX_TEXTINPUT_WIDTH + " - 2px)"
         return <div>
             <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flexWrap: "wrap" }}>
@@ -84,7 +85,14 @@ const Login: React.FC<LoginProps> = (props) => {
                     </button>
                 </div>
                 {/* Super hacky width stuff for mobile display */}
-                <div style={{ ...outlineText, padding: "1em", width: window.innerWidth < 500 ? "10em" : undefined, textAlign: "center" }}>
+                <div
+                    style={{
+                        ...outlineText,
+                        padding: "1em",
+                        width: window.innerWidth < 500 ? "calc(100vw - 2em)" : undefined,
+                        textAlign: "center"
+                    }}
+                >
                     or
                 </div>
                 <div>

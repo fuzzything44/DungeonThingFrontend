@@ -16,7 +16,7 @@ const ChangelogElement: React.FC<ChangelogElementProps> = (props) => {
             margin: "1.5em"
         }}
     >
-        <h1
+        <h2
             style={{
                 ...backgroundSecondary,
                 borderBottom: border.border,
@@ -27,7 +27,7 @@ const ChangelogElement: React.FC<ChangelogElementProps> = (props) => {
             }}
         >
             {props.changeDate}
-        </h1>
+        </h2>
         <div style={{ ...backgroundColor, padding: "0.3em", fontWeight: "normal", borderBottomLeftRadius: RADIUS, borderBottomRightRadius: RADIUS }}>
             {props.changeItems.map(item => <div key={item}>- {item}</div>)}
         </div>

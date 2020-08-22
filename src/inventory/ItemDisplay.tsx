@@ -3,8 +3,6 @@ import { ItemDetails } from './ItemDetails';
 import { getItemInformation } from './itemInfo';
 import { outlineText } from '../styles';
 
-const DEFAULT_IMAGE: string = require("../images/default.png");
-
 interface ItemDisplayProps {
     itemId: number;
     itemData: number;
@@ -13,11 +11,11 @@ interface ItemDisplayProps {
 }
 
 function getImageLoc(itemId: number, itemData: number): string {
-    let folder: string = getItemInformation(itemId, itemData).imageFolder;
-    if (folder === "") {
-        return DEFAULT_IMAGE;
+    let folder = getItemInformation(itemId, itemData).imageFolder;
+    if (folder.img.length < itemData) {
+        return folder.base;
     }
-    return document.location.href + "/images/" + folder + "/" + itemData.toString() + ".png";
+    return folder.img[itemData - 1];
 }
 
 function getBorderColor(itemId: number, itemData: number) {
@@ -64,15 +62,6 @@ const ItemDisplay: React.FC<ItemDisplayProps> = (props) => {
                 width: "100%",
                 borderRadius: "0.5em",
                 borderColor: getBorderColor(props.itemId, props.itemData)
-            }}
-            onError={(e: any) => {
-                let source: string = e.target.src;
-                if (source.endsWith("base.png")) {
-                    e.target.src = DEFAULT_IMAGE
-                }
-                else {
-                    e.target.src = source.replace(/[0-9]*\.png/, "base.png");
-                }
             }}
             alt={getItemInformation(props.itemId, props.itemData).name}
         />
