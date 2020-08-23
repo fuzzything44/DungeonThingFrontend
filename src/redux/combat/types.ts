@@ -1,3 +1,5 @@
+import { BossLog } from "../../api/ApiObjects";
+
 export type CombatActorAction = { time: number, startTime: number } & ({
     type: "NONE" | "ENTERING" | "DYING" | "ATTACK" | "CRITICAL"
 } | {
@@ -26,6 +28,8 @@ export interface CombatState {
     };
     actionCallbacks: number[];
     challengeBossNext: boolean;
+    fullLog: BossLog[];
+    combatStart: number;
 }
 
 export type ActorNames = "PLAYER" | "ENEMY";
@@ -35,7 +39,8 @@ export interface StartCombatAction {
     type: typeof START_COMBAT;
     playerHp: number;
     enemyHp: number;
-    enemyType: CombatState['enemyType']
+    enemyType: CombatState['enemyType'];
+    log: BossLog[];
 }
 
 export const END_COMBAT = "END_COMBAT";

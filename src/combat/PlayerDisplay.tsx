@@ -25,10 +25,10 @@ const PlayerDisplay: React.FC<PlayerDisplayProps> = (props) => {
     return <div style={{
         width: "10em",
         position: "absolute",
-        bottom: "15%",
+        bottom: "35%",
         left: "min(10em, 15%)"
     }}>
-        {props.damage.map(dmg => <FloatingDamage damage={dmg} />)}
+        {props.damage.map(dmg => <FloatingDamage key={dmg.startTime} damage={dmg} />)}
         {props.walking ? null : <HealthBar hp={props.hp} />}
         <FakeGif
             style={{

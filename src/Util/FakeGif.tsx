@@ -12,6 +12,7 @@ interface FakeGifProps {
 
 const FakeGif: React.FC<FakeGifProps> = (props) => {
     // Set things up to force re-render the component every frame
+    // eslint-disable-next-line
     const [_, forceUpdate] = useReducer(x => x + 1, 0);
     useEffect(() => {
         const interval = setInterval(forceUpdate, props.playTime * 1000 / props.images.length);

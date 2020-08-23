@@ -12,13 +12,15 @@ import {
     SetDamageAction,
     SET_DAMAGE
 } from "./types";
+import { BossLog } from "../../api/ApiObjects";
 
-export function startCombat(playerHp: number, enemyHp: number, isBoss: boolean): StartCombatAction {
+export function startCombat(playerHp: number, enemyHp: number, isBoss: boolean, log: BossLog[]): StartCombatAction {
     return {
         type: START_COMBAT,
         playerHp: playerHp,
         enemyHp: enemyHp,
-        enemyType: isBoss ? "BOSS" : "REGULAR"
+        enemyType: isBoss ? "BOSS" : "REGULAR",
+        log: log
     };
 }
 

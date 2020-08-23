@@ -8,6 +8,7 @@ import { CombatState } from '../redux/combat/types';
 import { startCombat, setCombatAction, endCombat, setDamage } from '../redux/combat/actions';
 import { EnemyDisplay, ENTER_TIME, DEATH_TIME } from './EnemyDisplay';
 import { PlayerDisplay } from './PlayerDisplay';
+import { CombatLog } from './CombatLog';
 
 const DEFAULT_ACTION_TIME = 2.4;
 
@@ -113,7 +114,7 @@ const setupCombat = () => {
     const { playerLog, enemyLog } = splitLog(combatLog);
 
     // Start the combat
-    store.dispatch(startCombat(25, 15, false));
+    store.dispatch(startCombat(25, 15, false, combatLog));
 
     // Add timeouts for animations and damage
     createActorTimeouts(playerLog, true);
@@ -171,16 +172,25 @@ const CombatPageUnmapped: React.FC<CombatPageProps> = (props) => {
     }
 
     return <div>
-        <ScrollingBackground paused={!scrollBackground} image={`url(${require("../images/tavern_repeat.png")})`} />
-        <InstanceMenu />
-        <PlayerDisplay
-            walking={scrollBackground}
-            hp={props.combatState.playerHp}
-            damage={props.combatState.playerDamage}
-            action={props.combatState.actions.player}
-        />
-        {enemy}
-        
+        <div aria-hidden="true">
+            <ScrollingBackground paused={!scrollBackground} image={`url(${require("../images/tavern_repeat.png")})`} />
+            <InstanceMenu />
+            <PlayerDisplay
+                walking={scrollBackground}
+                hp={props.combatState.playerHp}
+                damage={props.combatState.playerDamage}
+                action={props.combatState.actions.player}
+            />
+            {enemy}
+        </div>
+        <div
+            style={{
+                position: "absolute",
+                bottom: "0"
+            }}
+        >
+            <CombatLog log={props.combatState.fullLog} combatStart={props.combatState.combatStart} />
+        </div>
     </div>;
 
 }

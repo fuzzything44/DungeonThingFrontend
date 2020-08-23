@@ -12,7 +12,9 @@ const initialState: CombatState = {
         player: { time: DEFAULT_ACTION_TIME, startTime: Date.now(), type: "NONE" },
         enemy: { time: DEFAULT_ACTION_TIME, startTime: Date.now(), type: "NONE" }
     },
-    actionCallbacks: []
+    actionCallbacks: [],
+    fullLog: [],
+    combatStart: 0
 }
 
 export function combatReducer(state = initialState, action: CombatAction): CombatState {
@@ -28,7 +30,9 @@ export function combatReducer(state = initialState, action: CombatAction): Comba
                 actions: {
                     player: { time: DEFAULT_ACTION_TIME, startTime: Date.now(), type: "NONE" },
                     enemy: { time: DEFAULT_ACTION_TIME, startTime: Date.now(), type: "ENTERING" }
-                }
+                },
+                fullLog: action.log,
+                combatStart: Date.now()
             }
         case END_COMBAT:
             return {

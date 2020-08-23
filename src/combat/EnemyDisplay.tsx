@@ -19,7 +19,7 @@ const EnemyDisplay: React.FC<EnemyDisplayProps> = (props) => {
         overflowY: "visible",
         position: "absolute",
         width: "calc(10em + min(10em, 15vw))",
-        height: "85%",
+        height: "65%",
         right: "0",
         top: "0"
     }}>
@@ -29,7 +29,7 @@ const EnemyDisplay: React.FC<EnemyDisplayProps> = (props) => {
             width: "10em",
             animation: props.action.type === "ENTERING" ? `slide ${ENTER_TIME}s linear` : ""
         }}>
-            {props.damage.map(dmg => <FloatingDamage damage={dmg} />)}
+            {props.damage.map(dmg => <FloatingDamage key={dmg.startTime} damage={dmg} />)}
             {props.action.type === "ENTERING" ? null : <HealthBar hp={props.hp} />}
             <img alt="Enemy" style={{ width: "100%" }} src={require("../images/mana.png")} />
         </div>
