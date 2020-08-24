@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { border, backgroundColor, backgroundSecondary } from '../styles';
 import { BossLog } from '../api/ApiObjects';
+import { ENTER_TIME } from './EnemyDisplay';
 
 interface CombatLogProps {
     log: BossLog[];
@@ -12,7 +13,14 @@ const LOG_OPENING_TIME = 0.75;
 const CombatLog: React.FC<CombatLogProps> = (props) => {
     const [expanded, changeExpanded] = React.useState<"OPENED" | "OPENING" | "CLOSING" | "CLOSED">("CLOSED");
     const [timeout, changeTimeout] = React.useState<number | undefined>(undefined);
+    const [hasScrolled, changeScrolled] = React.useState(false);
 
+    // Reset if they've scrolled at the start of each combat
+    if ((props.log.length === 0 || Date.now() - props.combatStart < props.log[0].time * 1000) && hasScrolled) {
+        console.log("Resetting scroll");
+        changeScrolled(false);
+    }
+    
     return <section
         style={{
             ...border,
@@ -54,17 +62,32 @@ const CombatLog: React.FC<CombatLogProps> = (props) => {
             style={{
                 padding: expanded === "CLOSED" ? undefined : "0.5em",
                 height: expanded === "OPENED" || expanded === "OPENING" ? "15em" : "0",
-                overflow: expanded === "OPENED" ? undefined : "hidden",
+                overflowY: expanded === "OPENED" ? "scroll" : "hidden",
                 transition: `height ${LOG_OPENING_TIME}s linear`,
                 margin: "0",
                 listStyleType: "none"
             }}
+            onScroll={(e) => {
+                // Resume auto scroll if at bottom
+                if (e.currentTarget.scrollTop === e.currentTarget.scrollHeight - e.currentTarget.clientHeight) {
+                    console.log("    resume auto");
+                    changeScrolled(false);
+                } else {
+                    console.log("    has scrolled");
+                    changeScrolled(true);
+                }
+            }}
+            ref={ol => {
+                if (ol && !hasScrolled) {
+                    ol.scrollTop = ol.scrollHeight;
+                }
+            }}
         >
-            {props.log.filter(log => log.time * 1000 <= Date.now() - props.combatStart).map(log => {
+            {props.log.filter(log => log.time * 1000 <= Date.now() - props.combatStart - ENTER_TIME * 1000).map(log => {
                 const startString = log.toPlayer ?
                     `The enemy deals ${log.damageDealt} damage to you. You have ${log.remainingHp} HP left.` :
-                    `You deal ${log.damageDealt} damage to the enemy. It has ${log.remainingHp} HP left.`;
-                return <li><b>{log.details["message"]} </b>{startString}</li>;
+                    `You deal ${log.damageDealt} damage to the enemy. It has ${log.bossHp} HP left.`;
+                return <li key={log.time}><b>{log.details["message"]} </b>{startString}</li>;
             })}
         </ol>
     </section>;
