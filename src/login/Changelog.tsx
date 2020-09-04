@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ChangelogElement, RADIUS } from './ChangelogElement';
+import { ChangelogElement } from './ChangelogElement';
 import changelog from "./changelog.json";
 import { backgroundSecondary, border, outlineText } from '../styles';
 
@@ -33,7 +33,7 @@ const Changelog: React.FC<ChangelogProps> = (props) => {
                 style={{
                     ...backgroundSecondary,
                     ...border,
-                    borderRadius: RADIUS,
+                    borderRadius: "0.3em",
                     margin: "0.5em",
                     marginLeft: "2.5em",
                     marginRight: "2.5em",

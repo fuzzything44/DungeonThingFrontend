@@ -31,7 +31,7 @@ const EnemyDisplay: React.FC<EnemyDisplayProps> = (props) => {
         }}>
             {props.damage.map(dmg => <FloatingDamage key={dmg.startTime} damage={dmg} />)}
             {props.action.type === "ENTERING" ? null : <HealthBar hp={props.hp} />}
-            <img alt="Enemy" style={{ width: "100%" }} src={require("../images/mana.png")} />
+            <img alt="Enemy" style={{ width: "100%" }} src={require("../images/barrel.png")} />
         </div>
     </div>;
 }

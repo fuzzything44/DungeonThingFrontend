@@ -66,8 +66,8 @@ export function combatReducer(state = initialState, action: CombatAction): Comba
                 ...state,
                 playerDamage: newPlayerDamage,
                 enemyDamage: newEnemyDamage,
-                playerHp: { ...state.playerHp, current: newPlayerHp },
-                enemyHp: { ...state.enemyHp, current: newEnemyHp }
+                playerHp: { ...state.playerHp, current: Math.max(0, newPlayerHp) },
+                enemyHp: { ...state.enemyHp, current: Math.max(0, newEnemyHp) }
             }
         default:
             return state;

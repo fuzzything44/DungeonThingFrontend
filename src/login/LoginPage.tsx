@@ -36,6 +36,7 @@ const LoginPage: React.FC = () => {
                 marginRight: "-50%",
                 transform: "translate(-50%, -50%)"
             }}
+            onSubmit={(e) => e.preventDefault()}
         >
             <LoginCreate />
         </form>

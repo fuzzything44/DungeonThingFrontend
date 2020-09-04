@@ -1,37 +1,20 @@
 import * as React from 'react';
-import { border, backgroundSecondary, backgroundColor } from '../styles';
+import { TitleContent } from '../Util/TitleContent';
 
 interface ChangelogElementProps {
     changeDate: string;
     changeItems: string[];
 }
 
-export const RADIUS = "0.5em";
-
 const ChangelogElement: React.FC<ChangelogElementProps> = (props) => {
-    return <div
-        style={{
-            ...border,
-            borderRadius: RADIUS,
-            margin: "1.5em"
-        }}
-    >
-        <h2
-            style={{
-                ...backgroundSecondary,
-                borderBottom: border.border,
-                width: "calc(100% - 0.6em)",
-                padding: "0.3em",
-                borderTopLeftRadius: RADIUS,
-                borderTopRightRadius: RADIUS
-            }}
-        >
-            {props.changeDate}
-        </h2>
-        <div style={{ ...backgroundColor, padding: "0.3em", fontWeight: "normal", borderBottomLeftRadius: RADIUS, borderBottomRightRadius: RADIUS }}>
-            {props.changeItems.map(item => <div key={item}>- {item}</div>)}
-        </div>
-    </div>;
+    return <TitleContent title={<h2>{props.changeDate}</h2>} style={{ margin: "1.5em" }}>
+        <ul style={{
+            margin: "0"
+        }}>
+            {props.changeItems.map(item => <li key={item}>{item}</li>)}
+        </ul>
+        
+    </TitleContent>;
 }
 
 ChangelogElement.displayName = "ChangelogElement";

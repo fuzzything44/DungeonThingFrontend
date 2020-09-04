@@ -19,12 +19,7 @@ function realMakeCall(requests: any[]): Promise<any[]> {
         body: JSON.stringify(body),
         mode: "cors",
         headers: header
-    }).then(r => r.json()).then(data => {
-        if (data["error"]) {
-            throw data["error"];
-        }
-        return data;
-    });
+    }).then(r => r.json());
 }
 
 interface CallbackListElement {
@@ -60,7 +55,7 @@ export function makeCall<T>(request: object): Promise<T | { error: string }> {
                     });
                 }).catch(error => {
                     toMake.forEach((call) => {
-                        call.reject(error.message);
+                        call.reject(error);
                     });
                 });
             }, 10);

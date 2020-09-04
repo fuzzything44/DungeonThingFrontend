@@ -38,22 +38,14 @@ const ItemDisplay: React.FC<ItemDisplayProps> = (props) => {
             onClose={() => changeShowDetails(false) }
         />;
     }
-
-    return <button
-        style={{
-            width: "3em",
-            height: "3em",
-            position: "relative",
-            margin: "0.5em",
-            display: "inline-block"
-        }}
-        onClick={() => {
-            if (props.disableDetails) {
-                return;
-            }
-            changeShowDetails(true);
-        }}
-    >
+    const style: React.HTMLAttributes<HTMLDivElement>["style"] = {
+        width: "3em",
+        height: "3em",
+        position: "relative",
+        margin: "0.5em",
+        display: "inline-block"
+    };
+    const content = <>
         <img
             src={getImageLoc(props.itemId, props.itemData)}
             style={{
@@ -63,6 +55,7 @@ const ItemDisplay: React.FC<ItemDisplayProps> = (props) => {
                 borderRadius: "0.5em",
                 borderColor: getBorderColor(props.itemId, props.itemData)
             }}
+            title={getItemInformation(props.itemId, props.itemData).name}
             alt={getItemInformation(props.itemId, props.itemData).name}
         />
         <div
@@ -77,7 +70,16 @@ const ItemDisplay: React.FC<ItemDisplayProps> = (props) => {
             {props.amount === 1 ? null : props.amount}
         </div>
         {detailsDisplay}
-    </button>; 
+    </>;
+    if (props.disableDetails) {
+        return <div style={style}>
+            {content}
+        </div>
+    } else {
+        return <button style={style} onClick={() => changeShowDetails(true)}>
+            {content}
+        </button>
+    } 
 }
 ItemDisplay.displayName = "ItemDisplay";
 

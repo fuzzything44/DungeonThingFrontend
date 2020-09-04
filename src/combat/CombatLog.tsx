@@ -2,6 +2,7 @@ import * as React from 'react';
 import { border, backgroundColor, backgroundSecondary } from '../styles';
 import { BossLog } from '../api/ApiObjects';
 import { ENTER_TIME } from './EnemyDisplay';
+import { formatNumber } from '../Util/numberFormat';
 
 interface CombatLogProps {
     log: BossLog[];
@@ -17,7 +18,6 @@ const CombatLog: React.FC<CombatLogProps> = (props) => {
 
     // Reset if they've scrolled at the start of each combat
     if ((props.log.length === 0 || Date.now() - props.combatStart < props.log[0].time * 1000) && hasScrolled) {
-        console.log("Resetting scroll");
         changeScrolled(false);
     }
     
@@ -70,10 +70,8 @@ const CombatLog: React.FC<CombatLogProps> = (props) => {
             onScroll={(e) => {
                 // Resume auto scroll if at bottom
                 if (e.currentTarget.scrollTop === e.currentTarget.scrollHeight - e.currentTarget.clientHeight) {
-                    console.log("    resume auto");
                     changeScrolled(false);
                 } else {
-                    console.log("    has scrolled");
                     changeScrolled(true);
                 }
             }}
@@ -85,8 +83,8 @@ const CombatLog: React.FC<CombatLogProps> = (props) => {
         >
             {props.log.filter(log => log.time * 1000 <= Date.now() - props.combatStart - ENTER_TIME * 1000).map(log => {
                 const startString = log.toPlayer ?
-                    `The enemy deals ${log.damageDealt} damage to you. You have ${log.remainingHp} HP left.` :
-                    `You deal ${log.damageDealt} damage to the enemy. It has ${log.bossHp} HP left.`;
+                    `The enemy deals ${formatNumber(log.damageDealt)} damage to you. You have ${formatNumber(Math.max(0, log.remainingHp))} HP left.` :
+                    `You deal ${formatNumber(log.damageDealt)} damage to the enemy. It has ${formatNumber(Math.max(0, log.bossHp))} HP left.`;
                 return <li key={log.time}><b>{log.details["message"]} </b>{startString}</li>;
             })}
         </ol>

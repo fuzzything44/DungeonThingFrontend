@@ -12,11 +12,18 @@ interface LoginProps {
 }
 
 const Login: React.FC<LoginProps> = (props) => {
-    let [showGuest, changeShowGuest] = React.useState(true);
-    let [username, changeUsername] = React.useState(localStorage["username"] == null ? "" : localStorage["username"]);
-    let [password, changePassword] = React.useState("");
-    let [redirect, changeRedirect] = React.useState("");
-    let [error, changeError] = React.useState("");
+    const [showGuest, changeShowGuest] = React.useState(true);
+    const [username, changeUsername] = React.useState(localStorage["username"] == null ? "" : localStorage["username"]);
+    const [password, changePassword] = React.useState("");
+    const [redirect, changeRedirect] = React.useState("");
+    const [error, changeError] = React.useState("");
+    const handleError = (error: Error) => {
+        if (error.message === "Failed to fetch") {
+            changeError("Could not connect to the game server. Please try again later.");
+        } else {
+            changeError(error.message);
+        }
+    }; 
 
     if (redirect !== "") {
         return <Redirect to={redirect} />;
@@ -35,7 +42,7 @@ const Login: React.FC<LoginProps> = (props) => {
                 }}
                 onClick={() => {
                     callLogin({ name: localStorage["username"], password: localStorage["password"] }).then(data => {
-                        changeRedirect(PAGES.COMBAT);
+                        changeRedirect(PAGES.WELCOME_BACK);
                     }).catch(error => changeError(error.message));
                 }}
             >
@@ -54,7 +61,6 @@ const Login: React.FC<LoginProps> = (props) => {
             </button>
         </div>;
     } else {
-        console.log("Screen width: " + window.innerWidth);
         const standardWidth = "calc(" + MAX_TEXTINPUT_WIDTH + " - 2px)"
         return <div>
             <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flexWrap: "wrap" }}>
@@ -64,11 +70,12 @@ const Login: React.FC<LoginProps> = (props) => {
                     <button
                         onClick={() => {
                             callLogin({ name: username, password: password }).then(data => {
+                                console.log("Changing redirect");
                                 if (localStorage["password"] == null) {
                                     localStorage["username"] = username;
                                 }
-                                changeRedirect(PAGES.COMBAT);
-                            }).catch(error => changeError(error.message));
+                                changeRedirect(PAGES.WELCOME_BACK);
+                            }).catch(handleError);
                         }}
                         style={{
                             ...backgroundSecondary,
@@ -122,8 +129,8 @@ const Login: React.FC<LoginProps> = (props) => {
                         onClick={() => {
                             if (localStorage["password"]) {
                                 callLogin({ name: localStorage["username"], password: localStorage["password"] }).then(_ => {
-                                    changeRedirect(PAGES.COMBAT);
-                                });
+                                    changeRedirect(PAGES.WELCOME_BACK);
+                                }).catch(handleError);
                             } else {
                                 let guestName = "temp_" + (Math.round(Math.random() * Number.MAX_SAFE_INTEGER)).toString();
                                 let guestPass = (Math.round(Math.random() * Number.MAX_SAFE_INTEGER)).toString();
@@ -131,7 +138,7 @@ const Login: React.FC<LoginProps> = (props) => {
                                     localStorage["username"] = guestName;
                                     localStorage["password"] = guestPass;
                                     changeRedirect(PAGES.INTRODUCTION);
-                                }).catch(error => changeError(error.message));
+                                }).catch(handleError);
                             }
                         }}
                     >

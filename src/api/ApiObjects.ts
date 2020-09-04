@@ -2,63 +2,80 @@
 import { makeCall } from "./makeCall";
 
 export interface BossLog {
-    time: number
-    damageDealt: number
-    toPlayer: boolean
-    remainingHp: number
-    bossHp: number
-    details: any
+    time: number;
+    damageDealt: number;
+    toPlayer: boolean;
+    remainingHp: number;
+    bossHp: number;
+    details: any;
+}
+export interface BossRewardEquip {
+    type: "EQUIP";
+    info: BasicEquipInfo;
+}
+export interface BossRewardItem {
+    type: "ITEM";
+    info: ItemInfo;
+}
+export interface BossRewardMana {
+    type: "MANA";
+    amount: number;
 }
 export interface BossReward {
-    
+    reward: BossRewardEquip | BossRewardItem | BossRewardMana;
 }
 export interface AttributeInfo {
-    level: number
-    max: number
-    cost: number
+    level: number;
+    max: number;
+    cost: number;
 }
 export interface GiftInfo {
-    id: number
-    characterId: number
-    amount: number
-    itemData: number
-    itemId: number
+    id: number;
+    characterId: number;
+    amount: number;
+    itemData: number;
+    itemId: number;
 }
 export interface BasicEquipInfo {
-    level: number
-    type: number
-    name: number
-    id: number
-    rankId: number
+    level: number;
+    type: number;
+    name: string;
+    id: number;
+    rankId: number;
 }
 export interface ItemInfo {
-    amount: number
-    characterId: number
-    itemData: number
-    itemId: number
+    amount: number;
+    characterId: number;
+    itemData: number;
+    itemId: number;
 }
 export interface ItemListing {
-    amount: number
-    id: number
-    itemData: number
-    itemId: number
-    price: number
-    sellerId: number
-    purchase: string
+    amount: number;
+    id: number;
+    itemData: number;
+    itemId: number;
+    price: number;
+    sellerId: number;
+    purchase: string;
 }
 export interface UpdateInformation {
-    gain: number
-    total: number
-    per_min: number
-    tickets: number
-    rewards: BossReward[]
+    gain: number;
+    total: number;
+    per_min: number;
+    tickets: number;
+    rewards: BossReward[];
+    time: number;
+}
+export interface UpdateCombat {
+    log: string;
+    time_offset: number;
 }
 
 export interface BuyItemParams {
     id: number;
 }
 export interface BuyItemResponse {
-    mana: number
+    mana: number;
 }
 export function callBuyItem(params: BuyItemParams): Promise<BuyItemResponse> {
     return makeCall<BuyItemResponse>({...params, api: "buy"}).then(data => { 
@@ -74,9 +91,8 @@ export interface ChallengeBossParams {
     auto?: boolean;
 }
 export interface ChallengeBossResponse {
-    result: string;
+    result: boolean;
     log: BossLog[];
-    floor?: number
 }
 export function callChallengeBoss(params: ChallengeBossParams): Promise<ChallengeBossResponse> {
     return makeCall<ChallengeBossResponse>({...params, api: "challenge"}).then(data => { 
@@ -128,7 +144,7 @@ export interface CreateAccountParams {
 }
 export interface CreateAccountResponse {
     auth_token: string;
-    id: number
+    id: number;
 }
 export function callCreateAccount(params: CreateAccountParams): Promise<CreateAccountResponse> {
     return makeCall<CreateAccountResponse>({...params, api: "create_account"}).then(data => { 
@@ -186,7 +202,7 @@ export interface EquipInfoResponse {
     strength: number;
     level_cost: number;
     rank_cost: number;
-    reinforce: number
+    reinforce: number;
 }
 export function callEquipInfo(params: EquipInfoParams): Promise<EquipInfoResponse> {
     return makeCall<EquipInfoResponse>({...params, api: "equip_info"}).then(data => { 
@@ -236,7 +252,7 @@ export interface GetAttributesParams {
 export interface GetAttributesResponse {
     crit_rate: AttributeInfo;
     crit_dmg: AttributeInfo;
-    attack_dmg: AttributeInfo
+    attack_dmg: AttributeInfo;
 }
 export function callGetAttributes(params: GetAttributesParams): Promise<GetAttributesResponse> {
     return makeCall<GetAttributesResponse>({...params, api: "get_attributes"}).then(data => { 
@@ -252,7 +268,7 @@ export interface GetGiftsParams {
     
 }
 export interface GetGiftsResponse {
-    gifts: GiftInfo
+    gifts: GiftInfo;
 }
 export function callGetGifts(params: GetGiftsParams): Promise<GetGiftsResponse> {
     return makeCall<GetGiftsResponse>({...params, api: "gifts"}).then(data => { 
@@ -274,7 +290,7 @@ export interface GetInventoryResponse {
     shirt: number;
     pants: number;
     shoes: number;
-    items: ItemInfo[]
+    items: ItemInfo[];
 }
 export function callGetInventory(params: GetInventoryParams): Promise<GetInventoryResponse> {
     return makeCall<GetInventoryResponse>({...params, api: "inventory"}).then(data => { 
@@ -295,7 +311,7 @@ export interface GetMarketItemsParams {
     past_id?: number;
 }
 export interface GetMarketItemsResponse {
-    listings: ItemListing[]
+    listings: ItemListing[];
 }
 export function callGetMarketItems(params: GetMarketItemsParams): Promise<GetMarketItemsResponse> {
     return makeCall<GetMarketItemsResponse>({...params, api: "get_market"}).then(data => { 
@@ -311,7 +327,7 @@ export interface LevelEquipParams {
     id: number;
 }
 export interface LevelEquipResponse {
-    mana: number
+    mana: number;
 }
 export function callLevelEquip(params: LevelEquipParams): Promise<LevelEquipResponse> {
     return makeCall<LevelEquipResponse>({...params, api: "level_equip"}).then(data => { 
@@ -329,7 +345,7 @@ export interface LoginParams {
 }
 export interface LoginResponse {
     auth_token: string;
-    id: number
+    id: number;
 }
 export function callLogin(params: LoginParams): Promise<LoginResponse> {
     return makeCall<LoginResponse>({...params, api: "login"}).then(data => { 
@@ -362,7 +378,7 @@ export interface ReinforceParams {
     coupon: number;
 }
 export interface ReinforceResponse {
-    success: boolean
+    success: boolean;
 }
 export function callReinforce(params: ReinforceParams): Promise<ReinforceResponse> {
     return makeCall<ReinforceResponse>({...params, api: "reinforce"}).then(data => { 
@@ -378,7 +394,7 @@ export interface ReturnSaleItemParams {
     id: number;
 }
 export interface ReturnSaleItemResponse {
-    mana: number
+    mana: number;
 }
 export function callReturnSaleItem(params: ReturnSaleItemParams): Promise<ReturnSaleItemResponse> {
     return makeCall<ReturnSaleItemResponse>({...params, api: "return"}).then(data => { 
@@ -418,10 +434,10 @@ export interface StatusResponse {
     tickets: number;
     floor: number;
     attack: number;
-    armor: number;
+    hp: number;
     crit_rate: number;
     crit_dmg: number;
-    max_floor: number
+    max_floor: number;
 }
 export function callStatus(params: StatusParams): Promise<StatusResponse> {
     return makeCall<StatusResponse>({...params, api: "status"}).then(data => { 
@@ -437,7 +453,7 @@ export interface UpdateParams {
     
 }
 export interface UpdateResponse {
-    result: BossLog[] | UpdateInformation
+    result: UpdateCombat | UpdateInformation;
 }
 export function callUpdate(params: UpdateParams): Promise<UpdateResponse> {
     return makeCall<UpdateResponse>({...params, api: "update"}).then(data => { 
@@ -454,7 +470,7 @@ export interface UpgradeAttributeParams {
 }
 export interface UpgradeAttributeResponse {
     mana: number;
-    attr: AttributeInfo
+    attr: AttributeInfo;
 }
 export function callUpgradeAttribute(params: UpgradeAttributeParams): Promise<UpgradeAttributeResponse> {
     return makeCall<UpgradeAttributeResponse>({...params, api: "upgrade_attribute"}).then(data => { 

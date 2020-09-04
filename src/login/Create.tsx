@@ -11,11 +11,18 @@ interface CreateProps {
 }
 
 const Create: React.FC<CreateProps> = (props) => {
-    let [username, changeUsername] = React.useState("");
-    let [password, changePassword] = React.useState("");
-    let [email, changeEmail] = React.useState("");
-    let [error, changeError] = React.useState("");
-    let [redirect, changeRedirect] = React.useState("");
+    const [username, changeUsername] = React.useState("");
+    const [password, changePassword] = React.useState("");
+    const [email, changeEmail] = React.useState("");
+    const [error, changeError] = React.useState("");
+    const [redirect, changeRedirect] = React.useState("");
+    const handleError = (error: Error) => {
+        if (error.message === "Failed to fetch") {
+            changeError("Could not connect to the game server. Please try again later.");
+        } else {
+            changeError(error.message);
+        }
+    }; 
 
     if (redirect) {
         return <Redirect to={redirect} />
@@ -46,7 +53,7 @@ const Create: React.FC<CreateProps> = (props) => {
                         localStorage["username"] = username;
                     }
                     changeRedirect(PAGES.INTRODUCTION);
-                }).catch(error => changeError(error.message));
+                }).catch(handleError);
             }}
         >
             Create Account
