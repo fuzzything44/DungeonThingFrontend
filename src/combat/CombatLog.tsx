@@ -1,12 +1,16 @@
 import * as React from 'react';
 import { border, backgroundColor, backgroundSecondary } from '../styles';
-import { BossLog } from '../api/ApiObjects';
+import { BossLog, BossReward } from '../api/ApiObjects';
 import { ENTER_TIME } from './EnemyDisplay';
 import { formatNumber } from '../Util/numberFormat';
+import { store } from '../redux/store';
+import { getItemInformation } from '../inventory/itemInfo';
 
 interface CombatLogProps {
     log: BossLog[];
     combatStart: number;
+    rewards: BossReward[] | undefined;
+    enemyName: string;
 }
 
 const LOG_OPENING_TIME = 0.75;
@@ -81,12 +85,38 @@ const CombatLog: React.FC<CombatLogProps> = (props) => {
                 }
             }}
         >
+            {Date.now() - props.combatStart < ENTER_TIME * 1000 ? null : <li>
+                You're fighting a {props.enemyName} with {formatNumber(store.getState().combat.enemyHp.max)} HP
+            </li>}
             {props.log.filter(log => log.time * 1000 <= Date.now() - props.combatStart - ENTER_TIME * 1000).map(log => {
                 const startString = log.toPlayer ?
                     `The enemy deals ${formatNumber(log.damageDealt)} damage to you. You have ${formatNumber(Math.max(0, log.remainingHp))} HP left.` :
                     `You deal ${formatNumber(log.damageDealt)} damage to the enemy. It has ${formatNumber(Math.max(0, log.bossHp))} HP left.`;
-                return <li key={log.time}><b>{log.details["message"]} </b>{startString}</li>;
+                const details = log.details && log.details["message"] ? <b>{log.details["message"]}</b> : null;
+                return <li key={log.time}>{details} {startString}</li>;
             })}
+            {props.rewards === undefined ? null : <li>
+                You won the fight! On the enemy's body, you found:
+                <ul style={{ listStyleType: "none" }}>
+                    {props.rewards.map(reward => {
+                        let content: string;
+                        switch (reward.reward.type) {
+                            case "MANA":
+                                content = formatNumber(reward.reward.amount) + " mana";
+                                break;
+                            case "ITEM":
+                                content = formatNumber(reward.reward.info.amount) + "x " + getItemInformation(reward.reward.info.itemId, reward.reward.info.itemData).name;
+                                break;
+                            case "EQUIP":
+                                content = reward.reward.info.name;
+                                break;
+                            default:
+                                return ((_: never): null => null)(reward.reward);
+                        }
+                        return <li key={JSON.stringify(reward)}>{content}</li>
+                    })}
+                </ul>
+            </li>}
         </ol>
     </section>;
 };

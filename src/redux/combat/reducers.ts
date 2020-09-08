@@ -1,4 +1,4 @@
-import { CombatState, CombatAction, CHALLENGE_BOSS, SET_COMBAT_ACTION, START_COMBAT, END_COMBAT, SET_DAMAGE } from "./types";
+import { CombatState, CombatAction, CHALLENGE_BOSS, SET_COMBAT_ACTION, START_COMBAT, END_COMBAT, SET_DAMAGE, SET_COMBAT_REWARD, SET_CHALLENGE_BOSS, CLEAR_CHALLENGE_BOSS } from "./types";
 
 const DEFAULT_ACTION_TIME = 60 / 25;
 const initialState: CombatState = {
@@ -7,14 +7,15 @@ const initialState: CombatState = {
     enemyHp: { current: 1, max: 1 },
     enemyDamage: [],
     enemyType: "NONE",
+    lastType: "REGULAR",
     challengeBossNext: false,
     actions: {
         player: { time: DEFAULT_ACTION_TIME, startTime: Date.now(), type: "NONE" },
         enemy: { time: DEFAULT_ACTION_TIME, startTime: Date.now(), type: "NONE" }
     },
-    actionCallbacks: [],
     fullLog: [],
-    combatStart: 0
+    combatStart: 0,
+    rewards: undefined
 }
 
 export function combatReducer(state = initialState, action: CombatAction): CombatState {
@@ -27,16 +28,19 @@ export function combatReducer(state = initialState, action: CombatAction): Comba
                 enemyHp: { current: action.enemyHp, max: action.enemyHp },
                 enemyDamage: [],
                 enemyType: action.enemyType,
+                lastType: action.enemyType,
                 actions: {
                     player: { time: DEFAULT_ACTION_TIME, startTime: Date.now(), type: "NONE" },
                     enemy: { time: DEFAULT_ACTION_TIME, startTime: Date.now(), type: "ENTERING" }
                 },
                 fullLog: action.log,
-                combatStart: Date.now()
+                combatStart: Date.now() - action.timeOffset * 1000,
+                rewards: undefined
             }
         case END_COMBAT:
             return {
                 ...state,
+                lastType: state.enemyType === "NONE" ? "REGULAR" : state.enemyType,
                 enemyType: "NONE"
             }
         case CHALLENGE_BOSS:
@@ -68,6 +72,21 @@ export function combatReducer(state = initialState, action: CombatAction): Comba
                 enemyDamage: newEnemyDamage,
                 playerHp: { ...state.playerHp, current: Math.max(0, newPlayerHp) },
                 enemyHp: { ...state.enemyHp, current: Math.max(0, newEnemyHp) }
+            }
+        case SET_COMBAT_REWARD:
+            return {
+                ...state,
+                rewards: action.rewards
+            }
+        case SET_CHALLENGE_BOSS:
+            return {
+                ...state,
+                challengeBossNext: true
+            }
+        case CLEAR_CHALLENGE_BOSS:
+            return {
+                ...state,
+                challengeBossNext: false
             }
         default:
             return state;

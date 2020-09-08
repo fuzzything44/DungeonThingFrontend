@@ -1,15 +1,16 @@
 import * as React from 'react';
-import { UpdateInformation, callStatus, callUpdate } from '../api/ApiObjects';
+import { UpdateInformation, callStatus, callUpdate, BossLog } from '../api/ApiObjects';
 import { Redirect } from 'react-router-dom';
 import { PAGES } from '../App';
 import { ScrollingBackground } from '../combat/ScrollingBackground';
 import { PlayerDisplay } from '../combat/PlayerDisplay';
-import { DEFAULT_ACTION_TIME, runCombat } from '../combat/combatRunner';
+import { DEFAULT_ACTION_TIME, runCombat, createCombatTimeouts } from '../combat/combatRunner';
 import { Modal } from '../Util/Modal';
 import { OfflineGains } from './OfflineGains';
 import { ErrorBox } from '../Util/ErrorBox';
 import { store } from '../redux/store';
-import { setPlayerInfo } from '../redux/player/actions';
+import { setPlayerInfo, setMana, setManaRate } from '../redux/player/actions';
+import { setChallengeBoss } from '../redux/combat/actions';
 
 interface WelcomeBackProps {
 };
@@ -25,9 +26,15 @@ const WelcomeBackPage: React.FC<WelcomeBackProps> = (props) => {
             const [status, update] = results;
             store.dispatch(setPlayerInfo(status));
             if ("log" in update.result) {
-                throw new Error("TODO: Got back bosslog, handle this");
+                const log: BossLog[] = JSON.parse(update.result.log);
+                // Sure, we're fudging the hp a bit. Whatever.
+                store.dispatch(setChallengeBoss());
+                createCombatTimeouts(log, log[0].bossHp + (log[0].toPlayer ? 0 : log[0].damageDealt), update.result.time_offset);
+                changeRedirect(true);
             } else {
                 changeUpdateResults(update.result);
+                store.dispatch(setMana(update.result.total));
+                store.dispatch(setManaRate(update.result.per_min));
                 runCombat();
             }
         }).catch((error) => {

@@ -10,17 +10,25 @@ import {
     END_COMBAT,
     ActorNames,
     SetDamageAction,
-    SET_DAMAGE
-} from "./types";
-import { BossLog } from "../../api/ApiObjects";
+    SET_DAMAGE,
 
-export function startCombat(playerHp: number, enemyHp: number, isBoss: boolean, log: BossLog[]): StartCombatAction {
+    SetCombatRewardAction,
+    SET_COMBAT_REWARD,
+    SetChallengeBossAction,
+    SET_CHALLENGE_BOSS,
+    ClearChallengeBossAction,
+    CLEAR_CHALLENGE_BOSS
+} from "./types";
+import { BossLog, BossReward } from "../../api/ApiObjects";
+
+export function startCombat(playerHp: number, enemyHp: number, isBoss: boolean, log: BossLog[], timeOffset: number): StartCombatAction {
     return {
         type: START_COMBAT,
         playerHp: playerHp,
         enemyHp: enemyHp,
         enemyType: isBoss ? "BOSS" : "REGULAR",
-        log: log
+        log: log,
+        timeOffset: timeOffset
     };
 }
 
@@ -38,4 +46,16 @@ export function setCombatAction(action: CombatActorAction, actor: ActorNames): S
 
 export function setDamage(amount: number, target: ActorNames): SetDamageAction {
     return { type: SET_DAMAGE, damage: amount, target: target };
+}
+
+export function setReward(rewards: BossReward[]): SetCombatRewardAction {
+    return { type: SET_COMBAT_REWARD, rewards: rewards };
+}
+
+export function setChallengeBoss(): SetChallengeBossAction {
+    return { type: SET_CHALLENGE_BOSS };
+}
+
+export function clearChallengeBoss(): ClearChallengeBossAction {
+    return { type: CLEAR_CHALLENGE_BOSS };
 }

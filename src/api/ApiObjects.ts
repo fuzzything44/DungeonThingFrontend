@@ -93,6 +93,7 @@ export interface ChallengeBossParams {
 export interface ChallengeBossResponse {
     result: boolean;
     log: BossLog[];
+    start_hp: number;
 }
 export function callChallengeBoss(params: ChallengeBossParams): Promise<ChallengeBossResponse> {
     return makeCall<ChallengeBossResponse>({...params, api: "challenge"}).then(data => { 

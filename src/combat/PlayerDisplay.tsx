@@ -27,14 +27,12 @@ const PlayerDisplay: React.FC<PlayerDisplayProps> = (props) => {
         position: "absolute",
         bottom: "35%",
         left: "min(10em, 15%)",
-        height: "20em"
     }}>
         {props.damage.map(dmg => <FloatingDamage key={dmg.startTime} damage={dmg} />)}
         {props.walking ? null : <HealthBar hp={props.hp} />}
         <FakeGif
             style={{
-                paddingTop: "1em",
-                height: "100%"
+                paddingTop: "1em"
             }}
             images={playerImages}
             repeat

@@ -8,12 +8,14 @@ interface EnemyDisplayProps {
     hp: HP;
     damage: Damage[];
     action: CombatActorAction;
+    image: string;
 };
 
 export const ENTER_TIME = 3;
 export const DEATH_TIME = 3;
 
 const EnemyDisplay: React.FC<EnemyDisplayProps> = (props) => {
+
     return <div style={{
         overflowX: "hidden",
         overflowY: "visible",
@@ -27,11 +29,12 @@ const EnemyDisplay: React.FC<EnemyDisplayProps> = (props) => {
             position: "absolute",
             bottom: "0",
             width: "10em",
-            animation: props.action.type === "ENTERING" ? `slide ${ENTER_TIME}s linear` : ""
+            animation: props.action.type === "ENTERING" ? `slide ${ENTER_TIME}s linear` : "",
+            animationDelay: "-" + (Date.now() - props.action.startTime) + "ms"
         }}>
             {props.damage.map(dmg => <FloatingDamage key={dmg.startTime} damage={dmg} />)}
             {props.action.type === "ENTERING" ? null : <HealthBar hp={props.hp} />}
-            <img alt="Enemy" style={{ width: "100%" }} src={require("../images/barrel.png")} />
+            <img alt="Enemy" style={{ width: "100%" }} src={props.image} />
         </div>
     </div>;
 }
