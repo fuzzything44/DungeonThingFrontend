@@ -96,10 +96,14 @@ export function combatReducer(state = initialState, action: CombatAction): Comba
                 autoChallengeEnabled: true
             }
         case CLEAR_AUTO_CHALLENGE:
-            return {
-                ...state,
-                challengeBossNext: false,
-                autoChallengeEnabled: false
+            if (state.autoChallengeEnabled) {
+                return {
+                    ...state,
+                    challengeBossNext: false,
+                    autoChallengeEnabled: false
+                }
+            } else {
+                return state;
             }
         default:
             return state;
