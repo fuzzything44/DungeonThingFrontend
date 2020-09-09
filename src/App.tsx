@@ -1,7 +1,7 @@
 import React from 'react';
 import "./style.css";
 import { LoginPage } from './login/LoginPage';
-import { Switch, Route, Redirect, MemoryRouter } from 'react-router-dom'
+import { Switch, Route, Redirect, MemoryRouter, Link } from 'react-router-dom'
 import { CombatPage } from './combat/CombatPage';
 import { WelcomeBackPage } from './welcomeBack/WelcomeBackPage';
 
@@ -9,7 +9,8 @@ export const PAGES = {
     LOGIN: "/login",
     INTRODUCTION: "/intro",
     WELCOME_BACK: "/welcomeBack",
-    COMBAT: "/combat"
+    COMBAT: "/combat",
+    TAVERN: "/tavern"
 };
 
 function App() {
@@ -22,7 +23,7 @@ function App() {
                     <Route path={PAGES.INTRODUCTION}>This is normally the introduction page</Route>
                     <Route path={PAGES.WELCOME_BACK}><WelcomeBackPage /></Route>
                     <Route path={PAGES.COMBAT}><CombatPage /></Route>
-
+                    <Route path={PAGES.TAVERN}>Normally tavern page.<Link to={PAGES.COMBAT}>Back to combat</Link></Route>
                     <Route>404<br/>Page not found</Route>
                 </Switch>
             </MemoryRouter>

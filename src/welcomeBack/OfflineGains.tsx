@@ -27,30 +27,10 @@ const secondsToHms = (totalSeconds: number): string => {
         formatTimePart(totalHours, totalHours % 24, "hour"),
         formatTimePart(totalMinutes, totalMinutes % 60, "minute"),
         formatTimePart(totalSeconds, Math.floor(totalSeconds % 60), "second")
-    ].join(", ");
+    ].filter(tp => tp !== "").join(", ");
 }
 
 const OfflineGains: React.FC<OfflineGainsProps> = (props) => {
-    // Temporary testing thing
-    props = {
-        results: {
-            gain: 69420,
-            total: 777777,
-            per_min: 5,
-            tickets: 3,
-            time: 666666,
-            rewards: [
-                { reward: { type: "MANA", amount: 500 } },
-                { reward: { type: "ITEM", info: { itemData: 3, itemId: 1, amount: 1, characterId: 0 } } },
-                { reward: { type: "EQUIP", info: { id: 0, level: 5, name: "Level 5 Sword", type: 1, rankId: 3 } } },
-                { reward: { type: "ITEM", info: { itemData: 1, itemId: 1, amount: 1, characterId: 0 } } },
-                { reward: { type: "ITEM", info: { itemData: 3, itemId: 2, amount: 5, characterId: 0 } } },
-                { reward: { type: "ITEM", info: { itemData: 3, itemId: 2, amount: 3, characterId: 0 } } },
-                { reward: { type: "ITEM", info: { itemData: 5, itemId: 1, amount: 1, characterId: 0 } } }
-            ]
-        },
-        closeClicked: props.closeClicked
-    }
     const dungeonTickets = props.results.tickets ? <li>{formatNumber(props.results.tickets)} <Icon image={require("../images/ticket.png")} name="Dungeon entry ticket" /></li> : null;
     const drops = props.results.rewards.length === 0 ? null : <div>
         From bosses killed while you were gone, you got

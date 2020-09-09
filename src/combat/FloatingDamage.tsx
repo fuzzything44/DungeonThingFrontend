@@ -16,6 +16,8 @@ const FloatingDamage: React.FC<FloatingDamage> = (props) => {
         key={props.damage.startTime}
         style={{
             ...outlineText,
+            position: "absolute",
+            left: "3em",
             textAlign: "center",
             fontSize: "large",
             fontWeight: "bold",

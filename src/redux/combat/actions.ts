@@ -17,7 +17,11 @@ import {
     SetChallengeBossAction,
     SET_CHALLENGE_BOSS,
     ClearChallengeBossAction,
-    CLEAR_CHALLENGE_BOSS
+    CLEAR_CHALLENGE_BOSS,
+    SetAutoChallengeBossAction,
+    ClearAutoChallengeBossAction,
+    SET_AUTO_CHALLENGE,
+    CLEAR_AUTO_CHALLENGE
 } from "./types";
 import { BossLog, BossReward } from "../../api/ApiObjects";
 
@@ -58,4 +62,12 @@ export function setChallengeBoss(): SetChallengeBossAction {
 
 export function clearChallengeBoss(): ClearChallengeBossAction {
     return { type: CLEAR_CHALLENGE_BOSS };
+}
+
+export function setAutoChallenge(): SetAutoChallengeBossAction {
+    return { type: SET_AUTO_CHALLENGE };
+}
+
+export function clearAutoChallenge(): ClearAutoChallengeBossAction {
+    return { type: CLEAR_AUTO_CHALLENGE };
 }

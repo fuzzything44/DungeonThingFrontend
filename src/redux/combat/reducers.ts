@@ -1,4 +1,4 @@
-import { CombatState, CombatAction, CHALLENGE_BOSS, SET_COMBAT_ACTION, START_COMBAT, END_COMBAT, SET_DAMAGE, SET_COMBAT_REWARD, SET_CHALLENGE_BOSS, CLEAR_CHALLENGE_BOSS } from "./types";
+import { CombatState, CombatAction, CHALLENGE_BOSS, SET_COMBAT_ACTION, START_COMBAT, END_COMBAT, SET_DAMAGE, SET_COMBAT_REWARD, SET_CHALLENGE_BOSS, CLEAR_CHALLENGE_BOSS, SET_AUTO_CHALLENGE, CLEAR_AUTO_CHALLENGE } from "./types";
 
 const DEFAULT_ACTION_TIME = 60 / 25;
 const initialState: CombatState = {
@@ -9,6 +9,7 @@ const initialState: CombatState = {
     enemyType: "NONE",
     lastType: "REGULAR",
     challengeBossNext: false,
+    autoChallengeEnabled: false,
     actions: {
         player: { time: DEFAULT_ACTION_TIME, startTime: Date.now(), type: "NONE" },
         enemy: { time: DEFAULT_ACTION_TIME, startTime: Date.now(), type: "NONE" }
@@ -86,7 +87,19 @@ export function combatReducer(state = initialState, action: CombatAction): Comba
         case CLEAR_CHALLENGE_BOSS:
             return {
                 ...state,
-                challengeBossNext: false
+                challengeBossNext: false || state.autoChallengeEnabled
+            }
+        case SET_AUTO_CHALLENGE:
+            return {
+                ...state,
+                challengeBossNext: true,
+                autoChallengeEnabled: true
+            }
+        case CLEAR_AUTO_CHALLENGE:
+            return {
+                ...state,
+                challengeBossNext: false,
+                autoChallengeEnabled: false
             }
         default:
             return state;

@@ -9,7 +9,7 @@ import { PlayerDisplay } from './PlayerDisplay';
 import { CombatLog } from './CombatLog';
 import { PlayerState } from '../redux/player/types';
 import { border, backgroundSecondary } from '../styles';
-import { setChallengeBoss } from '../redux/combat/actions';
+import { setChallengeBoss, setAutoChallenge } from '../redux/combat/actions';
 import { getLocationInfo } from './locationInfo';
 
 interface StateProps {
@@ -64,20 +64,51 @@ const CombatPageUnmapped: React.FC<CombatPageProps> = (props) => {
         </div>
         <button
             style={{
-                ...backgroundSecondary,
                 ...border,
+                backgroundColor: props.combatState.challengeBossNext ? "darkgray" : backgroundSecondary.backgroundColor,
                 borderRadius: "0.5em",
                 padding: "1em",
                 position: "absolute",
                 top: "20%",
                 left: "calc(50% - 3.5em)",
                 width: "7em",
+                height: "1em"
             }}
             disabled={props.combatState.challengeBossNext}
             onClick={() => props.dispatch(setChallengeBoss())}
         >
             {props.combatState.challengeBossNext ? "Challenging..." : "Challenge Boss"}
         </button>
+        {props.playerState.max_floor >= 10 && props.playerState.max_floor > props.playerState.floor ? <button
+            style={{
+                ...border,
+                backgroundColor: props.combatState.autoChallengeEnabled ? "darkgray" : backgroundSecondary.backgroundColor,
+                borderRadius: "0.5em",
+                padding: "1em",
+                position: "absolute",
+                top: "calc(20% + 3.5em)",
+                left: "calc(50% - 5em)",
+                width: "10em",
+                textAlign: "center"
+            }}
+            disabled={props.combatState.challengeBossNext}
+            onClick={() => props.dispatch(setAutoChallenge())}
+        >
+            {props.combatState.autoChallengeEnabled ? "Auto-challenging..." : "Auto-Challenge"}
+        </button> : null}
+        <div style={{
+            borderBottom: border.border,
+            borderRight: border.border,
+            borderBottomRightRadius: "0.7em",
+            backgroundColor: "rgba(255, 255, 255, 0.8)",
+            padding: "0.5em",
+            position: "fixed",
+            top: "0",
+            left: "0"
+        }}>
+            {locationInfo.dungeonName}<br />
+            Floor {props.playerState.floor}
+        </div>
     </div>;
 }
 

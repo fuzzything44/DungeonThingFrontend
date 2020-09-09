@@ -5,6 +5,7 @@ export interface LocationInfo {
     bossImage: string;
     bossName: string;
     enemyHp: number;
+    dungeonName: string;
 }
 
 const linearExponentialScaling = (linearScale: number, base: number, exponentialScale: number, floor: number): number => {
@@ -20,7 +21,8 @@ export const getLocationInfo = (dungeonId: number, dungeonFloor: number): Locati
                 enemyName: "barrel",
                 bossImage: require("../images/mana.png"),
                 bossName: "giant rat",
-                enemyHp: linearExponentialScaling(5, 25, 1.05, dungeonFloor)
+                enemyHp: linearExponentialScaling(5, 25, 1.05, dungeonFloor),
+                dungeonName: "Tavern Cellar"
             };
         case 2:
             return {
@@ -29,7 +31,8 @@ export const getLocationInfo = (dungeonId: number, dungeonFloor: number): Locati
                 enemyName: "suit of armor",
                 bossImage: require("../images/ticket.png"),
                 bossName: "floating sword",
-                enemyHp: linearExponentialScaling(5, 5, 1.05, dungeonFloor)
+                enemyHp: linearExponentialScaling(5, 5, 1.05, dungeonFloor),
+                dungeonName: "Armory"
             };
         default:
             throw new Error("That isn't a known dungeon");

@@ -28,6 +28,7 @@ export interface CombatState {
         enemy: CombatActorAction;
     };
     challengeBossNext: boolean;
+    autoChallengeEnabled: boolean;
     fullLog: BossLog[];
     combatStart: number;
     rewards: BossReward[] | undefined;
@@ -85,6 +86,15 @@ export interface ClearChallengeBossAction {
     type: typeof CLEAR_CHALLENGE_BOSS;
 }
 
+export const SET_AUTO_CHALLENGE = "SET_AUTO_CHALLENGE";
+export interface SetAutoChallengeBossAction {
+    type: typeof SET_AUTO_CHALLENGE;
+}
+
+export const CLEAR_AUTO_CHALLENGE = "CLEAR_AUTO_CHALLENGE";
+export interface ClearAutoChallengeBossAction {
+    type: typeof CLEAR_AUTO_CHALLENGE;
+}
 export type CombatAction =
     StartCombatAction |
     EndCombatAction |
@@ -93,5 +103,7 @@ export type CombatAction =
     SetDamageAction |
     SetCombatRewardAction |
     SetChallengeBossAction |
-    ClearChallengeBossAction;
+    ClearChallengeBossAction |
+    SetAutoChallengeBossAction |
+    ClearAutoChallengeBossAction;
     

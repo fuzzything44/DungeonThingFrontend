@@ -1,6 +1,6 @@
-import { BossLog, callChallengeBoss, callUpdate } from "../api/ApiObjects";
+import { BossLog, callChallengeBoss, callUpdate, callStatus } from "../api/ApiObjects";
 import { store } from "../redux/store";
-import { setCombatAction, setDamage, startCombat, endCombat, setReward, clearChallengeBoss, setChallengeBoss } from "../redux/combat/actions";
+import { setCombatAction, setDamage, startCombat, endCombat, setReward, clearChallengeBoss, setChallengeBoss, clearAutoChallenge } from "../redux/combat/actions";
 import { ENTER_TIME, DEATH_TIME } from "./EnemyDisplay";
 import { setMana, setPlayerInfo, setManaRate } from "../redux/player/actions";
 import { getLocationInfo } from "./locationInfo";
@@ -144,9 +144,15 @@ export const createCombatTimeouts = (log: BossLog[], startHp: number, secondOffs
             type: "DYING"
         }, playerDead ? "PLAYER" : "ENEMY"));
         // At end of combat, get rewards
-        if (!playerDead) {
+        if (playerDead) {
+            store.dispatch(clearAutoChallenge());
+        } else {
             const _combatStart = store.getState().combat.combatStart;
-            const update = await callUpdate({});
+            const [update, status] = await Promise.all([callUpdate({}), callStatus({})]);
+            store.dispatch(setPlayerInfo(status));
+            if (status.max_floor <= status.floor) {
+                store.dispatch(clearAutoChallenge());
+            }
             if ("log" in update.result) {
                 chainNext = false;
                 const log: BossLog[] = JSON.parse(update.result.log);

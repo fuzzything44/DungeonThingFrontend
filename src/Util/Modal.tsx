@@ -44,7 +44,7 @@ const Modal: React.FC<ModalProps> = (props) => {
                             position: "absolute",
                             right: "0.1em",
                             top: "-0.1em",
-                            fontSize: "x-large",
+                            fontSize: "1.5em",
                             ...border,
                             borderRadius: "0.3em",
                             width: "1em",
