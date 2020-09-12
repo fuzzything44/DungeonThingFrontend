@@ -70,7 +70,6 @@ const Login: React.FC<LoginProps> = (props) => {
                     <button
                         onClick={() => {
                             callLogin({ name: username, password: password }).then(data => {
-                                console.log("Changing redirect");
                                 if (localStorage["password"] == null) {
                                     localStorage["username"] = username;
                                 }

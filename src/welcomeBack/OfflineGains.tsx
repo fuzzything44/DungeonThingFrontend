@@ -31,7 +31,7 @@ const secondsToHms = (totalSeconds: number): string => {
 }
 
 const OfflineGains: React.FC<OfflineGainsProps> = (props) => {
-    const dungeonTickets = props.results.tickets ? <li>{formatNumber(props.results.tickets)} <Icon image={require("../images/ticket.png")} name="Dungeon entry ticket" /></li> : null;
+    const dungeonTickets = props.results.tickets ? <li>{formatNumber(props.results.tickets)} <Icon icon="ticket" /></li> : null;
     const drops = props.results.rewards.length === 0 ? null : <div>
         From bosses killed while you were gone, you got
         <ul style={{ listStyleType: "none" }}>
@@ -39,7 +39,7 @@ const OfflineGains: React.FC<OfflineGainsProps> = (props) => {
                 const innerReward = reward.reward;
                 switch (innerReward.type) {
                     case "MANA":
-                        return <li key={innerReward.amount}>{formatNumber(innerReward.amount)} <Icon image={require("../images/mana.png")} name="Mana" /></li>
+                        return <li key={innerReward.amount}>{formatNumber(innerReward.amount)} <Icon icon="mana" /></li>
                     case "ITEM":
                         return <li key={JSON.stringify(innerReward)}><ItemDisplay {...innerReward.info} /></li>;
                     case "EQUIP":
@@ -58,7 +58,7 @@ const OfflineGains: React.FC<OfflineGainsProps> = (props) => {
                 listStyleType: "none"
             }}
         >
-            <li>{formatNumber(props.results.gain)} <Icon image={require("../images/mana.png")} name="Mana" /></li>
+            <li>{formatNumber(props.results.gain)} <Icon icon="mana" /></li>
             {dungeonTickets}
         </ul>
         {drops}

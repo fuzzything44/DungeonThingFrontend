@@ -112,7 +112,6 @@ export const createCombatTimeouts = (log: BossLog[], startHp: number, secondOffs
 
     // Start the combat
     store.dispatch(startCombat(store.getState().player.hp, startHp, store.getState().combat.challengeBossNext, log, realOffset));
-    console.log("Offsets: ", secondOffset, log[log.length - 1].time, realOffset);
 
     // Add timeouts for animations and damage
     createActorTimeouts(playerLog, true, realOffset);
@@ -165,7 +164,6 @@ export const createCombatTimeouts = (log: BossLog[], startHp: number, secondOffs
                     ...update.result.rewards
                 ]));
                 store.dispatch(setMana(update.result.total));
-                store.dispatch(setPlayerInfo({ tickets: update.result.tickets }));
                 if (store.getState().player.manaPerMin !== update.result.per_min) {
                     store.dispatch(setManaRate(update.result.per_min));
                 }

@@ -34,8 +34,8 @@ const InstanceMenuBase: React.FC<InstanceMenuProps> = (props) => {
             padding: "0.5em",
             paddingTop: "0"
         }}>
-            {formatNumber(props.mana)} <Icon image={require("./images/mana.png")} name="Mana" /><br />
-            {formatNumber(props.manaPerMin)} <Icon image={require("./images/mana.png")} name="Mana" />/minute<br />
+            {formatNumber(props.mana)} <Icon icon="mana" /><br />
+            {formatNumber(props.manaPerMin)} <Icon icon="mana" />/minute<br />
         </div>
         <div style={{ float: "left" }}>
             <Link to={PAGES.TAVERN}>
