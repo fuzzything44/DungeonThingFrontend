@@ -50,6 +50,19 @@ const InstanceMenuBase: React.FC<InstanceMenuProps> = (props) => {
                 />
             </Link>
         </div>
+        <div style={{ float: "left" }}>
+            <Link to={PAGES.SETTINGS}>
+                <img
+                    src={require("./images/gear.png")}
+                    style={{
+                        height: "2em",
+                        padding: "0.5em"
+                    }}
+                    alt="Account Settings"
+                    title="Account"
+                />
+            </Link>
+        </div>
     </div>;
 };
 

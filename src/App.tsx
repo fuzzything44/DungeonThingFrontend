@@ -4,13 +4,15 @@ import { LoginPage } from './login/LoginPage';
 import { Switch, Route, Redirect, MemoryRouter, Link } from 'react-router-dom'
 import { CombatPage } from './combat/CombatPage';
 import { WelcomeBackPage } from './welcomeBack/WelcomeBackPage';
+import { TavernHub } from './tavernHub/TavernHub';
 
 export const PAGES = {
     LOGIN: "/login",
     INTRODUCTION: "/intro",
     WELCOME_BACK: "/welcomeBack",
     COMBAT: "/combat",
-    TAVERN: "/tavern"
+    TAVERN: "/tavern",
+    SETTINGS: "/settings"
 };
 
 function App() {
@@ -23,7 +25,8 @@ function App() {
                     <Route path={PAGES.INTRODUCTION}>This is normally the introduction page</Route>
                     <Route path={PAGES.WELCOME_BACK}><WelcomeBackPage /></Route>
                     <Route path={PAGES.COMBAT}><CombatPage /></Route>
-                    <Route path={PAGES.TAVERN}>Normally tavern page.<Link to={PAGES.COMBAT}>Back to combat</Link></Route>
+                    <Route path={PAGES.TAVERN}><TavernHub /></Route>
+                    <Route path={PAGES.SETTINGS}>Settings page. <Link to={PAGES.COMBAT}>Back to combat</Link></Route>
                     <Route>404<br/>Page not found</Route>
                 </Switch>
             </MemoryRouter>

@@ -16,7 +16,7 @@ interface WelcomeBackProps {
 };
 
 const WelcomeBackPage: React.FC<WelcomeBackProps> = (props) => {
-    const [redirect, changeRedirect] = React.useState(false);
+    const [redirect, changeRedirect] = React.useState("");
     const [updateResults, changeUpdateResults] = React.useState<UpdateInformation | "UNSET" | "FETCHING">("UNSET");
     const [error, changeError] = React.useState("");
 
@@ -24,13 +24,19 @@ const WelcomeBackPage: React.FC<WelcomeBackProps> = (props) => {
         changeUpdateResults("FETCHING");
         Promise.all([callStatus({}), callUpdate({})]).then((results) => {
             const [status, update] = results;
+            
             store.dispatch(setPlayerInfo(status));
+            if (status.dungeon === 0) {
+                changeRedirect(PAGES.INTRODUCTION);
+                return;
+            }
+
             if ("log" in update.result) {
                 const log: BossLog[] = JSON.parse(update.result.log);
                 // Sure, we're fudging the hp a bit. Whatever.
                 store.dispatch(setChallengeBoss());
                 createCombatTimeouts(log, log[0].bossHp + (log[0].toPlayer ? 0 : log[0].damageDealt), update.result.time_offset);
-                changeRedirect(true);
+                changeRedirect(PAGES.COMBAT);
             } else {
                 changeUpdateResults(update.result);
                 store.dispatch(setMana(update.result.total));
@@ -42,11 +48,11 @@ const WelcomeBackPage: React.FC<WelcomeBackProps> = (props) => {
         });
     }
     if (redirect) {
-        return <Redirect to={PAGES.COMBAT} />;
+        return <Redirect to={redirect} />;
     }
 
     return <div>
-        <ScrollingBackground paused={false} image={`url(${require("../images/tavern_repeat.png")})`} />
+        <ScrollingBackground paused={false} image={`url(${require("../images/outside.png")})`} />
         <PlayerDisplay
             walking={true}
             hp={{max: 1, current: 1}}
@@ -58,7 +64,7 @@ const WelcomeBackPage: React.FC<WelcomeBackProps> = (props) => {
             {typeof updateResults === "string" ? "Calculating offline gains..." :
                 <OfflineGains
                     results={updateResults}
-                    closeClicked={() => changeRedirect(true)}
+                    closeClicked={() => changeRedirect(PAGES.COMBAT)}
                 />
             }
         </Modal>

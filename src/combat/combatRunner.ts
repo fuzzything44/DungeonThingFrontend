@@ -150,7 +150,7 @@ export const createCombatTimeouts = (log: BossLog[], startHp: number, secondOffs
             const _combatStart = store.getState().combat.combatStart;
             const [update, status] = await Promise.all([callUpdate({}), callStatus({})]);
             store.dispatch(setPlayerInfo(status));
-            if (status.max_floor <= status.floor) {
+            if (status.max_floor <= status.floor && status.dungeon === 1) {
                 store.dispatch(clearAutoChallenge());
             }
             if ("log" in update.result) {
@@ -175,11 +175,12 @@ export const createCombatTimeouts = (log: BossLog[], startHp: number, secondOffs
 
     setTimeout(() => {
         // After death, end combat and start a new one after 12s from very start of combat
+        const untilNextCombat = store.getState().combat.enemyType === "BOSS" ? 6000 : store.getState().combat.combatStart + (60 / COMBATS_PER_MIN) * 1000 - Date.now();
         setTimeout(() => {
             if (chainNext) {
                 runCombat();
             }
-        }, store.getState().combat.combatStart + (60 / COMBATS_PER_MIN) * 1000 - Date.now());
+        }, untilNextCombat);
         store.dispatch(endCombat());
     }, log[log.length - 1].time * 1000 + ENEMY_ENTRY_TIME + 1000 * DEATH_TIME - realOffset * 1000);
 }

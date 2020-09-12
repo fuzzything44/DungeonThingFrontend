@@ -22,3 +22,11 @@ export const errorBackground = {
 export const outlineText = {
     textShadow: "-1px 0 white, 0 1px white, 1px 0 white, 0 -1px white",
 }
+
+export const buttonStyle = {
+    ...border,
+    ...backgroundSecondary,
+    borderRadius: "0.3em",
+    paddingLeft: "0.2em",
+    paddingRight: "0.2em"
+}

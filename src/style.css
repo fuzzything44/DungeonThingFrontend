@@ -4,6 +4,12 @@ h1, h2 {
     margin: 0
 }
 
+a, a:visited {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+
 button {
     all: unset;
 }

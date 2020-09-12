@@ -41,7 +41,7 @@ const CombatLog: React.FC<CombatLogProps> = (props) => {
             }
         }}
     >
-        <h1
+        <div
             style={{
                 ...backgroundSecondary,
                 borderBottomLeftRadius: expanded === "CLOSED" ? "0.5em" : undefined,
@@ -60,8 +60,11 @@ const CombatLog: React.FC<CombatLogProps> = (props) => {
                 }
             }}
         >
-            Combat Log
-        </h1>
+            <h1>Combat Log</h1>
+            <div style={{ float: "right", paddingRight: "0.1em" }}>
+                {expanded === "OPENED" || expanded === "OPENING" ? "\u2193" : "\u2191"}
+            </div>
+        </div>
         <ol
             style={{
                 padding: expanded === "CLOSED" ? undefined : "0.5em",
