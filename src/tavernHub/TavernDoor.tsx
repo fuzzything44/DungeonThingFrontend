@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { PAGES } from '../App';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { Modal } from '../Util/Modal';
 import { Icon } from '../Util/Icon';
 import { buttonStyle } from '../styles';

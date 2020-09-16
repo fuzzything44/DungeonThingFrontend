@@ -32,8 +32,8 @@ const Create: React.FC<CreateProps> = (props) => {
         <div>Create an account</div>
         <br/>
         <div style={{display: "inline-block"}}>
-            <TextInput inputName="Username" onChange={value => { changeUsername(value); changeError(""); }} inputValue={username} example="VixnarTheMage" required />
-            <TextInput inputName="Password" onChange={value => { changePassword(value); changeError(""); }} inputValue={password} example="password123" required />
+            <TextInput inputName="Username" onChange={value => { changeUsername(value); changeError(""); }} inputValue={username} example="VixnarTheMage" required autocomplete="username" />
+            <TextInput inputName="Password" onChange={value => { changePassword(value); changeError(""); }} inputValue={password} example="password123" required autocomplete="new-password" />
             <TextInput inputName="Email" onChange={value => { changeEmail(value); changeError(""); }} inputValue={email} example="squidlover@gmail.com" />
         </div>
         <br/>

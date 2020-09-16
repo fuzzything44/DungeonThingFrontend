@@ -19,7 +19,13 @@ function realMakeCall(requests: any[]): Promise<any[]> {
         body: JSON.stringify(body),
         mode: "cors",
         headers: header
-    }).then(r => r.json());
+    }).then(r => {
+        if (r.ok) {
+            return r.json()
+        } else {
+            return r.text().then(text => { throw new Error(text); });
+        }
+    });
 }
 
 interface CallbackListElement {

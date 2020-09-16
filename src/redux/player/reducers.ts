@@ -1,4 +1,4 @@
-import { PlayerState, PlayerAction, SET_PLAYER_INFO, SET_MANA, SET_MANA_RATE } from "./types";
+import { PlayerState, PlayerAction, SET_PLAYER_INFO, SET_MANA, SET_MANA_RATE, SET_ATTRIBUTE_LEVEL } from "./types";
 
 const initialState: PlayerState = {
     hp: 0,
@@ -11,7 +11,12 @@ const initialState: PlayerState = {
     max_floor: 0,
     tickets: 0,
     mana: 0,
-    manaPerMin: 0
+    manaPerMin: 0,
+    attributes: {
+        crit_dmg: 0,
+        crit_rate: 0,
+        attack_dmg: 0
+    }
 };
 
 export function playerReducer(state = initialState, action: PlayerAction): PlayerState {
@@ -30,6 +35,14 @@ export function playerReducer(state = initialState, action: PlayerAction): Playe
             return {
                 ...state,
                 manaPerMin: action.rate
+            }
+        case SET_ATTRIBUTE_LEVEL:
+            return {
+                ...state,
+                attributes: {
+                    ...state.attributes,
+                    [action.attribute]: action.level
+                }
             }
         default:
             return state;

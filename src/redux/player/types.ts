@@ -1,8 +1,10 @@
 import { StatusResponse } from "../../api/ApiObjects";
+import { ATTRIBUTES } from "../../character/Attribute";
 
 export type PlayerState = StatusResponse & {
     mana: number;
     manaPerMin: number;
+    attributes: { [T in keyof typeof ATTRIBUTES] : number };
 };
 
 
@@ -22,4 +24,12 @@ export interface SetManaRateAction {
     type: typeof SET_MANA_RATE;
     rate: number;
 }
-export type PlayerAction = SetPlayerInfoAction | SetManaAction | SetManaRateAction;
+
+export const SET_ATTRIBUTE_LEVEL = "SET_ATTRIBUTE_LEVEL";
+export interface SetAttributeLevelAction {
+    type: typeof SET_ATTRIBUTE_LEVEL;
+    attribute: keyof typeof ATTRIBUTES;
+    level: number;
+}
+
+export type PlayerAction = SetPlayerInfoAction | SetManaAction | SetManaRateAction | SetAttributeLevelAction;
