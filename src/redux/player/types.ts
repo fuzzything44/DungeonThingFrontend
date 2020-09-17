@@ -7,7 +7,6 @@ export type PlayerState = StatusResponse & {
     attributes: { [T in keyof typeof ATTRIBUTES] : number };
 };
 
-
 export const SET_PLAYER_INFO = "SET_PLAYER_INFO";
 export type SetPlayerInfoAction = Partial<StatusResponse> & {
     type: typeof SET_PLAYER_INFO;

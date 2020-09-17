@@ -22,30 +22,16 @@ interface StateProps {
 
 type CharacterProps = StateProps;
 
-let lastAttributeFetch: number = 0;
-const ATTRIBUTE_FETCH_INTERVAL: number = 60 * 1000;
-
 const CharacterPageUnmapped: React.FC<CharacterProps> = (props) => {
     const [attributeError, changeAttributeError] = React.useState("");
     React.useEffect(() => {
-        let timeout: NodeJS.Timeout;
-        const fetchAttributes = async () => {
-            lastAttributeFetch = Date.now();
-            try {
-                const attributes = await callGetAttributes({});
-                let key: keyof GetAttributesResponse;
-                for (key in attributes) {
-                    store.dispatch(setAttributeLevel(key, attributes[key].level));
-                }
-            } catch (e) {
-                changeAttributeError(e.message);
+        callGetAttributes({}).then(attributes => {
+            let key: keyof GetAttributesResponse;
+            for (key in attributes) {
+                store.dispatch(setAttributeLevel(key, attributes[key].level));
             }
-            timeout = setTimeout(fetchAttributes, ATTRIBUTE_FETCH_INTERVAL);
-        };
-        timeout = setTimeout(fetchAttributes, Math.max(0, lastAttributeFetch - Date.now() + ATTRIBUTE_FETCH_INTERVAL));
-        return () => clearTimeout(timeout);
-    });
-    // TODO: get attributes
+        });
+    }, []);
     return <div style={{
         minHeight: "100vh",
         backgroundImage: `url(${require("../images/wood.png")})`,
