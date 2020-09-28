@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { PAGES } from '../App';
 import { Link } from 'react-router-dom';
+import { PlayerGif, PlayerActions } from '../Util/PlayerGif';
+import { DEFAULT_ACTION_TIME } from '../combat/combatRunner';
 
 interface PlayerProps {
 }
@@ -15,10 +17,11 @@ const Player: React.FC<PlayerProps> = (props) => {
             height: "14em"
         }}
     >
-        <img
-            style={{ height: "100%" }}
-            src={require("../images/animations/player_attacking/3.png")}
-            alt="Player"
+        <PlayerGif
+            action={PlayerActions.IDLE}
+            time={DEFAULT_ACTION_TIME}
+            startTime={0}
+            height={"15em"}
             title="Player"
         />
     </Link>

@@ -11,7 +11,7 @@ export interface BossLog {
 }
 export interface BossRewardEquip {
     type: "EQUIP";
-    info: BasicEquipInfo;
+    info: EquipInfo;
 }
 export interface BossRewardItem {
     type: "ITEM";
@@ -36,12 +36,18 @@ export interface GiftInfo {
     itemData: number;
     itemId: number;
 }
-export interface BasicEquipInfo {
+export interface EquipInfo {
+    id: number;
     level: number;
+    max_level: number;
+    rank: string;
+    rankId: number;
     type: number;
     name: string;
-    id: number;
-    rankId: number;
+    strength: number;
+    level_cost: number;
+    rank_cost: number;
+    reinforce: number;
 }
 export interface ItemInfo {
     amount: number;
@@ -193,17 +199,7 @@ export interface EquipInfoParams {
     id: number;
 }
 export interface EquipInfoResponse {
-    id: number;
-    level: number;
-    max_level: number;
-    rank: string;
-    rankId: number;
-    type: number;
-    name: string;
-    strength: number;
-    level_cost: number;
-    rank_cost: number;
-    reinforce: number;
+    info: EquipInfo;
 }
 export function callEquipInfo(params: EquipInfoParams): Promise<EquipInfoResponse> {
     return makeCall<EquipInfoResponse>({...params, api: "equip_info"}).then(data => { 
@@ -223,22 +219,6 @@ export interface EquipItemResponse {
 }
 export function callEquipItem(params: EquipItemParams): Promise<EquipItemResponse> {
     return makeCall<EquipItemResponse>({...params, api: "use_equip"}).then(data => { 
-        if ("error" in data) {
-            throw new Error(data["error"]);
-        } else { 
-            return data; 
-        } 
-    });
-}
- 
-export interface ExitDungeonParams {
-    
-}
-export interface ExitDungeonResponse {
-    
-}
-export function callExitDungeon(params: ExitDungeonParams): Promise<ExitDungeonResponse> {
-    return makeCall<ExitDungeonResponse>({...params, api: "exit"}).then(data => { 
         if ("error" in data) {
             throw new Error(data["error"]);
         } else { 
@@ -285,12 +265,12 @@ export interface GetInventoryParams {
     
 }
 export interface GetInventoryResponse {
-    equips: BasicEquipInfo[];
-    weapon: number;
-    hat: number;
-    shirt: number;
-    pants: number;
-    shoes: number;
+    equips: EquipInfo[];
+    weapon: EquipInfo;
+    hat: EquipInfo;
+    shirt: EquipInfo;
+    pants: EquipInfo;
+    shoes: EquipInfo;
     items: ItemInfo[];
 }
 export function callGetInventory(params: GetInventoryParams): Promise<GetInventoryResponse> {

@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { ItemDetails } from './ItemDetails';
-import { getItemInformation } from './itemInfo';
+import { getItemInformation, standardBorderColors } from './itemInfo';
 import { outlineText } from '../styles';
+import { BoxedImage } from '../Util/BoxedImage';
 
 interface ItemDisplayProps {
     itemId: number;
@@ -20,7 +21,7 @@ function getImageLoc(itemId: number, itemData: number): string {
 
 function getBorderColor(itemId: number, itemData: number) {
     if ([1, 2].includes(itemId)) {
-        return ["gray", "green", "blue", "mediumorchid", "red", "deeppink"][Math.floor((itemData - 1) / 5)];
+        return standardBorderColors(itemData);
     }
     return "black";
 }
@@ -46,17 +47,10 @@ const ItemDisplay: React.FC<ItemDisplayProps> = (props) => {
         display: "inline-block"
     };
     const content = <>
-        <img
-            src={getImageLoc(props.itemId, props.itemData)}
-            style={{
-                border: "2px solid",
-                height: "100%",
-                width: "100%",
-                borderRadius: "0.5em",
-                borderColor: getBorderColor(props.itemId, props.itemData)
-            }}
+        <BoxedImage
+            image={getImageLoc(props.itemId, props.itemData)}
+            borderColor={getBorderColor(props.itemId, props.itemData)}
             title={getItemInformation(props.itemId, props.itemData).name}
-            alt={getItemInformation(props.itemId, props.itemData).name}
         />
         <div
             style={{

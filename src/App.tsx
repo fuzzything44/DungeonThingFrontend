@@ -7,6 +7,7 @@ import { WelcomeBackPage } from './welcomeBack/WelcomeBackPage';
 import { TavernHub } from './tavernHub/TavernHub';
 import { CharacterPage } from './character/CharacterPage';
 import { SettingsPage } from './settings/SettingsPage';
+import { InventoryPage } from './inventory/InventoryPage';
 
 export const PAGES = {
     LOGIN: "/login",
@@ -32,7 +33,7 @@ function App() {
                     <Route path={PAGES.TAVERN}><TavernHub /></Route>
                     <Route path={PAGES.SETTINGS}><SettingsPage /></Route>
                     <Route path={PAGES.CHARACTER}><CharacterPage /></Route>
-                    <Route path={PAGES.INVENTORY}>Inventory page. equips + items here</Route>
+                    <Route path={PAGES.INVENTORY}><InventoryPage /></Route>
                     <Route>404<br/>Page not found</Route>
                 </Switch>
             </MemoryRouter>

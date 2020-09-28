@@ -42,3 +42,17 @@ button:focus {
         opacity: 0;
     }
 }
+
+@keyframes level-up {
+    0% {
+        transform: translate(7em, 0);
+        opacity: 0;
+    }
+    25% {
+        opacity: 255;
+    }
+    100% {
+        transform: translate(1.7em, 0);
+        opacity: 0;
+    }
+}

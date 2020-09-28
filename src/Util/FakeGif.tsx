@@ -7,6 +7,7 @@ interface FakeGifProps {
     playTime: number;
     startTime: number;
     alt: string;
+    title?: string;
     style?: React.HTMLAttributes<HTMLImageElement>["style"]
 }
 
@@ -33,7 +34,9 @@ const FakeGif: React.FC<FakeGifProps> = (props) => {
     }
     return <img
         style={props.style}
-        src={props.images[imageIndex]} alt={props.alt}
+        src={props.images[imageIndex]}
+        alt={props.alt}
+        title={props.title}
     />;
 };
 FakeGif.displayName = "FakeGif";

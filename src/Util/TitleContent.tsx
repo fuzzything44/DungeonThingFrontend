@@ -3,7 +3,8 @@ import { border, backgroundSecondary, backgroundColor } from "../styles";
 
 interface TitleContentProps {
     title: JSX.Element;
-    style?: React.HTMLAttributes<HTMLDivElement>["style"]
+    style?: React.HTMLAttributes<HTMLDivElement>["style"];
+    noPad?: boolean;
 }
 
 const RADIUS = "0.5em";
@@ -30,7 +31,7 @@ const TitleContent: React.FC<TitleContentProps> = (props) => {
         <div
             style={{
                 ...backgroundColor,
-                padding: "0.3em",
+                padding: props.noPad ? "" : "0.3em",
                 fontWeight: "normal",
                 borderBottomLeftRadius: RADIUS,
                 borderBottomRightRadius: RADIUS

@@ -2,8 +2,9 @@ import * as React from 'react';
 import { InstanceMenu } from '../InstanceMenu';
 import { connect } from 'react-redux';
 import { RootState } from '../redux/store';
-import { TitleContent } from '../Util/TitleContent';
 import { ChangePassword } from './ChangePassword';
+import { backgroundSecondary, border, buttonStyle } from '../styles';
+import { TitleContent } from '../Util/TitleContent';
 
 interface StateProps {
 };
@@ -17,9 +18,55 @@ const SettingsPageUnmapped: React.FC<SettingsProps> = (props) => {
         backgroundRepeat: "repeat",
         backgroundSize: "15em auto"
     }}>
-        <div style={{ height: "5em" }} />
+        <h1 style={{
+            ...backgroundSecondary,
+            ...border,
+            borderRadius: "0.5em",
+            padding: "0.6em",
+            marginLeft: "2em",
+            marginRight: "2em",
+            position: "relative",
+            top: "3.5em",
+            marginBottom: "3.5em",
+            textAlign: "center",
+            fontWeight: "bold",
+            fontSize: "1.5em",
+            display: "block"
+        }}>
+            Account Management
+        </h1>
+        <div style={{ height: "2em" }} />
         <div style={{ marginLeft: "5em", marginRight: "5em"}}>
             <ChangePassword />
+        </div>
+        <div style={{ height: "2em"}} />
+        <div style={{ marginLeft: "5em", marginRight: "5em" }}>
+            <TitleContent title={<h2>Links</h2>}>
+                <div style={{height: "0.3em"}} />
+                <a
+                    style={{
+                        ...buttonStyle,
+                        margin: "0.3em"
+                    }}
+                    href="https://discord.gg/E8vZ5VS"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Join the Discord
+                </a>
+                <a
+                    style={{
+                        ...buttonStyle,
+                        margin: "0.3em"
+                    }}
+                    href="https://github.com/fuzzything44/DungeonThingFrontend"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Contribute or Report issues on GitHub
+                </a>
+                <div style={{ height: "0.3em" }} />
+            </TitleContent>
         </div>
         <InstanceMenu />
     </div>;
