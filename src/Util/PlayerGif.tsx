@@ -12,7 +12,7 @@ interface PlayerGifProps {
     startTime: number;
     action: PlayerActions;
     title: string;
-    height?: string;
+    height?: number;
 }
 
 const PlayerGif: React.FC<PlayerGifProps> = (props) => {
@@ -35,7 +35,8 @@ const PlayerGif: React.FC<PlayerGifProps> = (props) => {
 
     return <div
         style={{
-            height: props.height ? props.height : "20em",
+            height: props.height ? props.height + "em" : "20em",
+            width: props.height ? props.height / 2 + "em" : "10em",
             position: "relative"
         }}
     >

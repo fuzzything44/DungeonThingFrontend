@@ -40,7 +40,7 @@ const InstanceMenuBase: React.FC<InstanceMenuProps> = (props) => {
         <div style={{ float: "left" }}>
             <Link to={PAGES.TAVERN}>
                 <img
-                    src={require("./images/barrel.png")}
+                    src={require("./images/mug.png")}
                     style={{
                         height: "2em",
                         padding: "0.5em"

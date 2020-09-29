@@ -18,7 +18,7 @@ const TavernDoor: React.FC<TavernDoorProps> = (props) => {
     const [error, changeError] = React.useState("");
 
     if (redirect) {
-        return <Redirect to={redirect} />;
+        return <Redirect push to={redirect} />;
     }
 
     return <>

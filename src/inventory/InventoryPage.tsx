@@ -9,6 +9,11 @@ import { InventoryDisplay } from './InventoryDisplay';
 import { EquipInfo } from './EquipInfo';
 import { setInventory } from '../redux/inventory/actions';
 import { MassDestroy } from './MassDestroy';
+import { PlayerGif, PlayerActions } from '../Util/PlayerGif';
+import { DEFAULT_ACTION_TIME } from '../combat/combatRunner';
+import { isLoggedIn } from '../api/makeCall';
+import { Redirect } from 'react-router-dom';
+import { PAGES } from '../App';
 
 type StateProps = { loaded: false } | {
     loaded: true
@@ -30,8 +35,12 @@ const InventoryPageUnmapped: React.FC<InventoryProps> = (_props) => {
     React.useEffect(() => {
         callGetInventory({}).then(inventory => {
             store.dispatch(setInventory(inventory));
-        });
+        }).catch(() => null);
     }, []);
+
+    if (!isLoggedIn()) {
+        return <Redirect to={PAGES.LOGIN} />;
+    }
 
     const props = _props.state;
     if (!props.loaded) {
@@ -95,11 +104,39 @@ const InventoryPageUnmapped: React.FC<InventoryProps> = (_props) => {
                         margin: "1em"
                     }}
                 >
-                    <EquipInfo
-                        info={props.hat}
-                        equipped={true}
-                    />
-                    Some image of you, I guess
+                    <div style={{ display: "flex" }}>
+                        <div>
+                            <EquipInfo
+                                info={props.hat}
+                                equipped={true}
+                            /><br />
+                            <EquipInfo
+                                info={props.shirt}
+                                equipped={true}
+                            /><br />
+                            <EquipInfo
+                                info={props.pants}
+                                equipped={true}
+                            /><br />
+                            <EquipInfo
+                                info={props.shoes}
+                                equipped={true}
+                            />
+                        </div>
+                        <PlayerGif
+                            action={PlayerActions.IDLE}
+                            time={DEFAULT_ACTION_TIME}
+                            startTime={0}
+                            title="You"
+                            height={10}
+                        />
+                        <div>
+                            <EquipInfo
+                                info={props.weapon}
+                                equipped={true}
+                            /><br />
+                        </div>
+                    </div>
                 </TitleContent>
             </div>
             <TitleContent

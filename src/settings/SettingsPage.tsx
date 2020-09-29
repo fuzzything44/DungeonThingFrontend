@@ -5,6 +5,9 @@ import { RootState } from '../redux/store';
 import { ChangePassword } from './ChangePassword';
 import { backgroundSecondary, border, buttonStyle } from '../styles';
 import { TitleContent } from '../Util/TitleContent';
+import { isLoggedIn } from '../api/makeCall';
+import { Redirect } from 'react-router-dom';
+import { PAGES } from '../App';
 
 interface StateProps {
 };
@@ -12,6 +15,10 @@ interface StateProps {
 type SettingsProps = StateProps;
 
 const SettingsPageUnmapped: React.FC<SettingsProps> = (props) => {
+    if (!isLoggedIn()) {
+        return <Redirect to={PAGES.LOGIN} />;
+    }
+
     return <div style={{
         minHeight: "100vh",
         backgroundImage: `url(${require("../images/wood.png")})`,

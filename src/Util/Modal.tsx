@@ -66,6 +66,7 @@ const Modal: React.FC<ModalProps> = (props) => {
                     <div style={{
                         padding: props.noPad ? "" : "0.5em",
                         maxHeight: "65vh",
+                        maxWidth: "90vw",
                         overflowY: "auto"
                     }}>
                         {props.children}

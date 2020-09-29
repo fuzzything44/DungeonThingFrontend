@@ -10,6 +10,9 @@ import { callGetAttributes, GetAttributesResponse } from '../api/ApiObjects';
 import { setAttributeLevel } from '../redux/player/actions';
 import { PlayerState } from '../redux/player/types';
 import { TitleContent } from '../Util/TitleContent';
+import { isLoggedIn } from '../api/makeCall';
+import { Redirect } from 'react-router-dom';
+import { PAGES } from '../App';
 
 interface StateProps {
     name: string;
@@ -32,6 +35,11 @@ const CharacterPageUnmapped: React.FC<CharacterProps> = (props) => {
             }
         });
     }, []);
+
+    if (!isLoggedIn()) {
+        return <Redirect to={PAGES.LOGIN} />;
+    }
+
     return <div style={{
         minHeight: "100vh",
         backgroundImage: `url(${require("../images/wood.png")})`,

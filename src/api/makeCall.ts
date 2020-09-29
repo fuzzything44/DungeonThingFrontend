@@ -68,3 +68,7 @@ export function makeCall<T>(request: object): Promise<T | { error: string }> {
         }
     })
 }
+
+export const isLoggedIn = () => {
+    return charId !== -1;
+}

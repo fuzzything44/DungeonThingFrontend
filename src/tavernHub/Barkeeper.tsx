@@ -23,7 +23,7 @@ const Barkeeper: React.FC<BarkeeperProps> = (props) => {
     const [redirect, changeRedirect] = React.useState("");
 
     if (redirect) {
-        return <Redirect to={redirect} />
+        return <Redirect push to={redirect} />
     }
 
     return <>

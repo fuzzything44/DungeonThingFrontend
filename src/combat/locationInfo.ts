@@ -35,6 +35,14 @@ export const getLocationInfo = (dungeonId: number, dungeonFloor: number): Locati
                 dungeonName: "Armory"
             };
         default:
-            throw new Error("That isn't a known dungeon");
+            return {
+                backgroundImage: "",
+                enemyImage: "",
+                enemyName: "",
+                bossImage: "",
+                bossName: "",
+                enemyHp: 1,
+                dungeonName: "???"
+            };
     }
 };

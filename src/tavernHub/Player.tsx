@@ -21,7 +21,7 @@ const Player: React.FC<PlayerProps> = (props) => {
             action={PlayerActions.IDLE}
             time={DEFAULT_ACTION_TIME}
             startTime={0}
-            height={"15em"}
+            height={15}
             title="Player"
         />
     </Link>

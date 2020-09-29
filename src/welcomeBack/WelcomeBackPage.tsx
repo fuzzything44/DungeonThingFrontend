@@ -11,6 +11,7 @@ import { ErrorBox } from '../Util/ErrorBox';
 import { store } from '../redux/store';
 import { setPlayerInfo, setMana, setManaRate } from '../redux/player/actions';
 import { setChallengeBoss } from '../redux/combat/actions';
+import { isLoggedIn } from '../api/makeCall';
 
 interface WelcomeBackProps {
 };
@@ -19,6 +20,10 @@ const WelcomeBackPage: React.FC<WelcomeBackProps> = (props) => {
     const [redirect, changeRedirect] = React.useState("");
     const [updateResults, changeUpdateResults] = React.useState<UpdateInformation | "UNSET" | "FETCHING">("UNSET");
     const [error, changeError] = React.useState("");
+
+    if (!isLoggedIn()) {
+        return <Redirect to={PAGES.LOGIN} />;
+    }
 
     if (updateResults === "UNSET") {
         changeUpdateResults("FETCHING");
