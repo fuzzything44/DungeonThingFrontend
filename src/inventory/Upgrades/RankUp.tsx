@@ -53,6 +53,11 @@ const RankUpUnmapped: React.FC<RankUpProps> = (props) => {
                 </div>
             })}
         </> : null}
+        helpText={<>
+            Ranking up an equipment slightly improves its attack or hp bonus.<br />
+            Additionally, it increases the maximum level by 5<br />
+            Ranking up requires using Rank Up orbs, which are gained by destroying equipment of the same rank.
+        </>}
     >
         {props.equip.rank}<br />
         You have {orbAmount} +{props.equip.rankId} Rank Orb{orbAmount === 1 ? "" : "s"}<br />

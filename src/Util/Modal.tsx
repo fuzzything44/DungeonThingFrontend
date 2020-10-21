@@ -3,7 +3,7 @@ import { border, errorBackground } from '../styles';
 import { TitleContent } from './TitleContent';
 
 interface ModalProps {
-    onClose: () => void;
+    onClose: (hitXButton: boolean) => void;
     title: string;
     hideClose?: boolean;
     noPad?: boolean;
@@ -21,7 +21,7 @@ const Modal: React.FC<ModalProps> = (props) => {
             left: "0",
             backgroundColor: "rgba(0, 0, 0, 0.5)"
         }}
-        onClick={(e) => { e.stopPropagation(); props.onClose(); }}
+        onClick={(e) => { e.stopPropagation(); props.onClose(false); }}
     >
         <div
             style={{
@@ -55,7 +55,7 @@ const Modal: React.FC<ModalProps> = (props) => {
                                 alignItems: "center",
                                 paddingBottom: "0.3em"
                             }}
-                                onClick={props.onClose}
+                                onClick={() => props.onClose(true)}
                             >
                                 x
                         </button>

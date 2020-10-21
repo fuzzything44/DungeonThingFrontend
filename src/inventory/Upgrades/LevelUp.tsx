@@ -44,6 +44,11 @@ const LevelUp: React.FC<LevelUpProps> = (props) => {
                 </div>
             })}
         </> : null}
+        helpText={<>
+            Levelling up equipment increases its stats, at the cost of mana<br />
+            This is the main way to grow your equipment!<br />
+            The max level of equipment can be increased by ranking it up.
+        </>}
     >
         Level {props.equip.level} / {props.equip.max_level}<br />
         <button

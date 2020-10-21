@@ -8,6 +8,7 @@ import { TitleContent } from '../Util/TitleContent';
 import { isLoggedIn } from '../api/makeCall';
 import { Redirect } from 'react-router-dom';
 import { PAGES } from '../App';
+import { Credits } from './Credits';
 
 interface StateProps {
 };
@@ -45,9 +46,7 @@ const SettingsPageUnmapped: React.FC<SettingsProps> = (props) => {
         <div style={{ height: "2em" }} />
         <div style={{ marginLeft: "5em", marginRight: "5em"}}>
             <ChangePassword />
-        </div>
-        <div style={{ height: "2em"}} />
-        <div style={{ marginLeft: "5em", marginRight: "5em" }}>
+            <div style={{ height: "2em" }} />
             <TitleContent title={<h2>Links</h2>}>
                 <div style={{height: "0.3em"}} />
                 <a
@@ -74,6 +73,8 @@ const SettingsPageUnmapped: React.FC<SettingsProps> = (props) => {
                 </a>
                 <div style={{ height: "0.3em" }} />
             </TitleContent>
+            <div style={{ height: "2em" }} />
+            <Credits />
         </div>
         <InstanceMenu />
     </div>;

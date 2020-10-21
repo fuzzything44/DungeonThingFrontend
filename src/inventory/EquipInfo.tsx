@@ -8,10 +8,14 @@ import { formatNumber } from '../Util/numberFormat';
 import { store } from '../redux/store';
 import { removeEquip, equipItem } from '../redux/inventory/actions';
 
-interface EquipInfoProps {
+type EquipInfoProps = {
     info: EquipInfoData;
-    equipped: boolean;
-}
+} & ({
+    equipped: true;
+} | {
+    equipped: false;
+    onError: (error: string) => void
+});
 
 const EquipInfo: React.FC<EquipInfoProps> = (props) => {
     const [showUpgrade, changeShowUpgrade] = React.useReducer(val => !val, false);
@@ -48,7 +52,7 @@ const EquipInfo: React.FC<EquipInfoProps> = (props) => {
                             await callEquipItem({ id: props.info.id });
                             store.dispatch(equipItem(props.info));
                         } catch (e) {
-                            /* TODO: handle this */
+                            props.onError(e.message);
                         }
                     }}
                 >
@@ -74,7 +78,7 @@ const EquipInfo: React.FC<EquipInfoProps> = (props) => {
                             await callDestroy({ id: props.info.id });
                             store.dispatch(removeEquip(props.info.id));
                         } catch (e) {
-                            /* TODO: handle this */
+                            props.onError(e.message);
                         }
                     }}
                 >

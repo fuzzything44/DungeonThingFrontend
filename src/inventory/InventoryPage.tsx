@@ -14,6 +14,7 @@ import { DEFAULT_ACTION_TIME } from '../combat/combatRunner';
 import { isLoggedIn } from '../api/makeCall';
 import { Redirect } from 'react-router-dom';
 import { PAGES } from '../App';
+import { ErrorBox } from '../Util/ErrorBox';
 
 type StateProps = { loaded: false } | {
     loaded: true
@@ -31,6 +32,7 @@ type InventoryProps = { state: StateProps };
 
 const InventoryPageUnmapped: React.FC<InventoryProps> = (_props) => {
     const [filter, changeFilter] = React.useState(-1);
+    const [error, changeError] = React.useState("");
 
     React.useEffect(() => {
         callGetInventory({}).then(inventory => {
@@ -168,10 +170,12 @@ const InventoryPageUnmapped: React.FC<InventoryProps> = (_props) => {
                     </button>)}
                 </div>
                 {props.maxFloor >= 20 ? <MassDestroy equips={props.equips} typeFilter={filter} /> : null}
+                {error ? <ErrorBox message={error} /> : null}
                 {props.equips.filter(equip => filter === -1 || equip.type === filter).map(equip => <EquipInfo
                     info={equip}
                     equipped={false}
                     key={equip.id}
+                    onError={changeError}
                 />)}
             </TitleContent>
         </div>

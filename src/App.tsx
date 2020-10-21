@@ -10,6 +10,7 @@ import { SettingsPage } from './settings/SettingsPage';
 import { InventoryPage } from './inventory/InventoryPage';
 import { IntroductionPage } from './introduction/IntroductionPage';
 import { IntroductionInsidePage } from './introduction/IntroductionInsidePage';
+import { TutorialComponent } from './tutorial/Tutorial';
 
 export const PAGES = {
     LOGIN: "/login",
@@ -26,6 +27,7 @@ export const PAGES = {
 function App() {
     return (
         <div>
+            <TutorialComponent />
             <BrowserRouter>
                 <Switch>
                     <Route exact path="/" ><Redirect to={PAGES.LOGIN} /></Route>

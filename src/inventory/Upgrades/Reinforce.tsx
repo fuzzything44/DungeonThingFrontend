@@ -59,6 +59,12 @@ const ReinforceUnmapped: React.FC<ReinforceProps> = (props) => {
                 </div>
             })}
         </> : null}
+        helpText={<>
+            Reinforcing consumes reinforce coupons and small amounts of mana to increase equipment stats.<br />
+            Each reinforce level provides a 2% (additive) bonus to attack or hp.<br />
+            The success chance lowers with each successful reinforce and is increased by using better coupons<br />
+            An equipment can be reinforced up to its level.
+        </>}
     >
         {success !== undefined ? <div>Upgrade {success ? "Successful!" : "unsuccessful."}</div> : null}
         Reinforces: {props.equip.reinforce}/{props.equip.level}<br />
