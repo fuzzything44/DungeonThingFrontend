@@ -21,7 +21,7 @@ const LoginPage: React.FC = () => {
                 height: "5em"
             }}
         >
-            Welcome to DungeonThing (name WIP)
+            Welcome to Tavern Cellar
         </div><br />
         <form
             style={{

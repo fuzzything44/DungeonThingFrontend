@@ -17,7 +17,8 @@ import {
     SetChallengeBossAction,
     SET_CHALLENGE_BOSS,
     ClearChallengeBossAction,
-    CLEAR_CHALLENGE_BOSS,
+    CLEAR_CHALLENGE_BOSS,
+
     SetAutoChallengeBossAction,
     ClearAutoChallengeBossAction,
     SET_AUTO_CHALLENGE,

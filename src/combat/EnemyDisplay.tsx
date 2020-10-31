@@ -2,19 +2,46 @@ import * as React from 'react';
 import { CombatState, CombatActorAction, HP, Damage } from '../redux/combat/types';
 import { HealthBar } from './HealthBar';
 import { FloatingDamage } from './FloatingDamage';
+import { FakeGif } from '../Util/FakeGif';
+import { EnemyImages } from '../images/animations';
 
 interface EnemyDisplayProps {
     type: CombatState["enemyType"];
     hp: HP;
     damage: Damage[];
     action: CombatActorAction;
-    image: string;
+    images: EnemyImages;
 };
 
 export const ENTER_TIME = 3;
 export const DEATH_TIME = 3;
 
 const EnemyDisplay: React.FC<EnemyDisplayProps> = (props) => {
+    const images: string[] = (() => {
+        switch (props.type) {
+            case "BOSS":
+                switch (props.action.type) {
+                    case "ENTERING":
+                        return props.images.boss.entering;
+                    case "DYING":
+                        return props.images.boss.dying;
+                    default:
+                        return props.images.boss.attacking;
+                }
+            case "REGULAR":
+                switch (props.action.type) {
+                    case "DYING":
+                        return props.images.regular.dying;
+                    default:
+                        return [props.images.regular.base];
+                }
+            case "NONE":
+                return [""];
+            default:
+                return ((_ : never) => [])(props.type)
+        }
+    })();
+
     return <div style={{
         width: "calc(15% + 10em)",
         position: "absolute",
@@ -36,7 +63,14 @@ const EnemyDisplay: React.FC<EnemyDisplayProps> = (props) => {
                 }}
             >
                 {props.action.type === "ENTERING" ? null : <HealthBar hp={props.hp} />}
-                <img alt="Enemy" style={{ width: "100%" }} src={props.image} />
+                <div style={{height: "1em"}} />
+                <FakeGif
+                    alt="Enemy"
+                    style={{ width: "100%" }}
+                    images={images}
+                    playTime={props.action.time}
+                    startTime={props.action.startTime}
+                />
             </div>
         </div>
     </div>;

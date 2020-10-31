@@ -1,11 +1,12 @@
+import { EnemyImages, enemy } from "../images/animations";
+
 export interface LocationInfo {
     backgroundImage: string;
-    enemyImage: string;
     enemyName: string;
-    bossImage: string;
     bossName: string;
     enemyHp: number;
     dungeonName: string;
+    enemyImages: EnemyImages
 }
 
 const linearExponentialScaling = (linearScale: number, base: number, exponentialScale: number, floor: number): number => {
@@ -17,32 +18,49 @@ export const getLocationInfo = (dungeonId: number, dungeonFloor: number): Locati
         case 1:
             return {
                 backgroundImage: require("../images/tavern_repeat.png"),
-                enemyImage: require("../images/barrel.png"),
                 enemyName: "barrel",
-                bossImage: require("../images/mana.png"),
                 bossName: "giant rat",
                 enemyHp: linearExponentialScaling(5, 25, 1.05, dungeonFloor),
-                dungeonName: "Tavern Cellar"
+                dungeonName: "Tavern Cellar",
+                enemyImages: enemy.cellar
             };
         case 2:
             return {
                 backgroundImage: require("../images/login.png"),
-                enemyImage: require("../images/mana.png"),
                 enemyName: "suit of armor",
-                bossImage: require("../images/ticket.png"),
                 bossName: "floating sword",
                 enemyHp: linearExponentialScaling(5, 5, 1.05, dungeonFloor),
-                dungeonName: "Armory"
+                dungeonName: "Armory",
+                enemyImages: {
+                    boss: {
+                        attacking: [""],
+                        dying: [""],
+                        entering: [""]
+                    },
+                    regular: {
+                        base: "",
+                        dying: [""]
+                    }
+                }
             };
         default:
             return {
                 backgroundImage: "",
-                enemyImage: "",
                 enemyName: "",
-                bossImage: "",
                 bossName: "",
                 enemyHp: 1,
-                dungeonName: "???"
+                dungeonName: "???",
+                enemyImages: {
+                    boss: {
+                        attacking: [""],
+                        dying: [""],
+                        entering: [""]
+                    },
+                    regular: {
+                        base: "",
+                        dying: [""]
+                    }
+                }
             };
     }
 };

@@ -3,7 +3,9 @@
     "date": "???",
     "updates": [
       "Reworked the entire frontend of the game. Welcome to the new experience!",
-      "This update does remove the player market and the Armory. These will return later."
+      "Removed the player market and the Armory. These will return later.",
+      "Capped offline progress at 8 days.",
+      "Capped the max reachable cellar floor to 95. This will be removed later when the special floor 100 boss is ready."
     ]
   },
   {

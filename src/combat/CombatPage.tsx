@@ -40,7 +40,7 @@ const CombatPageUnmapped: React.FC<CombatPageProps> = (props) => {
             hp={props.combatState.enemyHp}
             damage={props.combatState.enemyDamage}
             action={props.combatState.actions.enemy}
-            image={props.combatState.enemyType === "REGULAR" ? locationInfo.enemyImage : locationInfo.bossImage}
+            images={locationInfo.enemyImages}
         />;
     }
 
