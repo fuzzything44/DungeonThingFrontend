@@ -27,14 +27,10 @@ const WelcomeBackPage: React.FC<WelcomeBackProps> = (props) => {
 
     if (updateResults === "UNSET") {
         changeUpdateResults("FETCHING");
-        Promise.all([callStatus({}), callUpdate({})]).then((results) => {
+        Promise.all([callStatus({}), callUpdate({}).catch()]).then((results) => {
             const [status, update] = results;
             
             store.dispatch(setPlayerInfo(status));
-            if (status.dungeon === 0) {
-                changeRedirect(PAGES.INTRODUCTION);
-                return;
-            }
 
             if ("log" in update.result) {
                 const log: BossLog[] = JSON.parse(update.result.log);
@@ -49,6 +45,10 @@ const WelcomeBackPage: React.FC<WelcomeBackProps> = (props) => {
                 runCombat();
             }
         }).catch((error) => {
+            if (error.message === "You're not in a dungeon") {
+                changeRedirect(PAGES.INTRODUCTION);
+                return;
+            }
             changeError(error.message);
         });
     }
