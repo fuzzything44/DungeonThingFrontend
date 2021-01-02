@@ -1,7 +1,7 @@
 import React from 'react';
 import "./style.css";
 import { LoginPage } from './login/LoginPage';
-import { Switch, Route, Redirect, BrowserRouter } from 'react-router-dom'
+import { Switch, Route, Redirect, MemoryRouter } from 'react-router-dom'
 import { CombatPage } from './combat/CombatPage';
 import { WelcomeBackPage } from './welcomeBack/WelcomeBackPage';
 import { TavernHub } from './tavernHub/TavernHub';
@@ -28,7 +28,7 @@ function App() {
     return (
         <div>
             <TutorialComponent />
-            <BrowserRouter basename="/TavernCellar">
+            <MemoryRouter>
                 <Switch>
                     <Route exact path="/" ><Redirect to={PAGES.LOGIN} /></Route>
                     <Route path={PAGES.LOGIN}><LoginPage /></Route>
@@ -42,7 +42,7 @@ function App() {
                     <Route path={PAGES.INVENTORY}><InventoryPage /></Route>
                     <Route>404<br/>Page not found</Route>
                 </Switch>
-            </BrowserRouter>
+            </MemoryRouter>
         </div>
     );
 }
