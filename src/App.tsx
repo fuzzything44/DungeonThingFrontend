@@ -28,7 +28,7 @@ function App() {
     return (
         <div>
             <TutorialComponent />
-            <BrowserRouter>
+            <BrowserRouter basename="/TavernCellar">
                 <Switch>
                     <Route exact path="/" ><Redirect to={PAGES.LOGIN} /></Route>
                     <Route path={PAGES.LOGIN}><LoginPage /></Route>
