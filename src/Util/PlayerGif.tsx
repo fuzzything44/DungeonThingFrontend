@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { FakeGif } from './FakeGif';
-import { player_walking, AnimationImage, player_standing, player_attacking } from '../images/animations';
+import { player_walking, player_standing, player_attacking } from '../images/animations';
 
 export enum PlayerActions {
     IDLE,
@@ -16,7 +16,7 @@ interface PlayerGifProps {
 }
 
 const PlayerGif: React.FC<PlayerGifProps> = (props) => {
-    let playerImages: AnimationImage;
+    let playerImages: string[];
     switch (props.action) {
         case PlayerActions.IDLE:
             playerImages = player_standing;
@@ -31,8 +31,6 @@ const PlayerGif: React.FC<PlayerGifProps> = (props) => {
             return ((_: never) => null)(props.action);
     }
 
-    const allImages: string[][] = [playerImages.player, playerImages.pants];
-
     return <div
         style={{
             height: props.height ? props.height + "em" : "20em",
@@ -40,21 +38,20 @@ const PlayerGif: React.FC<PlayerGifProps> = (props) => {
             position: "relative"
         }}
     >
-        {allImages.map((images, index) => <FakeGif
-            key={index}
+        <FakeGif
             style={{
                 position: "absolute",
                 bottom: "0",
                 paddingTop: "1em",
                 height: "100%"
             }}
-            images={images}
+            images={playerImages}
             repeat
             playTime={props.time}
             startTime={props.startTime}
             title={props.title}
             alt={props.title}
-        />)}
+        />
     </div>;
 };
 

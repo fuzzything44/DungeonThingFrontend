@@ -41,7 +41,6 @@ const EnemyDisplay: React.FC<EnemyDisplayProps> = (props) => {
                 return ((_ : never) => [])(props.type)
         }
     })();
-
     return <div style={{
         width: "calc(15% + 10em)",
         position: "absolute",

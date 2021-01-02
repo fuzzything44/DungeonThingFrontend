@@ -1,8 +1,7 @@
 let charId: number = -1;
 let auth: string = "";
 
-let endpoint: string = "http://localhost:5000/api"
-//document.location.href + (document.location.href.endsWith("/") ? "" : "/") + "api";
+let endpoint: string = "https://fuzzything44.xyz/DungeonThing/api"
 
 function realMakeCall(requests: any[]): Promise<any[]> {
     let header = new Headers();
