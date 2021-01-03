@@ -1,5 +1,11 @@
 [
   {
+    "date": "January 3, 2021",
+    "updates": [
+      "Fix issue with screen readers ignoring the navigation menu on the combat page."
+    ]
+  },
+  {
     "date": "January 1, 2021 - New year, new UI",
     "updates": [
       "Reworked the entire frontend of the game. Welcome to the new experience!",

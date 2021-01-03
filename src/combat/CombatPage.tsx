@@ -47,7 +47,6 @@ const CombatPageUnmapped: React.FC<CombatPageProps> = (props) => {
     return <div>
         <div aria-hidden="true">
             <ScrollingBackground paused={!scrollBackground} image={`url(${locationInfo.backgroundImage})`} />
-            <InstanceMenu />
             <PlayerDisplay
                 walking={scrollBackground}
                 hp={props.combatState.playerHp}
@@ -56,6 +55,7 @@ const CombatPageUnmapped: React.FC<CombatPageProps> = (props) => {
             />
             {enemy}
         </div>
+        <InstanceMenu />
         <div
             style={{
                 position: "absolute",
