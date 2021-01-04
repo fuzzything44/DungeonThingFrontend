@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "ab80a64c706a43e51f6d347ce93c0f46",
+    "revision": "1292d64396524aa549f7ae57a344e965",
     "url": "/TavernCellar/index.html"
   },
   {
-    "revision": "acf07812b83cb7dd30e2",
+    "revision": "b81d8ad1ea70dfee699b",
     "url": "/TavernCellar/static/css/main.3707af3f.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/TavernCellar/static/js/2.5e957e40.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "acf07812b83cb7dd30e2",
-    "url": "/TavernCellar/static/js/main.2e7c6968.chunk.js"
+    "revision": "b81d8ad1ea70dfee699b",
+    "url": "/TavernCellar/static/js/main.4d3dfd3d.chunk.js"
   },
   {
     "revision": "3f5c61ac9c7e805b3c3e",
