@@ -1,5 +1,13 @@
 [
   {
+    "date": "January 19, 2021",
+    "updates": [
+      "Fix issue with the tab being inactive too long logging the player out, but not giving any indication that happened. Now it brings you back to the login page.",
+      "Fix reinforce chances being calculated incorrectly",
+      "Changed login page to work slightly better with password managers"
+    ]
+  },
+  {
     "date": "January 3, 2021",
     "updates": [
       "Fix issue with screen readers ignoring the navigation menu on the combat page."

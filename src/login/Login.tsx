@@ -65,8 +65,8 @@ const Login: React.FC<LoginProps> = (props) => {
         return <div>
             <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flexWrap: "wrap" }}>
                 <div style={{ width: MAX_TEXTINPUT_WIDTH }}>
-                    <TextInput inputName="Username" inputValue={username} onChange={value => { changeUsername(value); changeError(""); }} example="JaneTheBarbarian" required autocomplete="username" />
-                    <TextInput inputName="Password" inputValue={password} onChange={value => { changePassword(value); changeError(""); }} example="password1" required autocomplete="current-password" />
+                    <TextInput inputName="Username" inputValue={username} onChange={value => { changeUsername(value); changeError(""); }} example="JaneTheBarbarian" required />
+                    <TextInput inputName="Password" inputValue={password} onChange={value => { changePassword(value); changeError(""); }} example="password1" required type="password" />
                     <button
                         onClick={() => {
                             callLogin({ name: username, password: password }).then(data => {

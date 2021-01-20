@@ -42,7 +42,7 @@ export const ChangePassword: React.FC<{}> = () => {
             <TextInput
                 inputName="Old Password"
                 inputValue={oldPass}
-                autocomplete="current-password"
+                type="password"
                 required
                 onChange={(newInput) => { changeOldPass(newInput); changeError(""); }}
             />
@@ -50,7 +50,7 @@ export const ChangePassword: React.FC<{}> = () => {
             <TextInput
                 inputName="New Password"
                 inputValue={newPass}
-                autocomplete="new-password"
+                type="password"
                 required
                 onChange={(newInput) => { changeNewPass(newInput); changeError(""); }}
             />

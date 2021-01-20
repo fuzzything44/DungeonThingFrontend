@@ -30,7 +30,7 @@ const ReinforceUnmapped: React.FC<ReinforceProps> = (props) => {
     const usedCoupon = reinforceCoupons.find(item => item.itemData === coupon);
     const couponsLeft = usedCoupon ? usedCoupon.amount : 0;
 
-    const getSuccessChance = (rank: number) => formatNumber(Math.min(100, 100 * rank * (1 / props.equip.reinforce + 1)));
+    const getSuccessChance = (rank: number) => formatNumber(Math.min(100, 100 * rank / (props.equip.reinforce + 1)));
 
     const reinforceCost = (props.equip.reinforce + 1) * 10;
     return <UpgradeBase

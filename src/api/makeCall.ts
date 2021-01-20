@@ -23,7 +23,12 @@ function realMakeCall(requests: any[]): Promise<any[]> {
         if (r.ok) {
             return r.json()
         } else {
-            return r.text().then(text => { throw new Error(text); });
+            return r.text().then(text => {
+                if (text === "Invalid Authentication Token") {
+                    charId = -1;
+                }
+                throw new Error(text);
+            });
         }
     });
 }
