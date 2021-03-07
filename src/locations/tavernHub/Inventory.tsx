@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { PAGES } from '../App';
+import { PAGES } from '../../pages';
 import { Link } from 'react-router-dom';
 
 interface InventoryProps {
@@ -17,7 +17,7 @@ const Inventory: React.FC<InventoryProps> = (props) => {
     >
         <img
             style={{ height: "100%" }}
-            src={require("../images/lootbag.png")}
+            src={require("../../images/lootbag.png")}
             alt="Inventory"
             title="Inventory"
         />

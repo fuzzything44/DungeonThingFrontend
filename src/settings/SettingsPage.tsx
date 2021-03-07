@@ -7,7 +7,7 @@ import { backgroundSecondary, border, buttonStyle } from '../styles';
 import { TitleContent } from '../Util/TitleContent';
 import { isLoggedIn } from '../api/makeCall';
 import { Redirect } from 'react-router-dom';
-import { PAGES } from '../App';
+import { PAGES } from '../pages';
 import { Credits } from './Credits';
 
 interface StateProps {

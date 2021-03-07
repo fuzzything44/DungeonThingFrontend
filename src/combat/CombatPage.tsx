@@ -13,7 +13,7 @@ import { setChallengeBoss, setAutoChallenge } from '../redux/combat/actions';
 import { getLocationInfo } from './locationInfo';
 import { isLoggedIn } from '../api/makeCall';
 import { Redirect } from 'react-router-dom';
-import { PAGES } from '../App';
+import { PAGES } from '../pages';
 
 interface StateProps {
     playerState: PlayerState;

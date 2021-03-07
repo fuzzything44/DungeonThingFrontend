@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { UpdateInformation, callStatus, callUpdate, BossLog } from '../api/ApiObjects';
 import { Redirect } from 'react-router-dom';
-import { PAGES } from '../App';
+import { PAGES } from '../pages';
 import { ScrollingBackground } from '../combat/ScrollingBackground';
 import { PlayerDisplay } from '../combat/PlayerDisplay';
 import { DEFAULT_ACTION_TIME, runCombat, createCombatTimeouts } from '../combat/combatRunner';

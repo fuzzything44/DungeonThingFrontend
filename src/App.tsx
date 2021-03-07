@@ -4,25 +4,14 @@ import { LoginPage } from './login/LoginPage';
 import { Switch, Route, Redirect, MemoryRouter } from 'react-router-dom'
 import { CombatPage } from './combat/CombatPage';
 import { WelcomeBackPage } from './welcomeBack/WelcomeBackPage';
-import { TavernHub } from './tavernHub/TavernHub';
 import { CharacterPage } from './character/CharacterPage';
 import { SettingsPage } from './settings/SettingsPage';
 import { InventoryPage } from './inventory/InventoryPage';
 import { IntroductionPage } from './introduction/IntroductionPage';
 import { IntroductionInsidePage } from './introduction/IntroductionInsidePage';
 import { TutorialComponent } from './tutorial/Tutorial';
-
-export const PAGES = {
-    LOGIN: "/login",
-    INTRODUCTION: "/intro",
-    INTRODUCTION_2: "/intro2",
-    WELCOME_BACK: "/welcomeBack",
-    COMBAT: "/combat",
-    TAVERN: "/tavern",
-    SETTINGS: "/settings",
-    CHARACTER: "/character",
-    INVENTORY: "/inventory"
-};
+import { LocationManager } from './locations/locationManager';
+import { PAGES } from './pages';
 
 function App() {
     return (
@@ -36,7 +25,7 @@ function App() {
                     <Route path={PAGES.INTRODUCTION_2}><IntroductionInsidePage /></Route>
                     <Route path={PAGES.WELCOME_BACK}><WelcomeBackPage /></Route>
                     <Route path={PAGES.COMBAT}><CombatPage /></Route>
-                    <Route path={PAGES.TAVERN}><TavernHub /></Route>
+                    <Route path={PAGES.LOCATION}><LocationManager /></Route>
                     <Route path={PAGES.SETTINGS}><SettingsPage /></Route>
                     <Route path={PAGES.CHARACTER}><CharacterPage /></Route>
                     <Route path={PAGES.INVENTORY}><InventoryPage /></Route>

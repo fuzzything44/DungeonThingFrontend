@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { PAGES } from '../App';
+import { PAGES } from '../../pages';
 import { Link } from 'react-router-dom';
-import { PlayerGif, PlayerActions } from '../Util/PlayerGif';
-import { DEFAULT_ACTION_TIME } from '../combat/combatRunner';
+import { PlayerGif, PlayerActions } from '../../Util/PlayerGif';
+import { DEFAULT_ACTION_TIME } from '../../combat/combatRunner';
 
 interface PlayerProps {
 }

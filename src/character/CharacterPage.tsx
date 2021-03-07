@@ -12,7 +12,7 @@ import { PlayerState } from '../redux/player/types';
 import { TitleContent } from '../Util/TitleContent';
 import { isLoggedIn } from '../api/makeCall';
 import { Redirect } from 'react-router-dom';
-import { PAGES } from '../App';
+import { PAGES } from '../pages';
 
 interface StateProps {
     name: string;

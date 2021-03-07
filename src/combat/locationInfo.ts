@@ -13,9 +13,14 @@ const linearExponentialScaling = (linearScale: number, base: number, exponential
     return (linearScale * floor - 1) + Math.ceil(base * Math.pow(exponentialScale, floor - 1));
 }
 
+export const DUNGEONS = {
+    TAVERN_CELLAR: 1,
+    ARMORY: 2
+}
+
 export const getLocationInfo = (dungeonId: number, dungeonFloor: number): LocationInfo => {
     switch (dungeonId) {
-        case 1:
+        case DUNGEONS.TAVERN_CELLAR:
             return {
                 backgroundImage: require("../images/tavern_repeat.png"),
                 enemyName: "barrel",
@@ -24,24 +29,14 @@ export const getLocationInfo = (dungeonId: number, dungeonFloor: number): Locati
                 dungeonName: "Tavern Cellar",
                 enemyImages: enemy.cellar
             };
-        case 2:
+        case DUNGEONS.ARMORY:
             return {
-                backgroundImage: require("../images/login.png"),
+                backgroundImage: require("../images/armory_repeat.png"),
                 enemyName: "suit of armor",
                 bossName: "floating sword",
                 enemyHp: linearExponentialScaling(5, 5, 1.05, dungeonFloor),
                 dungeonName: "Armory",
-                enemyImages: {
-                    boss: {
-                        attacking: [""],
-                        dying: [""],
-                        entering: [""]
-                    },
-                    regular: {
-                        base: "",
-                        dying: [""]
-                    }
-                }
+                enemyImages: enemy.armory
             };
         default:
             return {
@@ -64,3 +59,4 @@ export const getLocationInfo = (dungeonId: number, dungeonFloor: number): Locati
             };
     }
 };
+

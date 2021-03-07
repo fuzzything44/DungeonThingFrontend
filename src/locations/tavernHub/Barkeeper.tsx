@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { Redirect, Link } from 'react-router-dom';
-import { Modal } from '../Util/Modal';
-import { PAGES } from '../App';
-import { buttonStyle } from '../styles';
-import { formatNumber } from '../Util/numberFormat';
-import { Icon } from '../Util/Icon';
-import { callEnterDungeon, callStatus } from '../api/ApiObjects';
-import { ErrorBox } from '../Util/ErrorBox';
-import { store } from '../redux/store';
-import { setPlayerInfo, setManaRate } from '../redux/player/actions';
+import { Modal } from '../../Util/Modal';
+import { buttonStyle } from '../../styles';
+import { formatNumber } from '../../Util/numberFormat';
+import { Icon } from '../../Util/Icon';
+import { callEnterDungeon, callStatus } from '../../api/ApiObjects';
+import { ErrorBox } from '../../Util/ErrorBox';
+import { store } from '../../redux/store';
+import { setPlayerInfo, setManaRate } from '../../redux/player/actions';
+import { PAGES } from '../../pages';
 
 interface BarkeeperProps {
     dungeonName: string;
@@ -38,7 +38,7 @@ const Barkeeper: React.FC<BarkeeperProps> = (props) => {
         >
             <img
                 style={{ height: "100%" }}
-                src={require("../images/barkeeper.png")}
+                src={require("../../images/barkeeper.png")}
                 alt="Barkeeper"
                 title="Barkeeper"
             />

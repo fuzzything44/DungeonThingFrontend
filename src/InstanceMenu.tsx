@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 import { formatNumber } from './Util/numberFormat';
 import { Icon } from './Util/Icon';
 import { Link } from 'react-router-dom';
-import { PAGES } from './App';
+import { PAGES } from './pages';
+import { LOCATIONS } from './locations/locations';
 
 interface StateProps {
     mana: number;
@@ -38,7 +39,7 @@ const InstanceMenuBase: React.FC<InstanceMenuProps> = (props) => {
             {formatNumber(props.manaPerMin)} <Icon icon="mana" />/minute<br />
         </div>
         <div style={{ float: "left" }}>
-            <Link to={PAGES.TAVERN}>
+            <Link to={LOCATIONS.TAVERN}>
                 <img
                     src={require("./images/mug.png")}
                     style={{

@@ -13,7 +13,7 @@ import { PlayerGif, PlayerActions } from '../Util/PlayerGif';
 import { DEFAULT_ACTION_TIME } from '../combat/combatRunner';
 import { isLoggedIn } from '../api/makeCall';
 import { Redirect } from 'react-router-dom';
-import { PAGES } from '../App';
+import { PAGES } from '../pages';
 import { ErrorBox } from '../Util/ErrorBox';
 
 type StateProps = { loaded: false } | {

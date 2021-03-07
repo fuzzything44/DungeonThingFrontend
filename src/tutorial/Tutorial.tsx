@@ -11,6 +11,7 @@ import { HasTicketTutorial } from "./HasTicket";
 import { KilledBossAgainTutorial } from "./KilledBossAgain";
 import { AutoChallengeTutorial } from "./AutoChallenge";
 import { MassDestroyTutorial } from "./MassDestroy";
+import { ArmoryTutorial } from "./ArmoryTutorial";
 
 interface TutorialPossibilities {
     floor: number;
@@ -31,7 +32,8 @@ const tutorials: Tutorial[] = [
     HasTicketTutorial,
     KilledBossAgainTutorial,
     AutoChallengeTutorial,
-    MassDestroyTutorial
+    MassDestroyTutorial,
+    ArmoryTutorial
 ];
 
 interface TutorialProps {

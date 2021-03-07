@@ -4,7 +4,7 @@ import { border, backgroundSecondary, backgroundColor } from '../styles';
 import { callCreateAccount } from '../api/ApiObjects';
 import { ErrorBox } from '../Util/ErrorBox';
 import { Redirect } from 'react-router-dom';
-import { PAGES } from '../App';
+import { PAGES } from '../pages';
 
 interface CreateProps {
     goToLogin: () => void

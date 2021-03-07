@@ -120,5 +120,38 @@ export const enemy = createEnemyImageMap({
                 require("./enemy/cellar/normal/24.png"),
             ]
         }
+    },
+    armory: {
+        boss: {
+            attacking: [require("./enemy/armory/boss/attacking.png")],
+            dying: [require("./enemy/armory/boss/dying.png")],
+            entering: [require("./enemy/armory/boss/entering.png")]
+        },
+        regular: {
+            base: require("./enemy/armory/normal/base.png"),
+            dying: [
+                require("./enemy/armory/normal/1.png"),
+                require("./enemy/armory/normal/2.png"),
+                require("./enemy/armory/normal/3.png"),
+                require("./enemy/armory/normal/4.png"),
+                require("./enemy/armory/normal/5.png"),
+                require("./enemy/armory/normal/6.png"),
+                require("./enemy/armory/normal/7.png"),
+                require("./enemy/armory/normal/8.png"),
+                require("./enemy/armory/normal/9.png"),
+                require("./enemy/armory/normal/10.png"),
+                require("./enemy/armory/normal/11.png"),
+                require("./enemy/armory/normal/12.png"),
+                require("./enemy/armory/normal/13.png"),
+                require("./enemy/armory/normal/14.png"),
+                require("./enemy/armory/normal/15.png"),
+                require("./enemy/armory/normal/16.png"),
+                require("./enemy/armory/normal/17.png"),
+                require("./enemy/armory/normal/18.png"),
+                require("./enemy/armory/normal/19.png"),
+                require("./enemy/armory/normal/20.png")
+            ]
+        }
     }
+
 });

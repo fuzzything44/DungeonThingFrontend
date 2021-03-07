@@ -5,7 +5,7 @@ import { DEFAULT_ACTION_TIME } from '../combat/combatRunner';
 import { PlayerGif, PlayerActions } from '../Util/PlayerGif';
 import { Modal } from '../Util/Modal';
 import { buttonStyle } from '../styles';
-import { PAGES } from '../App';
+import { PAGES } from '../pages';
 import { isLoggedIn } from '../api/makeCall';
 
 

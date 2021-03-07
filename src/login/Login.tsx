@@ -5,7 +5,7 @@ import { TextInput, MAX_TEXTINPUT_WIDTH } from '../Util/TextInput';
 import { callLogin, callCreateAccount } from '../api/ApiObjects';
 import { backgroundSecondary, border, outlineText } from '../styles';
 import { ErrorBox } from '../Util/ErrorBox';
-import { PAGES } from '../App';
+import { PAGES } from '../pages';
 
 interface LoginProps {
     goToCreate: () => void;

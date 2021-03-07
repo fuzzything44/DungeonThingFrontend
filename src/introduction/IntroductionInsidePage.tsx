@@ -11,7 +11,7 @@ import { store } from '../redux/store';
 import { setPlayerInfo, setMana, setManaRate } from '../redux/player/actions';
 import { runCombat } from '../combat/combatRunner';
 import { Redirect } from 'react-router-dom';
-import { PAGES } from '../App';
+import { PAGES } from '../pages';
 import { isLoggedIn } from '../api/makeCall';
 
 enum IntroductionStates {

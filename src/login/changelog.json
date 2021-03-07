@@ -1,5 +1,13 @@
 [
   {
+    "date": "March 6, 2021",
+    "updates": [
+      "Added back the Armory, along with the rest of the town outside the tavern (there's not much yet)",
+      "Added a tutorial about the Armory. It will appear after reaching floor 25 of the Tavern, which is when the Armory is available.",
+      "The armory is a second dungeon to adventure in. It gives less mana and equipement than the Tavern Cellar, but is a good source of reinforce coupons. Now you can finally reinforce to the max again!"
+    ]
+  },
+  {
     "date": "January 19, 2021",
     "updates": [
       "Fix issue with the tab being inactive too long logging the player out, but not giving any indication that happened. Now it brings you back to the login page.",
