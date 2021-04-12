@@ -64,6 +64,13 @@ export interface ItemListing {
     sellerId: number;
     purchase: string;
 }
+export interface QuestInfo {
+    num: number;
+    complete: boolean;
+    claimed: boolean;
+    name: string;
+    desc: string;
+}
 export interface UpdateInformation {
     gain: number;
     total: number;
@@ -136,6 +143,22 @@ export interface ClaimGiftResponse {
 }
 export function callClaimGift(params: ClaimGiftParams): Promise<ClaimGiftResponse> {
     return makeCall<ClaimGiftResponse>({...params, api: "claim_gift"}).then(data => { 
+        if ("error" in data) {
+            throw new Error(data["error"]);
+        } else { 
+            return data; 
+        } 
+    });
+}
+ 
+export interface ClaimQuestParams {
+    num: number;
+}
+export interface ClaimQuestResponse {
+    
+}
+export function callClaimQuest(params: ClaimQuestParams): Promise<ClaimQuestResponse> {
+    return makeCall<ClaimQuestResponse>({...params, api: "claim_quest"}).then(data => { 
         if ("error" in data) {
             throw new Error(data["error"]);
         } else { 
@@ -237,6 +260,23 @@ export interface GetAttributesResponse {
 }
 export function callGetAttributes(params: GetAttributesParams): Promise<GetAttributesResponse> {
     return makeCall<GetAttributesResponse>({...params, api: "get_attributes"}).then(data => { 
+        if ("error" in data) {
+            throw new Error(data["error"]);
+        } else { 
+            return data; 
+        } 
+    });
+}
+ 
+export interface GetQuestsParams {
+    
+}
+export interface GetQuestsResponse {
+    quests: QuestInfo[];
+    refreshDays: number;
+}
+export function callGetQuests(params: GetQuestsParams): Promise<GetQuestsResponse> {
+    return makeCall<GetQuestsResponse>({...params, api: "get_quests"}).then(data => { 
         if ("error" in data) {
             throw new Error(data["error"]);
         } else { 
@@ -419,6 +459,7 @@ export interface StatusResponse {
     crit_rate: number;
     crit_dmg: number;
     max_floor: number;
+    gold: number;
 }
 export function callStatus(params: StatusParams): Promise<StatusResponse> {
     return makeCall<StatusResponse>({...params, api: "status"}).then(data => { 

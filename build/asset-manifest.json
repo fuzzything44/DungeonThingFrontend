@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/TavernCellar/static/css/main.3707af3f.chunk.css",
-    "main.js": "/TavernCellar/static/js/main.23a9b7a9.chunk.js",
-    "main.js.map": "/TavernCellar/static/js/main.23a9b7a9.chunk.js.map",
+    "main.js": "/TavernCellar/static/js/main.90b4834d.chunk.js",
+    "main.js.map": "/TavernCellar/static/js/main.90b4834d.chunk.js.map",
     "runtime-main.js": "/TavernCellar/static/js/runtime-main.0792966a.js",
     "runtime-main.js.map": "/TavernCellar/static/js/runtime-main.0792966a.js.map",
     "static/js/2.4c4e4e67.chunk.js": "/TavernCellar/static/js/2.4c4e4e67.chunk.js",
     "static/js/2.4c4e4e67.chunk.js.map": "/TavernCellar/static/js/2.4c4e4e67.chunk.js.map",
     "index.html": "/TavernCellar/index.html",
-    "precache-manifest.898250200408c0e450b77807d60d64e6.js": "/TavernCellar/precache-manifest.898250200408c0e450b77807d60d64e6.js",
+    "precache-manifest.71eb1d9bdd94f4d725e6621e19547f32.js": "/TavernCellar/precache-manifest.71eb1d9bdd94f4d725e6621e19547f32.js",
     "service-worker.js": "/TavernCellar/service-worker.js",
     "static/css/main.3707af3f.chunk.css.map": "/TavernCellar/static/css/main.3707af3f.chunk.css.map",
     "static/js/2.4c4e4e67.chunk.js.LICENSE.txt": "/TavernCellar/static/js/2.4c4e4e67.chunk.js.LICENSE.txt",
@@ -37,12 +37,13 @@
     "static/media/8.png": "/TavernCellar/static/media/8.4df4fc58.png",
     "static/media/9.png": "/TavernCellar/static/media/9.d5dd84e3.png",
     "static/media/barkeeper.png": "/TavernCellar/static/media/barkeeper.ea09120c.png",
+    "static/media/list.png": "/TavernCellar/static/media/list.1d6c4b5d.png",
     "static/media/mana.png": "/TavernCellar/static/media/mana.dfa1ee9d.png"
   },
   "entrypoints": [
     "static/js/runtime-main.0792966a.js",
     "static/js/2.4c4e4e67.chunk.js",
     "static/css/main.3707af3f.chunk.css",
-    "static/js/main.23a9b7a9.chunk.js"
+    "static/js/main.90b4834d.chunk.js"
   ]
 }

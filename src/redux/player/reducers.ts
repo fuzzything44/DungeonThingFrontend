@@ -16,7 +16,8 @@ const initialState: PlayerState = {
         crit_dmg: 0,
         crit_rate: 0,
         attack_dmg: 0
-    }
+    },
+    gold: 0
 };
 
 export function playerReducer(state = initialState, action: PlayerAction): PlayerState {

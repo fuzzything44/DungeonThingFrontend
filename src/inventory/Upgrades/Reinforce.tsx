@@ -68,7 +68,7 @@ const ReinforceUnmapped: React.FC<ReinforceProps> = (props) => {
     >
         {success !== undefined ? <div>Upgrade {success ? "Successful!" : "unsuccessful."}</div> : null}
         Reinforces: {props.equip.reinforce}/{props.equip.level}<br />
-        {coupon === undefined ? <div>
+        {coupon === undefined || couponsLeft === 0 ? <div>
             {reinforceCoupons.length === 0 ? <div>
                     Destroy reinforced equipment <br />
                     or<br />
@@ -95,7 +95,7 @@ const ReinforceUnmapped: React.FC<ReinforceProps> = (props) => {
                 You have {couponsLeft} remaining<br />
                 Reinforcing with these gives a {getSuccessChance(coupon)}% success chance<br/>
                 <button
-                    disabled={usedCoupon === undefined}
+                    disabled={animating}
                     style={buttonStyle}
                     onClick={async () => {
                         if (usedCoupon === undefined) {

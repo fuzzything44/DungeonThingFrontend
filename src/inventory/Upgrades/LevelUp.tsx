@@ -53,6 +53,7 @@ const LevelUp: React.FC<LevelUpProps> = (props) => {
         Level {props.equip.level} / {props.equip.max_level}<br />
         <button
             style={buttonStyle}
+            disabled={animating}
             onClick={async () => {
                 if (props.equip.level < props.equip.max_level) {
                     changeAnimating(true);

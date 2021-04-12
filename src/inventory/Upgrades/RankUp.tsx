@@ -67,7 +67,7 @@ const RankUpUnmapped: React.FC<RankUpProps> = (props) => {
                 ...buttonStyle,
                 backgroundColor: orbAmount > 0 ? buttonStyle.backgroundColor : "gray"
             }}
-            disabled={orbAmount === 0}
+            disabled={orbAmount === 0 || animating}
             onClick={async () => {
                 if (orbItem === undefined) {
                     return;

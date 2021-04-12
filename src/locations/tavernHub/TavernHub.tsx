@@ -11,6 +11,7 @@ import { isLoggedIn } from '../../api/makeCall';
 import { Redirect } from 'react-router-dom';
 import { PAGES } from '../../pages';
 import { ExitDoor } from './ExitDoor';
+import { QuestList } from './quests/QuestList';
 
 interface StateProps {
     dungeonName: string;
@@ -50,6 +51,7 @@ const TavernHubUnmapped: React.FC<TavernHubProps> = (props) => {
         </div>
         <Player />
         <Inventory />
+        <QuestList />
         <TavernDoor {...props} />
         <ExitDoor />
         <Barkeeper {...props} />

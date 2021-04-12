@@ -1,5 +1,14 @@
 [
   {
+    "date": "April 12, 2021",
+    "updates": [
+      "Added Weekly Quests. There are currently 3 available, giving you a total of 15 gold/week.",
+      "Gold coins will get a use later",
+      "More weekly quests will be added later",
+      "Changed upgrade buttons to be disabled while currently in the upgrade animation (bugfix)"
+    ]
+  },
+  {
     "date": "March 6, 2021",
     "updates": [
       "Added back the Armory, along with the rest of the town outside the tavern (there's not much yet)",
