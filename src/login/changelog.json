@@ -1,5 +1,17 @@
 [
   {
+    "date": "May 23, 2021 - Skills update",
+    "updates": [
+      "Significantly increased damage variance.",
+      "Capped offline dungeon tickets at 8",
+      "Added an option to see HPs in percents, instead of absolute values",
+      "You can buy skill slots by upgrading a new attribute, found in your player stats",
+      "Skills slowly charge up with every attack, and once you have them charged enough, they'll be used",
+      "Skills are used in the order you define, looping around once they've all been used",
+      "Skills have a maximum number of uses, after which they're excluded from the use order"
+    ]
+  },
+  {
     "date": "April 12, 2021",
     "updates": [
       "Added Weekly Quests. There are currently 3 available, giving you a total of 15 gold/week.",

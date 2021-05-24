@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { FakeGif } from './FakeGif';
-import { player_walking, player_standing, player_attacking } from '../images/animations';
+import { player_walking, player_standing, player_attacking, player_skill } from '../images/animations';
 
 export enum PlayerActions {
     IDLE,
     WALKING,
-    ATTACKING
+    ATTACKING,
+    SKILL
 }
 interface PlayerGifProps {
     time: number;
@@ -26,6 +27,9 @@ const PlayerGif: React.FC<PlayerGifProps> = (props) => {
             break;
         case PlayerActions.ATTACKING:
             playerImages = player_attacking;
+            break;
+        case PlayerActions.SKILL:
+            playerImages = player_skill;
             break;
         default:
             return ((_: never) => null)(props.action);

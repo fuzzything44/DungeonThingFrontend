@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { UpdateInformation, callStatus, callUpdate, BossLog } from '../api/ApiObjects';
+import { UpdateInformation, callStatus, callUpdate, BossLog, callGetAssignedSkills } from '../api/ApiObjects';
 import { Redirect } from 'react-router-dom';
 import { PAGES } from '../pages';
 import { ScrollingBackground } from '../combat/ScrollingBackground';
@@ -9,7 +9,7 @@ import { Modal } from '../Util/Modal';
 import { OfflineGains } from './OfflineGains';
 import { ErrorBox } from '../Util/ErrorBox';
 import { store } from '../redux/store';
-import { setPlayerInfo, setMana, setManaRate } from '../redux/player/actions';
+import { setPlayerInfo, setMana, setManaRate, setUsedSkills } from '../redux/player/actions';
 import { setChallengeBoss } from '../redux/combat/actions';
 import { isLoggedIn } from '../api/makeCall';
 
@@ -27,10 +27,11 @@ const WelcomeBackPage: React.FC<WelcomeBackProps> = (props) => {
 
     if (updateResults === "UNSET") {
         changeUpdateResults("FETCHING");
-        Promise.all([callStatus({}), callUpdate({}).catch()]).then((results) => {
-            const [status, update] = results;
+        Promise.all([callStatus({}), callUpdate({}).catch(), callGetAssignedSkills({})]).then((results) => {
+            const [status, update, skills] = results;
             
             store.dispatch(setPlayerInfo(status));
+            store.dispatch(setUsedSkills(skills.skills));
 
             if ("log" in update.result) {
                 const log: BossLog[] = JSON.parse(update.result.log);
@@ -62,7 +63,7 @@ const WelcomeBackPage: React.FC<WelcomeBackProps> = (props) => {
             walking={true}
             hp={{max: 1, current: 1}}
             damage={[]}
-            action={{ type: "NONE", time: DEFAULT_ACTION_TIME, startTime: 0 }}
+            action={{ type: "NONE", time: DEFAULT_ACTION_TIME, startTime: 0, skillCharge: 0 }}
         />
         <Modal hideClose onClose={() => { }} title="Welcome Back!">
             {error ? <ErrorBox message={error} /> : null}

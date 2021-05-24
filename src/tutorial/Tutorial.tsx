@@ -12,6 +12,7 @@ import { KilledBossAgainTutorial } from "./KilledBossAgain";
 import { AutoChallengeTutorial } from "./AutoChallenge";
 import { MassDestroyTutorial } from "./MassDestroy";
 import { ArmoryTutorial } from "./ArmoryTutorial";
+import { SkillTutorial } from "./SkillTutorial";
 
 interface TutorialPossibilities {
     floor: number;
@@ -33,7 +34,8 @@ const tutorials: Tutorial[] = [
     KilledBossAgainTutorial,
     AutoChallengeTutorial,
     MassDestroyTutorial,
-    ArmoryTutorial
+    ArmoryTutorial,
+    SkillTutorial
 ];
 
 interface TutorialProps {
@@ -52,7 +54,6 @@ const TutorialUnmapped: React.FC<TutorialProps> = (props) => {
     const TutorialInfo = nextTutorial.display;
     const finishTutorial = () => {
         store.dispatch(setLastTutorial(nextTutorial.id));
-        localStorage["tutorial"] = nextTutorial.id;
     }
     if (nextTutorial.canShow(props.tutorialInfo)) {
         return <Modal title={nextTutorial.name} onClose={(hitXButton: boolean) => {

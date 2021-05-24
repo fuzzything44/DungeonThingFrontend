@@ -1,10 +1,10 @@
 import { BossLog, BossReward } from "../../api/ApiObjects";
 
-export type CombatActorAction = { time: number, startTime: number } & ({
+export type CombatActorAction = { time: number, startTime: number, skillCharge: number } & ({
     type: "NONE" | "ENTERING" | "DYING" | "ATTACK" | "CRITICAL"
 } | {
     type: "SKILL";
-    skillName: string;
+    skillId: number;
 })
 
 export interface HP {

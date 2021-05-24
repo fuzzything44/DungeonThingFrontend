@@ -15,19 +15,29 @@ export const ATTRIBUTES = {
             const costDoubler = Math.floor(Math.pow(2, level / 100));
             return costDoubler * level * 250;
         },
-        max: undefined
+        max: undefined,
+        floorVisible: 0
     },
     crit_rate: {
         name: "Critical Rate",
         description: "+1% critical hit chance per level",
         cost: (level: number) => [100, 500, 1000, 10000, 1 * 1000 * 1000][level],
-        max: 5
+        max: 5,
+        floorVisible: 0
     },
     crit_dmg: {
         name: "Critical Damage",
         description: "+10% critical damage per level",
         cost: (level: number) => Math.floor(Math.pow(level + 5, 3) * 20),
-        max: 10
+        max: 10,
+        floorVisible: 0
+    },
+    skill_slots: {
+        name: "Skill Slots",
+        description: "+1 equippable skill per level",
+        cost: (level: number) => [10 * 1000 * 1000, 100 * 1000 * 1000][level],
+        max: 2,
+        floorVisible: 30
     }
 }
 interface PassedProps {

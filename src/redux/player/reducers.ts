@@ -1,4 +1,4 @@
-import { PlayerState, PlayerAction, SET_PLAYER_INFO, SET_MANA, SET_MANA_RATE, SET_ATTRIBUTE_LEVEL } from "./types";
+import { PlayerState, PlayerAction, SET_PLAYER_INFO, SET_MANA, SET_MANA_RATE, SET_ATTRIBUTE_LEVEL, SET_SKILLS, SET_USED_SKILLS } from "./types";
 
 const initialState: PlayerState = {
     hp: 0,
@@ -15,9 +15,13 @@ const initialState: PlayerState = {
     attributes: {
         crit_dmg: 0,
         crit_rate: 0,
-        attack_dmg: 0
+        attack_dmg: 0,
+        skill_slots: 0
     },
-    gold: 0
+    gold: 0,
+    skill_slots: 0,
+    skills: [],
+    usedSkills: []
 };
 
 export function playerReducer(state = initialState, action: PlayerAction): PlayerState {
@@ -45,7 +49,18 @@ export function playerReducer(state = initialState, action: PlayerAction): Playe
                     [action.attribute]: action.level
                 }
             }
+        case SET_SKILLS:
+            return {
+                ...state,
+                skills: action.skills
+            }
+        case SET_USED_SKILLS:
+            return {
+                ...state,
+                usedSkills: action.skills
+            }
         default:
-            return state;
+            ((x: never) => null)(action); // Type checking, ensure all cases covered
+            return state; // Still needed as this WILL be called with other types
     }
 }

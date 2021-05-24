@@ -9,7 +9,7 @@ interface TitleContentProps {
 
 const RADIUS = "0.5em";
 const TitleContent: React.FC<TitleContentProps> = (props) => {
-    return <div
+    return <section
         style={{
             ...border,
             borderRadius: RADIUS,
@@ -39,7 +39,7 @@ const TitleContent: React.FC<TitleContentProps> = (props) => {
         >
             {props.children}
         </div>
-    </div>;
+    </section>;
 };
 
 TitleContent.displayName = "TitleContent";

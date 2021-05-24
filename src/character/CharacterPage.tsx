@@ -13,6 +13,7 @@ import { TitleContent } from '../Util/TitleContent';
 import { isLoggedIn } from '../api/makeCall';
 import { Redirect } from 'react-router-dom';
 import { PAGES } from '../pages';
+import { SkillMenu } from './Skills/SkillMenu';
 
 interface StateProps {
     name: string;
@@ -21,6 +22,7 @@ interface StateProps {
     critRate: number;
     critDmg: number;
     attributes: PlayerState["attributes"];
+    maxFloor: number;
 };
 
 type CharacterProps = StateProps;
@@ -95,6 +97,9 @@ const CharacterPageUnmapped: React.FC<CharacterProps> = (props) => {
                 {attributeError ? <ErrorBox message={attributeError} /> : null}
                 {Object.keys(ATTRIBUTES).map((_key) => {
                     const key: keyof typeof ATTRIBUTES = _key as keyof typeof ATTRIBUTES;
+                    if (props.maxFloor < ATTRIBUTES[key].floorVisible) {
+                        return null;
+                    }
                     return <Attribute
                         key={key}
                         attribute={key}
@@ -104,16 +109,16 @@ const CharacterPageUnmapped: React.FC<CharacterProps> = (props) => {
                 })}
             </TitleContent>
         </div>
-        {/* Enable and finish when we get skills <div style={{
-            ...backgroundColor,
-            ...border,
-            borderRadius: "0.4em",
+        <div style={{
             margin: "1em",
             padding: "0.8em",
             boxSizing: "border-box"
         }}>
-            SKILLS HERE
-        </div> */}
+            {props.maxFloor >= ATTRIBUTES.skill_slots.floorVisible ? <SkillMenu /> :
+                <section style={{ ...backgroundColor, ...border, borderRadius: "0.4em", padding: "0.5em", textAlign: "center" }}>
+                    Locked. Come back once you've reached floor {ATTRIBUTES.skill_slots.floorVisible} of the tavern cellar
+                </section>}
+        </div>
         {/* Used to make the background expand into the margin of the previous div */}
         <div style={{ height: "1px" }} />
         <InstanceMenu />
@@ -130,7 +135,8 @@ const mapStateToProps = (state: RootState): StateProps => {
         attack: state.player.attack,
         critRate: state.player.crit_rate,
         critDmg: state.player.crit_dmg,
-        attributes: state.player.attributes
+        attributes: state.player.attributes,
+        maxFloor: state.player.max_floor
     };
 }
 

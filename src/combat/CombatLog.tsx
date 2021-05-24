@@ -3,23 +3,44 @@ import { border, backgroundColor, backgroundSecondary } from '../styles';
 import { BossLog, BossReward } from '../api/ApiObjects';
 import { ENTER_TIME } from './EnemyDisplay';
 import { formatNumber } from '../Util/numberFormat';
-import { store } from '../redux/store';
+import { store, RootState } from '../redux/store';
 import { getItemInformation } from '../inventory/itemInfo';
+import { getSkillData } from '../character/Skills/SkillData';
+import { SetHpDisplayAction } from '../redux/preferences/types';
+import { connect } from 'react-redux';
 
-interface CombatLogProps {
+interface StateProps {
+    hpDisplay: SetHpDisplayAction["display"];
+    maxHp: number;
+}
+
+interface PassedProps {
     log: BossLog[];
     combatStart: number;
     rewards: BossReward[] | undefined;
     enemyName: string;
+    enemyStartHp: number;
 }
 
 const LOG_OPENING_TIME = 0.75;
 
-const CombatLog: React.FC<CombatLogProps> = (props) => {
+type CombatLogProps = StateProps & PassedProps;
+const CombatLogUnconnected: React.FC<CombatLogProps> = (props) => {
     const [expanded, changeExpanded] = React.useState<"OPENED" | "OPENING" | "CLOSING" | "CLOSED">("CLOSED");
     const [timeout, changeTimeout] = React.useState<number | undefined>(undefined);
     const [hasScrolled, changeScrolled] = React.useState(false);
+    const [, update] = React.useReducer(x => !x, true);
 
+    // Timeouts to update the log
+    React.useEffect(() => {
+        const firstAction = Date.now() - props.combatStart + ENTER_TIME * 1000;
+        const enemyTimeout = setTimeout(update, firstAction);
+        const timeouts = props.log.map(elem => setTimeout(update, firstAction + elem.time * 1000));
+        return () => {
+            clearTimeout(enemyTimeout);
+            timeouts.forEach(t => clearTimeout(t));
+        }
+    }, [props.log, props.combatStart]);
     // Reset if they've scrolled at the start of each combat
     if ((props.log.length === 0 || Date.now() - props.combatStart < props.log[0].time * 1000) && hasScrolled) {
         changeScrolled(false);
@@ -92,11 +113,19 @@ const CombatLog: React.FC<CombatLogProps> = (props) => {
                 You're fighting a {props.enemyName} with {formatNumber(store.getState().combat.enemyHp.max)} HP
             </li>}
             {props.log.filter(log => log.time * 1000 <= Date.now() - props.combatStart - ENTER_TIME * 1000).map(log => {
+                const hpLeft = Math.max(0, log.toPlayer ? log.remainingHp : log.bossHp);
+                const maxHp = log.toPlayer ? props.maxHp : props.enemyStartHp;
+
+                const hpDisplay = props.hpDisplay === "VAL" ?
+                    formatNumber(hpLeft) :
+                    (100 * hpLeft / maxHp).toFixed(2) + "%";
                 const startString = log.toPlayer ?
-                    `The enemy deals ${formatNumber(log.damageDealt)} damage to you. You have ${formatNumber(Math.max(0, log.remainingHp))} HP left.` :
-                    `You deal ${formatNumber(log.damageDealt)} damage to the enemy. It has ${formatNumber(Math.max(0, log.bossHp))} HP left.`;
-                const details = log.details && log.details["message"] ? <b>{log.details["message"]}</b> : null;
-                return <li key={log.time}>{details} {startString}</li>;
+                    `The enemy deals ${formatNumber(log.damageDealt)} damage to you. You have ${hpDisplay} HP left.` :
+                    `You deal ${formatNumber(log.damageDealt)} damage to the enemy. It has ${hpDisplay} HP left.`;
+                const details = log.details["message"] ? <b>{log.details["message"]}</b> : null;
+                const skill = log.details["skill"] ?
+                    <b>Skill used: {getSkillData(parseInt(log.details["skill"]), 0).name}!</b> : null;
+                return <li key={log.time}>{skill} {details} {startString}</li>;
             })}
             {props.rewards === undefined ? null : <li>
                 You won the fight! On the enemy's body, you found:
@@ -124,6 +153,14 @@ const CombatLog: React.FC<CombatLogProps> = (props) => {
     </section>;
 };
 
-CombatLog.displayName = "CombatLog";
+CombatLogUnconnected.displayName = "CombatLog";
 
+const mapStateToProps = (state: RootState): StateProps => {
+    return {
+        hpDisplay: state.preferences.hpDisplay,
+        maxHp: state.player.hp
+    };
+}
+
+const CombatLog = connect(mapStateToProps)(CombatLogUnconnected);
 export { CombatLog };

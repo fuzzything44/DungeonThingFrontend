@@ -9,6 +9,7 @@ import { isLoggedIn } from '../api/makeCall';
 import { Redirect } from 'react-router-dom';
 import { PAGES } from '../pages';
 import { Credits } from './Credits';
+import { MiscSettings } from './MiscSettings';
 
 interface StateProps {
 };
@@ -46,6 +47,8 @@ const SettingsPageUnmapped: React.FC<SettingsProps> = (props) => {
         <div style={{ height: "2em" }} />
         <div style={{ marginLeft: "5em", marginRight: "5em"}}>
             <ChangePassword />
+            <div style={{ height: "2em" }} />
+            <MiscSettings />
             <div style={{ height: "2em" }} />
             <TitleContent title={<h2>Links</h2>}>
                 <div style={{height: "0.3em"}} />

@@ -66,7 +66,8 @@ const CombatPageUnmapped: React.FC<CombatPageProps> = (props) => {
                 log={props.combatState.fullLog}
                 combatStart={props.combatState.combatStart}
                 rewards={props.combatState.rewards}
-                enemyName={props.combatState.lastType === "REGULAR" ? locationInfo.enemyName : locationInfo.bossName }
+                enemyName={props.combatState.lastType === "REGULAR" ? locationInfo.enemyName : locationInfo.bossName}
+                enemyStartHp={props.combatState.enemyHp.max}
             />
         </div>
         <button

@@ -4,15 +4,16 @@ import { setCombatAction, setDamage, startCombat, endCombat, setReward, clearCha
 import { ENTER_TIME, DEATH_TIME } from "./EnemyDisplay";
 import { setMana, setPlayerInfo, setManaRate } from "../redux/player/actions";
 import { getLocationInfo } from "./locationInfo";
+import { CombatActor, PlayerCombatActor } from "./CombatSim/CombatActor";
 
-export const DEFAULT_ACTION_TIME = 2.4;
+export const ATTACKS_PER_MIN = 25;
+export const DEFAULT_ACTION_TIME = 60 / ATTACKS_PER_MIN;
 export const COMBATS_PER_MIN = 5;
 
 const splitLog = (log: BossLog[]): { playerLog: BossLog[], enemyLog: BossLog[] } => {
     return { playerLog: log.filter(v => !v.toPlayer), enemyLog: log.filter(v => v.toPlayer) };
 };
 
-const DAMAGE_RANGE = 0.1;
 const HP_RANGE = 0.3;
 
 const fuzzNumber = (initial: number, range: number): number => {
@@ -21,41 +22,42 @@ const fuzzNumber = (initial: number, range: number): number => {
 
 const generateMockCombat = (): { log: BossLog[], start_hp: number } => {
     const playerInfo = store.getState().player;
-
-    const damagePerAttack = playerInfo.attack * DEFAULT_ACTION_TIME / 60;
     const startHp = fuzzNumber(getLocationInfo(playerInfo.dungeon, playerInfo.floor).enemyHp, HP_RANGE);
-    let combatLog: BossLog[] = [];
-    let enemyHp: number = startHp;
-    let toNextAttack: number = 1000 * DEFAULT_ACTION_TIME / 2;
-    let millisecondsElapsed = 0;
-    while (enemyHp > 0) {
-        let logElem: BossLog;
 
-        if (Math.random() * 100 < playerInfo.crit_rate) {
-            logElem = {
-                time: 0,
-                damageDealt: damagePerAttack * playerInfo.crit_dmg,
-                toPlayer: false,
-                remainingHp: playerInfo.hp,
-                bossHp: 0,
-                details: { message: "Critical hit!" }
-            };
-        } else {
-            logElem = {
-                time: 0,
-                damageDealt: damagePerAttack,
-                toPlayer: false,
-                remainingHp: playerInfo.hp,
-                bossHp: 0,
-                details: null
-            }
-        }
-        millisecondsElapsed += toNextAttack;
-        toNextAttack = 1000 * DEFAULT_ACTION_TIME;
+    let player: CombatActor = new PlayerCombatActor(playerInfo);
+    let enemy: CombatActor = new CombatActor({
+        damagePerHit: 0,
+        attackSpeed: Infinity,
+        critMult: 1,
+        critRate: 0,
+        hp: startHp,
+        toNextAttack: Infinity,
+        skillCharge: 0,
+        skills: [],
+        effects: []
+    });
+    let combatLog: BossLog[] = [];
+
+    let millisecondsElapsed = 0;
+    while (enemy.info.hp > 0) {
+        // Only player acts in these combats
+        let logElem: BossLog = player.runAction(enemy);
+        // Tick effects
+        player.info.effects.forEach(eff => eff.tickEffectAction(player));
+        player.info.effects.forEach(eff => eff.tickEffect(logElem.time, player));
+        enemy.info.effects.forEach(eff => eff.tickEffect(logElem.time, enemy));
+        // Remove effects
+        player.info.effects = player.info.effects.filter(eff => !eff.expired);
+        enemy.info.effects = enemy.info.effects.filter(eff => !eff.expired);
+        // Elapse time
+        millisecondsElapsed += logElem.time;
+        player.info.toNextAttack -= logElem.time;
+
+        // Fill in combat log
         logElem.time = millisecondsElapsed / 1000;
-        logElem.damageDealt = fuzzNumber(logElem.damageDealt, DAMAGE_RANGE);
-        enemyHp -= logElem.damageDealt;
-        logElem.bossHp = enemyHp;
+        logElem.remainingHp = player.info.hp;
+        logElem.bossHp = enemy.info.hp;
+        logElem.playerCharge = player.info.skillCharge;
         combatLog.push(logElem);
     }
 
@@ -83,14 +85,17 @@ const createActorTimeouts = (log: BossLog[], isPlayer: boolean, secondOffset: nu
             store.dispatch(setCombatAction({
                 time: endAnimation - startAnimation,
                 startTime: Date.now(),
-                type: "ATTACK"
+                skillCharge: isPlayer ? log[i].playerCharge : 0,
+                ...(log[i].details["skill"] ? { type: "SKILL", skillId: parseInt(log[i].details["skill"]) } : { type: "ATTACK" })
             }, isPlayer ? "PLAYER" : "ENEMY"));
         }, ENEMY_ENTRY_TIME + startAnimation * 1000 - secondOffset * 1000);
         // Create timeout to clear animation
         setTimeout(() => {
+            console.log("Cleared");
             store.dispatch(setCombatAction({
                 time: DEFAULT_ACTION_TIME,
                 startTime: Date.now(),
+                skillCharge: isPlayer ? log[i].playerCharge : 0,
                 type: "NONE"
             }, isPlayer ? "PLAYER" : "ENEMY"));
         }, ENEMY_ENTRY_TIME + endAnimation * 1000 - secondOffset * 1000);
@@ -123,6 +128,7 @@ export const createCombatTimeouts = (log: BossLog[], startHp: number, secondOffs
             store.dispatch(setCombatAction({
                 time: time,
                 startTime: Date.now(),
+                skillCharge: 0,
                 type: "NONE"
             }, "ENEMY"));
         }
@@ -140,6 +146,7 @@ export const createCombatTimeouts = (log: BossLog[], startHp: number, secondOffs
         store.dispatch(setCombatAction({
             time: DEATH_TIME,
             startTime: Date.now(),
+            skillCharge: 0,
             type: "DYING"
         }, playerDead ? "PLAYER" : "ENEMY"));
         // At end of combat, get rewards

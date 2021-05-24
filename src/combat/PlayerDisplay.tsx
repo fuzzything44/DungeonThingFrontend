@@ -17,6 +17,8 @@ const PlayerDisplay: React.FC<PlayerDisplayProps> = (props) => {
         action = PlayerActions.WALKING;
     } else if (props.action.type === "ATTACK" || props.action.type === "CRITICAL") {
         action = PlayerActions.ATTACKING;
+    } else if (props.action.type === "SKILL") {
+        action = PlayerActions.SKILL;
     } else {
         action = PlayerActions.IDLE;
     }
@@ -27,7 +29,7 @@ const PlayerDisplay: React.FC<PlayerDisplayProps> = (props) => {
         left: "min(10em, 15%)",
     }}>
         {props.damage.map(dmg => <FloatingDamage key={dmg.startTime} damage={dmg} />)}
-        {props.walking ? null : <HealthBar hp={props.hp} />}
+        {props.walking ? null : <HealthBar hp={props.hp} skillCharge={props.action.skillCharge} />}
         <PlayerGif
             action={action}
             time={props.action.time}

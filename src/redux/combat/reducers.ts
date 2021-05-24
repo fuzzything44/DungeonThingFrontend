@@ -11,8 +11,8 @@ const initialState: CombatState = {
     challengeBossNext: false,
     autoChallengeEnabled: false,
     actions: {
-        player: { time: DEFAULT_ACTION_TIME, startTime: Date.now(), type: "NONE" },
-        enemy: { time: DEFAULT_ACTION_TIME, startTime: Date.now(), type: "NONE" }
+        player: { time: DEFAULT_ACTION_TIME, startTime: Date.now(), type: "NONE", skillCharge: 0 },
+        enemy: { time: DEFAULT_ACTION_TIME, startTime: Date.now(), type: "NONE", skillCharge: 0 }
     },
     fullLog: [],
     combatStart: 0,
@@ -31,8 +31,8 @@ export function combatReducer(state = initialState, action: CombatAction): Comba
                 enemyType: action.enemyType,
                 lastType: action.enemyType,
                 actions: {
-                    player: { time: DEFAULT_ACTION_TIME, startTime: Date.now(), type: "NONE" },
-                    enemy: { time: DEFAULT_ACTION_TIME, startTime: Date.now(), type: "ENTERING" }
+                    player: { time: DEFAULT_ACTION_TIME, startTime: Date.now(), type: "NONE", skillCharge: 0 },
+                    enemy: { time: DEFAULT_ACTION_TIME, startTime: Date.now(), type: "ENTERING", skillCharge: 0 }
                 },
                 fullLog: action.log,
                 combatStart: Date.now() - action.timeOffset * 1000,

@@ -16,7 +16,7 @@ export const ChangePassword: React.FC<{}> = () => {
     if (success) {
         return <TitleContent
             style={{ textAlign: "center" }}
-            title={<h1>Change Password</h1>}
+            title={<h2>Change Password</h2>}
         >
             <div style={{ height: "11em"}}>
                 Password changed successfully!<br />
@@ -36,7 +36,7 @@ export const ChangePassword: React.FC<{}> = () => {
     }
     return <TitleContent
         style={{ textAlign: "center" }}
-        title={<h1>Change Password</h1>}
+        title={<h2>Change Password</h2>}
     >
         <div style={{ display: "flex", justifyContent: "center", marginTop: "1em" }}>
             <TextInput

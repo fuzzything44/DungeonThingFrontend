@@ -77,6 +77,21 @@ export const player_walking: string[] = [
     require("./player_walking/15.png")
 ];
 
+export const player_skill: string[] = [
+    require("./player_skill/1.png"),
+    require("./player_skill/2.png"),
+    require("./player_skill/3.png"),
+    require("./player_skill/4.png"),
+    require("./player_skill/5.png"),
+    require("./player_skill/6.png"),
+    require("./player_skill/7.png"),
+    require("./player_skill/8.png"),
+    require("./player_skill/9.png"),
+    require("./player_skill/10.png"),
+    require("./player_skill/11.png"),
+    require("./player_skill/12.png")
+];
+
 // This is just to get typing right
 // So that all properties are EnemyImages, and no extra properties can be accessed.
 interface EnemyImageMap {

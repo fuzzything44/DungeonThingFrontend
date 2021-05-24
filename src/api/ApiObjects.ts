@@ -7,6 +7,7 @@ export interface BossLog {
     toPlayer: boolean;
     remainingHp: number;
     bossHp: number;
+    playerCharge: number;
     details: any;
 }
 export interface BossRewardEquip {
@@ -70,6 +71,10 @@ export interface QuestInfo {
     claimed: boolean;
     name: string;
     desc: string;
+}
+export interface SkillInfo {
+    skill_id: number;
+    skill_level: number;
 }
 export interface UpdateInformation {
     gain: number;
@@ -257,6 +262,7 @@ export interface GetAttributesResponse {
     crit_rate: AttributeInfo;
     crit_dmg: AttributeInfo;
     attack_dmg: AttributeInfo;
+    skill_slots: AttributeInfo;
 }
 export function callGetAttributes(params: GetAttributesParams): Promise<GetAttributesResponse> {
     return makeCall<GetAttributesResponse>({...params, api: "get_attributes"}).then(data => { 
@@ -277,6 +283,38 @@ export interface GetQuestsResponse {
 }
 export function callGetQuests(params: GetQuestsParams): Promise<GetQuestsResponse> {
     return makeCall<GetQuestsResponse>({...params, api: "get_quests"}).then(data => { 
+        if ("error" in data) {
+            throw new Error(data["error"]);
+        } else { 
+            return data; 
+        } 
+    });
+}
+ 
+export interface GetAssignedSkillsParams {
+    
+}
+export interface GetAssignedSkillsResponse {
+    skills: SkillInfo[];
+}
+export function callGetAssignedSkills(params: GetAssignedSkillsParams): Promise<GetAssignedSkillsResponse> {
+    return makeCall<GetAssignedSkillsResponse>({...params, api: "get_assigned_skills"}).then(data => { 
+        if ("error" in data) {
+            throw new Error(data["error"]);
+        } else { 
+            return data; 
+        } 
+    });
+}
+ 
+export interface GetSkillsParams {
+    
+}
+export interface GetSkillsResponse {
+    skills: SkillInfo[];
+}
+export function callGetSkills(params: GetSkillsParams): Promise<GetSkillsResponse> {
+    return makeCall<GetSkillsResponse>({...params, api: "get_skills"}).then(data => { 
         if ("error" in data) {
             throw new Error(data["error"]);
         } else { 
@@ -427,6 +465,22 @@ export function callReturnSaleItem(params: ReturnSaleItemParams): Promise<Return
     });
 }
  
+export interface SetAssignedSkillsParams {
+    skills: number[];
+}
+export interface SetAssignedSkillsResponse {
+    
+}
+export function callSetAssignedSkills(params: SetAssignedSkillsParams): Promise<SetAssignedSkillsResponse> {
+    return makeCall<SetAssignedSkillsResponse>({...params, api: "set_assigned_skills"}).then(data => { 
+        if ("error" in data) {
+            throw new Error(data["error"]);
+        } else { 
+            return data; 
+        } 
+    });
+}
+ 
 export interface SellItemParams {
     item: number;
     data: number;
@@ -460,6 +514,7 @@ export interface StatusResponse {
     crit_dmg: number;
     max_floor: number;
     gold: number;
+    skill_slots: number;
 }
 export function callStatus(params: StatusParams): Promise<StatusResponse> {
     return makeCall<StatusResponse>({...params, api: "status"}).then(data => { 
