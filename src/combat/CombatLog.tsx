@@ -142,6 +142,10 @@ const CombatLogUnconnected: React.FC<CombatLogProps> = (props) => {
                             case "EQUIP":
                                 content = reward.reward.info.name;
                                 break;
+                            case "SKILL":
+                                let skillInfo = reward.reward.info;
+                                content = "Skill Book: " + getSkillData(skillInfo.skill_id, skillInfo.skill_level).name;
+                                break;
                             default:
                                 return ((_: never): null => null)(reward.reward);
                         }

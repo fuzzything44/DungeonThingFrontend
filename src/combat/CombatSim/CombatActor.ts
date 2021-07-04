@@ -33,6 +33,13 @@ export class CombatActor {
         }, 0);
     }
 
+    private multiplyStatModifiers(type: Stats): number {
+        return this.info.effects.reduce((accumulator: number, effect: Effect) => {
+            const effectAmount = effect.modifiers.reduce((acc, mod) => acc + mod.stat === type ? mod.amount : 0, 0)
+            return accumulator * (1 + effectAmount / 100);
+        }, 1);
+    }
+
     public get totalDamage(): number {
         return (this.info.damagePerHit + this.sumStatModifiers(Stats.DAMAGE_BASE)) *
                (1 + this.sumStatModifiers(Stats.DAMAGE_PERCENT) / 100.0);
@@ -40,6 +47,10 @@ export class CombatActor {
 
     public get totalCritRate(): number {
         return (this.info.critRate + this.sumStatModifiers(Stats.CRIT_RATE));
+    }
+
+    public get totalAttackSpeed(): number {
+        return Math.max(1, this.info.attackSpeed * this.multiplyStatModifiers(Stats.ATTACK_SPEED));
     }
 
     public performBasicAttack(enemy: CombatActor): BossLog {
@@ -56,7 +67,7 @@ export class CombatActor {
 
         enemy.info.hp -= damageDealt;
         const timeSpent = this.info.toNextAttack;
-        this.info.toNextAttack += this.info.attackSpeed;
+        this.info.toNextAttack += this.totalAttackSpeed;
         return {
             time: timeSpent,
             damageDealt: Math.round(damageDealt),

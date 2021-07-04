@@ -6,11 +6,14 @@ import { RootState, store } from '../../../redux/store';
 import { connect } from 'react-redux';
 import { setQuestDays, setQuests } from '../../../redux/quests/actions';
 import { ErrorBox } from '../../../Util/ErrorBox';
+import { QuestShop } from './QuestShop';
+import { buttonStyle } from '../../../styles';
+import { TextRadioGroup } from '../../../Util/TextRadioGroup';
 
 interface QuestListProps {
     weeklyRefresh: number | "?";
     allQuests: QuestInfo[];
-    gold: number | null;
+    gold: number;
 }
 
 const TOTAL_WEEKLY_QUESTS = 5;
@@ -18,6 +21,7 @@ const TOTAL_WEEKLY_QUESTS = 5;
 const QuestListUnmapped: React.FC<QuestListProps> = (props) => {
     const [showQuests, changeShowQuests] = React.useState(false);
     const [error, changeError] = React.useState("");
+    const [tab, changeTab] = React.useState("QUESTS");
 
     React.useEffect(() => {
         callGetQuests({}).then(questResponse => {
@@ -48,9 +52,22 @@ const QuestListUnmapped: React.FC<QuestListProps> = (props) => {
         </button>
         {showQuests ? <Modal title="Quests" onClose={() => changeShowQuests(false)}>
             {error ? <ErrorBox message={error} /> : null}
-            Current gold: {props.gold ? props.gold : "-"} (A shop to spend this will be added here soon)<br/>
-            <WeeklyQuests refreshDays={props.weeklyRefresh} quests={weeklies} />
-            {rest.length ? <h2>Other Quests - how did you get this? </h2> : null}
+            <div style={{textAlign: "center"}}>
+                <TextRadioGroup
+                    labels={[
+                        { display: "Quests", value: "QUESTS" },
+                        { display: "Shop", value: "SHOP" }
+                    ]}
+                    onChange={changeTab}
+                    selected={tab}
+                    group={"questTabs"}
+                />
+            </div>
+            {tab === "QUESTS" ? <>
+                <WeeklyQuests refreshDays={props.weeklyRefresh} quests={weeklies} />
+                {rest.length ? <h2>Other Quests - how did you get this? </h2> : null}
+            </> : <QuestShop gold={props.gold} />}
+            
         </Modal> : null}
     </>
 }

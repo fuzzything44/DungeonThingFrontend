@@ -23,8 +23,8 @@ const Quest: React.FC<QuestProps> = (props) => {
                 <rect rx="25%" x={0} y={0} width="100%" height="100%" fill={BORDER_COLOR} />
                 <rect rx="20%" x={7} y={7} width="86%" height="86%" fill={backgroundSecondary.backgroundColor} />
                 {props.complete ? <>
-                    <line x1={0} y1={40} x2={40} y2={80} stroke="red" stroke-width={10} />
-                    <line x1={40} y1={80} x2={100} y2={10} stroke="red" stroke-width={10} />
+                    <line x1={0} y1={40} x2={40} y2={80} stroke="red" strokeWidth={10} />
+                    <line x1={40} y1={80} x2={100} y2={10} stroke="red" strokeWidth={10} />
                 </> : null}
             </svg>
             {props.name}

@@ -1,5 +1,15 @@
 [
   {
+    "date": "July 4th, 2021 - Skills, part 2",
+    "updates": [
+      "Added most of the elemental skills!",
+      "Added a shop to buy items using gold",
+      "You can only equip and get skills that align with your chosen element.",
+      "Buy and use an elemental totem to choose an element. This can be changed, but it'll cost another totem.",
+      "New skills currently use placeholder art. Expect this to change soon."
+    ]
+  },
+  {
     "date": "May 23, 2021 - Skills update",
     "updates": [
       "Significantly increased damage variance.",

@@ -12,12 +12,13 @@ interface ElemInfo {
     color: string;
     name: string;
 }
+
 const ELEM_MAP: {[e in SkillElement]: ElemInfo} = {
     [SkillElement.NEUTRAL]: { color: "black", name: "Neutral" },
     [SkillElement.FIRE]: { color: "red", name: "Fire" },
     [SkillElement.WATER]: { color: "blue", name: "Water" },
     [SkillElement.EARTH]: { color: "green", name: "Earth" },
-    [SkillElement.AIR]: { color: "lightgray", name: "Air" }
+    [SkillElement.AIR]: { color: "#BB3", name: "Air" }
 }
 
 export const SkillDisplay: React.FC<SkillDisplayProps> = (props) => {
@@ -81,10 +82,10 @@ export const SkillDisplay: React.FC<SkillDisplayProps> = (props) => {
             </button>
         </div>
         {showModal ? <Modal
-            title={`Skill Info - ${data.name} Lv. ${props.info.skill_level + 1}`}
+            title={`Skill Info - ${data.name}`}
             onClose={() => changeShowModal(false)}
         >
-            <div style={{ textAlign: "center"}}>
+            <div style={{ textAlign: "center", minWidth: "20em"}}>
                 <img style={{ width: "4em" }} src={data.image} alt={data.name} title={data.name} />
             </div>
 

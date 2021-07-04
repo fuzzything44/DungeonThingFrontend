@@ -5,7 +5,7 @@ import { SkillInfo, callGetSkills, callSetAssignedSkills, callGetAssignedSkills 
 import { SkillDisplay } from './SkillDisplay';
 import { TitleContent } from '../../Util/TitleContent';
 import { EquipSkill } from './EquipSkill';
-import { BLANK_SKILL } from './SkillData';
+import { BLANK_SKILL, SkillElement } from './SkillData';
 import { buttonStyle } from '../../styles';
 import { setSkills, setUsedSkills } from '../../redux/player/actions';
 import { ErrorBox } from '../../Util/ErrorBox';
@@ -18,6 +18,7 @@ interface StateProps {
     skillSlots: number;
     skills: SkillInfo[];
     equipped: SkillInfo[];
+    element: SkillElement;
 };
 
 type SkillProps = PassedProps & StateProps;
@@ -51,6 +52,7 @@ const SkillUnmapped: React.FC<SkillProps> = (props) => {
             equipped={currentEquip}
             index={index}
             skills={props.skills}
+            playerElement={props.element}
             onChange={(newSkill: SkillInfo) => {
                 // Technically not functional, but close enough since js doesn't do this easily in functional style
                 let newSkillArr = [...currentEquip];
@@ -93,7 +95,8 @@ const mapStateToProps = (state: RootState): StateProps => {
     return {
         skillSlots: state.player.skill_slots,
         skills: state.player.skills,
-        equipped: state.player.usedSkills
+        equipped: state.player.usedSkills,
+        element: state.player.element
     };
 }
 

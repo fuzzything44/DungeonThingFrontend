@@ -14,6 +14,7 @@ import { isLoggedIn } from '../api/makeCall';
 import { Redirect } from 'react-router-dom';
 import { PAGES } from '../pages';
 import { SkillMenu } from './Skills/SkillMenu';
+import { SkillElement } from './Skills/SkillData';
 
 interface StateProps {
     name: string;
@@ -23,6 +24,7 @@ interface StateProps {
     critDmg: number;
     attributes: PlayerState["attributes"];
     maxFloor: number;
+    element: SkillElement;
 };
 
 type CharacterProps = StateProps;
@@ -81,6 +83,22 @@ const CharacterPageUnmapped: React.FC<CharacterProps> = (props) => {
                         <tr><th>Attack</th><td>{formatNumber(props.attack)}</td></tr>
                         <tr><th>Crit Rate</th><td>{formatNumber(props.critRate)}%</td></tr>
                         <tr><th>Crit Damage</th><td>{formatNumber(props.critDmg * 100)}%</td></tr>
+                        {(() => {
+                            switch (props.element) {
+                                case SkillElement.NEUTRAL:
+                                    return null;
+                                case SkillElement.FIRE:
+                                    return <tr><th>Element</th><td style={{ fontWeight: "bold", color: "#D22" }}>Fire</td></tr>;
+                                case SkillElement.WATER:
+                                    return <tr><th>Element</th><td style={{ fontWeight: "bold", color: "#22D" }}>Water</td></tr>;
+                                case SkillElement.EARTH:
+                                    return <tr><th>Element</th><td style={{ fontWeight: "bold", color: "#080" }}>Earth</td></tr>;
+                                case SkillElement.AIR:
+                                    return <tr><th>Element</th><td style={{ fontWeight: "bold", color: "#BB3" }}>Air</td></tr>;
+                                default:
+                                    return ((_: never) => null)(props.element);
+                            }
+                        })()}
                     </tbody>
                 </table>
             </TitleContent>
@@ -136,7 +154,8 @@ const mapStateToProps = (state: RootState): StateProps => {
         critRate: state.player.crit_rate,
         critDmg: state.player.crit_dmg,
         attributes: state.player.attributes,
-        maxFloor: state.player.max_floor
+        maxFloor: state.player.max_floor,
+        element: state.player.element
     };
 }
 

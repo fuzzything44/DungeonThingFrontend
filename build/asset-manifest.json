@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/TavernCellar/static/css/main.7c051c59.chunk.css",
-    "main.js": "/TavernCellar/static/js/main.e0e7ff62.chunk.js",
-    "main.js.map": "/TavernCellar/static/js/main.e0e7ff62.chunk.js.map",
+    "main.js": "/TavernCellar/static/js/main.4a33e5e0.chunk.js",
+    "main.js.map": "/TavernCellar/static/js/main.4a33e5e0.chunk.js.map",
     "runtime-main.js": "/TavernCellar/static/js/runtime-main.0792966a.js",
     "runtime-main.js.map": "/TavernCellar/static/js/runtime-main.0792966a.js.map",
-    "static/js/2.cb69fcad.chunk.js": "/TavernCellar/static/js/2.cb69fcad.chunk.js",
-    "static/js/2.cb69fcad.chunk.js.map": "/TavernCellar/static/js/2.cb69fcad.chunk.js.map",
+    "static/js/2.d9a11250.chunk.js": "/TavernCellar/static/js/2.d9a11250.chunk.js",
+    "static/js/2.d9a11250.chunk.js.map": "/TavernCellar/static/js/2.d9a11250.chunk.js.map",
     "index.html": "/TavernCellar/index.html",
-    "precache-manifest.dda484017de2ed6d61f3e10b6425ff3e.js": "/TavernCellar/precache-manifest.dda484017de2ed6d61f3e10b6425ff3e.js",
+    "precache-manifest.e3d1f69ca296e67ff9dc903ca5198fcd.js": "/TavernCellar/precache-manifest.e3d1f69ca296e67ff9dc903ca5198fcd.js",
     "service-worker.js": "/TavernCellar/service-worker.js",
     "static/css/main.7c051c59.chunk.css.map": "/TavernCellar/static/css/main.7c051c59.chunk.css.map",
-    "static/js/2.cb69fcad.chunk.js.LICENSE.txt": "/TavernCellar/static/js/2.cb69fcad.chunk.js.LICENSE.txt",
+    "static/js/2.d9a11250.chunk.js.LICENSE.txt": "/TavernCellar/static/js/2.d9a11250.chunk.js.LICENSE.txt",
     "static/media/1.png": "/TavernCellar/static/media/1.449c05a5.png",
     "static/media/10.png": "/TavernCellar/static/media/10.fb8874be.png",
     "static/media/11.png": "/TavernCellar/static/media/11.fb810ceb.png",
@@ -42,8 +42,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.0792966a.js",
-    "static/js/2.cb69fcad.chunk.js",
+    "static/js/2.d9a11250.chunk.js",
     "static/css/main.7c051c59.chunk.css",
-    "static/js/main.e0e7ff62.chunk.js"
+    "static/js/main.4a33e5e0.chunk.js"
   ]
 }

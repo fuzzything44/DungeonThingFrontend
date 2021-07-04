@@ -1,5 +1,7 @@
-import { ItemFolder, rank_orb, reinforce, none } from "../images/items";
+import React from "react";
+import { ItemFolder, rank_orb, reinforce, none, totem } from "../images/items";
 import { equipImages } from "../images/equips";
+import { buttonStyle } from "../styles";
 
 export const EQUIP_TYPES = {
     WEAPON: 0,
@@ -11,13 +13,15 @@ export const EQUIP_TYPES = {
 
 export const ITEM_MAPPINGS = {
     RANK_ORB: 1,
-    REINFORCE_COUPON: 2
+    REINFORCE_COUPON: 2,
+    ELEMENT_TOTEM: 3
 }
 
 interface FullItemInformation {
     name: string;
     imageFolder: ItemFolder;
     description: string;
+    useOptions?: string[]
 }
 
 export const standardBorderColors = (rank: number): string => {
@@ -40,6 +44,13 @@ export function getItemInformation(id: number, data: number): FullItemInformatio
                 name: "Reinforce coupon +" + data.toString(),
                 imageFolder: reinforce, 
                 description: "This is a coupon used to reinforce equipment, along with a small amount of mana. Higher rank coupons give a higher chance of success."
+            };
+        case ITEM_MAPPINGS.ELEMENT_TOTEM:
+            return {
+                name: "Elemental Mastery Totem",
+                imageFolder: totem,
+                description: "This is a totem used to change your mastered element, allowing you to acquire and use skills of that element. Use it to choose an element to align with. \nFire tends to focus around dealing as much damage as possible, even to the detriment of your  own health.\nWater focuses around healing and slowing your opponent.\nEarth focuses around preventing and reducing damage you take.\nAir focuses around increasing your own stats.",
+                useOptions: ["fire", "water", "earth", "air"]
             };
         default:
             return {

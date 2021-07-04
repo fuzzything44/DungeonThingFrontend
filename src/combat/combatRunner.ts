@@ -44,8 +44,8 @@ const generateMockCombat = (): { log: BossLog[], start_hp: number } => {
         let logElem: BossLog = player.runAction(enemy);
         // Tick effects
         player.info.effects.forEach(eff => eff.tickEffectAction(player));
-        player.info.effects.forEach(eff => eff.tickEffect(logElem.time, player));
-        enemy.info.effects.forEach(eff => eff.tickEffect(logElem.time, enemy));
+        player.info.effects.forEach(eff => eff.tickEffect(logElem.time / 1000, player));
+        enemy.info.effects.forEach(eff => eff.tickEffect(logElem.time / 1000, enemy));
         // Remove effects
         player.info.effects = player.info.effects.filter(eff => !eff.expired);
         enemy.info.effects = enemy.info.effects.filter(eff => !eff.expired);
@@ -91,7 +91,6 @@ const createActorTimeouts = (log: BossLog[], isPlayer: boolean, secondOffset: nu
         }, ENEMY_ENTRY_TIME + startAnimation * 1000 - secondOffset * 1000);
         // Create timeout to clear animation
         setTimeout(() => {
-            console.log("Cleared");
             store.dispatch(setCombatAction({
                 time: DEFAULT_ACTION_TIME,
                 startTime: Date.now(),

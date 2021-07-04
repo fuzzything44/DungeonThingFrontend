@@ -2,7 +2,8 @@ import * as React from "react";
 
 const ICONS = {
     mana: { image: require("../images/mana.png"), name: "Mana" },
-    ticket: { image: require("../images/ticket.png"), name: "Dungeon entry ticket"}
+    ticket: { image: require("../images/ticket.png"), name: "Dungeon entry ticket" },
+    gold: { image: require("../images/gold.png"), name: "Gold"}
 }
 
 interface IconProps {

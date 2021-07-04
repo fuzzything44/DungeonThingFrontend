@@ -22,7 +22,7 @@ export class CriticalStrike extends NeutralSkill {
 
     public useSkill(user: CombatActor, enemy: CombatActor): BossLog {
         const critBoost: number = STRENGTH[this.level];
-        user.info.effects.push(new BasicEffect(EffectDuration.ATTACKS, 1,
+        user.info.effects.push(new BasicEffect("~CRITICAL_STRIKE", EffectDuration.ATTACKS, 1, 0,
             [{ stat: Stats.CRIT_RATE, amount: critBoost }]));
         return user.performBasicAttack(enemy);
     }

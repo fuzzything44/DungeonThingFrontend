@@ -38,3 +38,8 @@ export const reinforce: ItemFolder = {
     ],
     base: require("./reinforce/base.png")
 };
+
+export const totem: ItemFolder = {
+    img: [],
+    base: require("./totem/base.png")
+}

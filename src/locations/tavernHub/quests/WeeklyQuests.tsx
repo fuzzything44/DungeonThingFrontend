@@ -13,7 +13,7 @@ const WeeklyQuests: React.FC<WeeklyQuestsProps> = (props) => {
             Weekly Quests - {props.refreshDays} days until refresh
         </h2>
         <ul style={{ listStyleType: "none" }}>
-            {props.quests.map(quest => <li><Quest {...quest}/></li>)}
+            {props.quests.map(quest => <li key={quest.num}><Quest {...quest} /></li>)}
         </ul>
     </div>
 }

@@ -4,6 +4,7 @@ import { border, backgroundSecondary } from '../styles';
 import { formatNumber } from '../Util/numberFormat';
 import { Icon } from '../Util/Icon';
 import { ItemDisplay } from '../inventory/ItemDisplay';
+import { getSkillData } from '../character/Skills/SkillData';
 
 interface OfflineGainsProps {
     results: UpdateInformation;
@@ -43,8 +44,9 @@ const OfflineGains: React.FC<OfflineGainsProps> = (props) => {
                     case "ITEM":
                         return <li key={JSON.stringify(innerReward)}><ItemDisplay {...innerReward.info} /></li>;
                     case "EQUIP":
-                        // TODO: handle this once we get a better equip component
-                        return <li key= { JSON.stringify(innerReward) }>New equip: {innerReward.info.name}</li>;
+                        return <li key={JSON.stringify(innerReward)}>New equip: {innerReward.info.name}</li>;
+                    case "SKILL":
+                        return <li key={JSON.stringify(innerReward)}>Skill Book: {getSkillData(innerReward.info.skill_id, innerReward.info.skill_level).name}</li>
                     default: // Ensures compiler error if all cases not covered
                         return ((_: never): null => null)(innerReward);
                 }

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ItemDetails } from './ItemDetails';
-import { getItemInformation, standardBorderColors } from './itemInfo';
+import { getItemInformation, standardBorderColors, ITEM_MAPPINGS } from './itemInfo';
 import { outlineText } from '../styles';
 import { BoxedImage } from '../Util/BoxedImage';
 
@@ -13,15 +13,22 @@ interface ItemDisplayProps {
 
 function getImageLoc(itemId: number, itemData: number): string {
     let folder = getItemInformation(itemId, itemData).imageFolder;
-    if (folder.img.length < itemData) {
+
+    if (itemId === 3) {
+        console.log("Finding totem", itemData, folder);
+    }
+    if (folder.img.length <= itemData) {
         return folder.base;
     }
     return folder.img[itemData - 1];
 }
 
 function getBorderColor(itemId: number, itemData: number) {
-    if ([1, 2].includes(itemId)) {
+    if ([ITEM_MAPPINGS.RANK_ORB, ITEM_MAPPINGS.REINFORCE_COUPON].includes(itemId)) {
         return standardBorderColors(itemData);
+    }
+    if (itemId === ITEM_MAPPINGS.ELEMENT_TOTEM) {
+        return "blue";
     }
     return "black";
 }

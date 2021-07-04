@@ -21,7 +21,7 @@ export class StrongBlow extends NeutralSkill {
     }
 
     public useSkill(user: CombatActor, enemy: CombatActor): BossLog {
-        user.info.effects.push(new BasicEffect(EffectDuration.ATTACKS, 1,
+        user.info.effects.push(new BasicEffect("~STRONG_BLOW", EffectDuration.ATTACKS, 1, 0,
             [{ stat: Stats.DAMAGE_PERCENT, amount: STRENGTH }]));
         return user.performBasicAttack(enemy);
     }

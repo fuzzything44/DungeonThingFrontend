@@ -18,12 +18,16 @@ export interface BossRewardItem {
     type: "ITEM";
     info: ItemInfo;
 }
+export interface BossRewardSkill {
+    type: "SKILL";
+    info: SkillInfo;
+}
 export interface BossRewardMana {
     type: "MANA";
     amount: number;
 }
 export interface BossReward {
-    reward: BossRewardEquip | BossRewardItem | BossRewardMana;
+    reward: BossRewardEquip | BossRewardItem | BossRewardSkill | BossRewardMana;
 }
 export interface AttributeInfo {
     level: number;
@@ -97,6 +101,24 @@ export interface BuyItemResponse {
 }
 export function callBuyItem(params: BuyItemParams): Promise<BuyItemResponse> {
     return makeCall<BuyItemResponse>({...params, api: "buy"}).then(data => { 
+        if ("error" in data) {
+            throw new Error(data["error"]);
+        } else { 
+            return data; 
+        } 
+    });
+}
+ 
+export interface BuyShopItemParams {
+    shop: string;
+    entry: string;
+    amount?: number;
+}
+export interface BuyShopItemResponse {
+    
+}
+export function callBuyShopItem(params: BuyShopItemParams): Promise<BuyShopItemResponse> {
+    return makeCall<BuyShopItemResponse>({...params, api: "buy_shop"}).then(data => { 
         if ("error" in data) {
             throw new Error(data["error"]);
         } else { 
@@ -247,6 +269,24 @@ export interface EquipItemResponse {
 }
 export function callEquipItem(params: EquipItemParams): Promise<EquipItemResponse> {
     return makeCall<EquipItemResponse>({...params, api: "use_equip"}).then(data => { 
+        if ("error" in data) {
+            throw new Error(data["error"]);
+        } else { 
+            return data; 
+        } 
+    });
+}
+ 
+export interface UseItemParams {
+    id: number;
+    data: number;
+    option?: string;
+}
+export interface UseItemResponse {
+    message: string;
+}
+export function callUseItem(params: UseItemParams): Promise<UseItemResponse> {
+    return makeCall<UseItemResponse>({...params, api: "use_item"}).then(data => { 
         if ("error" in data) {
             throw new Error(data["error"]);
         } else { 
@@ -515,6 +555,7 @@ export interface StatusResponse {
     max_floor: number;
     gold: number;
     skill_slots: number;
+    element: number;
 }
 export function callStatus(params: StatusParams): Promise<StatusResponse> {
     return makeCall<StatusResponse>({...params, api: "status"}).then(data => { 
