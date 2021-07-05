@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 import { setQuestDays, setQuests } from '../../../redux/quests/actions';
 import { ErrorBox } from '../../../Util/ErrorBox';
 import { QuestShop } from './QuestShop';
-import { buttonStyle } from '../../../styles';
 import { TextRadioGroup } from '../../../Util/TextRadioGroup';
 
 interface QuestListProps {

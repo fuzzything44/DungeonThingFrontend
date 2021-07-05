@@ -1,7 +1,5 @@
-import React from "react";
 import { ItemFolder, rank_orb, reinforce, none, totem } from "../images/items";
 import { equipImages } from "../images/equips";
-import { buttonStyle } from "../styles";
 
 export const EQUIP_TYPES = {
     WEAPON: 0,

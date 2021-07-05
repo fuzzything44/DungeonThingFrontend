@@ -3,10 +3,7 @@ import { Modal } from '../Util/Modal';
 import { getItemInformation } from './itemInfo';
 import { ItemDisplay } from './ItemDisplay';
 import { buttonStyle } from '../styles';
-import { callUseItem, callGetInventory, callStatus } from '../api/ApiObjects';
-import { store } from '../redux/store';
-import { setInventory } from '../redux/inventory/actions';
-import { setPlayerInfo } from '../redux/player/actions';
+import { callUseItem } from '../api/ApiObjects';
 
 interface ItemDetailsProps {
     itemId: number,
