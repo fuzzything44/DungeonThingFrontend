@@ -5,8 +5,8 @@ import { Stats } from "../../../../combat/CombatSim/Effects/StatModifier";
 import { AirSkill } from "./AirSkill";
 
 const USES = [1, 2, 2];
-const STRENGTH = [5, 10, 10];
-const DURATION = [10, 15, 15];
+const STRENGTH = [10, 20, 20];
+const DURATION = [15, 20, 30];
 
 const CHARGE_TIME = 4;
 

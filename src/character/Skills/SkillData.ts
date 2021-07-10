@@ -50,6 +50,7 @@ interface SkillData {
 }
 
 const SKILL_LEVEL_NAMES: string[] = ["Basic", "Trained", "Advanced", "Masterful"];
+SKILL_LEVEL_NAMES[-1] = "";
 
 export const BLANK_SKILL: SkillInfo = { skill_id: 0, skill_level: 0 };
 
@@ -250,7 +251,7 @@ export const getSkillData = (id: number, level: number): SkillData => {
         case AirSkill.FORCEFUL_GUST_ID:
             return {
                 name: "Forceful Gust - " + SKILL_LEVEL_NAMES[level],
-                desc: `Increases critical hit rate by ${[5, 10, 10][level]}% for ${[10, 10, 15][level]} seconds.`,
+                desc: `Increases critical hit rate by ${[10, 20, 20][level]}% for ${[15, 20, 30][level]} seconds.`,
                 elem: SkillElement.AIR,
                 uses: [1, 1, 2][level],
                 charge: 4,
@@ -261,7 +262,7 @@ export const getSkillData = (id: number, level: number): SkillData => {
         case AirSkill.TWISTING_WINDS_ID:
             return {
                 name: "Twisting Winds - " + SKILL_LEVEL_NAMES[level],
-                desc: `Gain ${[5, 10, 15, 20][level]}% dodge chance for ${[20, 20, 20, 30][level]} seconds.`,
+                desc: `Gain ${[10, 20, 25, 30][level]}% dodge chance for ${[20, 20, 20, 30][level]} seconds.`,
                 elem: SkillElement.AIR,
                 uses: [1, 1, 2, 3][level],
                 charge: 4,
@@ -272,10 +273,10 @@ export const getSkillData = (id: number, level: number): SkillData => {
         case AirSkill.RIDE_THE_BREEZE_ID:
             return {
                 name: "Ride the Breeze - " + SKILL_LEVEL_NAMES[level],
-                desc: `Increase attack speed by ${[10, 15, 15, 20][level]}% for ${[10, 15, 15, 20][level]} seconds.`,
+                desc: `Increase attack speed by ${[10, 15, 15, 20][level]}% for ${[20, 30, 30, 45][level]} seconds.`,
                 elem: SkillElement.AIR,
                 uses: [1, 2, 3, 3][level],
-                charge: 4,
+                charge: 3,
                 image: require("../../images/skills/air/ride_breeze.png"),
                 maxLvl: 3,
                 skill: new RideTheBreeze(level)

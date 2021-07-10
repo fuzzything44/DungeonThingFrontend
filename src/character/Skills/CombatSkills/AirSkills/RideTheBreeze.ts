@@ -6,9 +6,9 @@ import { AirSkill } from "./AirSkill";
 
 const USES = [1, 2, 3, 3];
 const STRENGTH = [10, 15, 15, 20];
-const DURATION = [10, 15, 15, 20];
+const DURATION = [20, 30, 30, 45];
 
-const CHARGE_TIME = 4;
+const CHARGE_TIME = 3;
 
 export class RideTheBreeze extends AirSkill {
     private level: number;

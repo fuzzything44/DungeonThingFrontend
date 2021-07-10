@@ -1,5 +1,15 @@
 [
   {
+    "date": "July 10th, 2021",
+    "updates": [
+      "Added art for all elemental skills",
+      "Rebalanced Air Skills",
+      "Forceful Gust: Roughly doubled strength & duration",
+      "Twisting Winds: Increased dodge chance by about 10%",
+      "Ride the Breeze: Doubled duration, decreased charge time by 1"
+    ]
+  },
+  {
     "date": "July 4th, 2021 - Skills, part 2",
     "updates": [
       "Added most of the elemental skills!",

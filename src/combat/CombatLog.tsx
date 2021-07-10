@@ -124,7 +124,7 @@ const CombatLogUnconnected: React.FC<CombatLogProps> = (props) => {
                     `You deal ${formatNumber(log.damageDealt)} damage to the enemy. It has ${hpDisplay} HP left.`;
                 const details = log.details["message"] ? <b>{log.details["message"]}</b> : null;
                 const skill = log.details["skill"] ?
-                    <b>Skill used: {getSkillData(parseInt(log.details["skill"]), 0).name}!</b> : null;
+                    <b>Skill used: {getSkillData(parseInt(log.details["skill"]), -1).name}!</b> : null;
                 return <li key={log.time}>{skill} {details} {startString}</li>;
             })}
             {props.rewards === undefined ? null : <li>
