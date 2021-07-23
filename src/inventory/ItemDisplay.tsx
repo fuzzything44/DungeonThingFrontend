@@ -14,9 +14,6 @@ interface ItemDisplayProps {
 function getImageLoc(itemId: number, itemData: number): string {
     let folder = getItemInformation(itemId, itemData).imageFolder;
 
-    if (itemId === 3) {
-        console.log("Finding totem", itemData, folder);
-    }
     if (folder.img.length <= itemData) {
         return folder.base;
     }

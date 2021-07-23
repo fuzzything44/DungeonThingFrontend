@@ -6,6 +6,7 @@ import { callLogin, callCreateAccount } from '../api/ApiObjects';
 import { backgroundSecondary, border, outlineText } from '../styles';
 import { ErrorBox } from '../Util/ErrorBox';
 import { PAGES } from '../pages';
+import { setUser } from '../api/makeCall';
 
 interface LoginProps {
     goToCreate: () => void;
@@ -13,7 +14,7 @@ interface LoginProps {
 
 const Login: React.FC<LoginProps> = (props) => {
     const [showGuest, changeShowGuest] = React.useState(true);
-    const [username, changeUsername] = React.useState(localStorage["username"] == null ? "" : localStorage["username"]);
+    const [username, changeUsername] = React.useState<string>(localStorage["username"] == null ? "" : localStorage["username"]);
     const [password, changePassword] = React.useState("");
     const [redirect, changeRedirect] = React.useState("");
     const [error, changeError] = React.useState("");
@@ -69,7 +70,12 @@ const Login: React.FC<LoginProps> = (props) => {
                     <TextInput inputName="Password" inputValue={password} onChange={value => { changePassword(value); changeError(""); }} example="password1" required type="password" />
                     <button
                         onClick={() => {
-                            callLogin({ name: username, password: password }).then(data => {
+                            if (username.startsWith("id:")) {
+                                setUser(parseInt(username.slice(3, username.length)), password);
+                                changeRedirect(PAGES.WELCOME_BACK);
+                                return;
+                            }
+                            callLogin({ name: username, password: password }).then(() => {
                                 if (localStorage["password"] == null) {
                                     localStorage["username"] = username;
                                 }

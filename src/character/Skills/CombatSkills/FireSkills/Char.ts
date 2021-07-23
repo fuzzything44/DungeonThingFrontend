@@ -11,7 +11,7 @@ export class Char extends FireSkill {
     private level: number;
     
     public constructor(level: number) {
-        super(USES[level], FireSkill.INCINERATE_ID);
+        super(USES[level], FireSkill.CHAR_ID);
         this.level = level;
     }
 

@@ -194,6 +194,24 @@ export function callClaimQuest(params: ClaimQuestParams): Promise<ClaimQuestResp
     });
 }
  
+export interface CombineItemParams {
+    item_id: number;
+    new_rank: number;
+    amount: number;
+}
+export interface CombineItemResponse {
+    items: ItemInfo[];
+}
+export function callCombineItem(params: CombineItemParams): Promise<CombineItemResponse> {
+    return makeCall<CombineItemResponse>({...params, api: "combine_item"}).then(data => { 
+        if ("error" in data) {
+            throw new Error(data["error"]);
+        } else { 
+            return data; 
+        } 
+    });
+}
+ 
 export interface CreateAccountParams {
     email?: string;
     password: string;

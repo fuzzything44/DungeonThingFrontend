@@ -2,7 +2,8 @@ import { PAGES } from '../pages';
 
 const BASE_LOCATIONS = {
     TAVERN: "/tavern",
-    TOWN: "/town"
+    TOWN: "/town",
+    FORGE: "/forge"
 }
 
 export const LOCATIONS: typeof BASE_LOCATIONS = Object.keys(BASE_LOCATIONS).reduce((obj: any, key) => {

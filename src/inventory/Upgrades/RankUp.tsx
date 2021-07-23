@@ -59,7 +59,7 @@ const RankUpUnmapped: React.FC<RankUpProps> = (props) => {
             Ranking up requires using Rank Up orbs, which are gained by destroying equipment of the same rank.
         </>}
     >
-        {props.equip.rank}<br />
+        {props.equip.rank} (Rank {props.equip.rankId})<br />
         You have {orbAmount} +{props.equip.rankId} Rank Orb{orbAmount === 1 ? "" : "s"}<br />
         {orbAmount === 0 ? <>Destroy {props.equip.rank} equipment to get orbs.<br/></> : null}
         <button

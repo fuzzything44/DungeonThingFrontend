@@ -18,7 +18,7 @@ export interface CombatActorInfo {
     effects: Effect[];
 }
 
-const DAMAGE_FUZZING = 0.5;
+export const DAMAGE_FUZZING = 0.5;
 
 export class CombatActor {
     info: CombatActorInfo;

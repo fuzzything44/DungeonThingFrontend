@@ -39,6 +39,11 @@ interface CallbackListElement {
     call: any;
 }
 
+export function setUser(id: number, authToken: string) {
+    charId = id;
+    auth = authToken;
+}
+
 let callsToMake: CallbackListElement[] = [];
 export function makeCall<T>(request: object): Promise<T | { error: string }> {
     return new Promise((resolve, reject) => {
@@ -50,28 +55,37 @@ export function makeCall<T>(request: object): Promise<T | { error: string }> {
         });
         // If list was empty, add a resolver
         if (callsToMake.length === 1) {
-            setTimeout(() => {
-                // After 10ms timeout (so we include other setTimeout(func, 0) calls, hopefully)
-                // make the call and resolve all promises
-
-                let toMake = callsToMake;
-                callsToMake = [];
-                realMakeCall(toMake.map(call => call.call)).then(results => {
-                    results.forEach((result, index) => {
-                        if (toMake[index].call["api"] === "login" || toMake[index].call["api"] === "create_account") {
-                            charId = result.id;
-                            auth = result.auth_token;
-                        }
-                        toMake[index].resolve(result);
-                    });
-                }).catch(error => {
-                    toMake.forEach((call) => {
-                        call.reject(error);
-                    });
-                });
-            }, 10);
+            setTimeout(callResolver, 10);
         }
     })
+}
+
+function callResolver() {
+    // After 10ms timeout (so we include other setTimeout(func, 0) calls, hopefully)
+    // make the call and resolve all promises
+
+    // Only send 25 requests at a time.
+    let toMake = callsToMake.splice(0, 25);
+    // If there were more than that, we'll chain this again.
+    let doChain = callsToMake.length > 0;
+    realMakeCall(toMake.map(call => call.call)).then(results => {
+        results.forEach((result, index) => {
+            if (toMake[index].call["api"] === "login" || toMake[index].call["api"] === "create_account") {
+                charId = result.id;
+                auth = result.auth_token;
+            }
+            toMake[index].resolve(result);
+        });
+    }).catch(error => {
+        toMake.forEach((call) => {
+            call.reject(error);
+        });
+    }).finally(() => {
+        if (doChain) {
+            // Another 10ms delay incase the resolved promises add new calls that we could also handle.
+            setTimeout(callResolver, 10);
+        }
+    });
 }
 
 export const isLoggedIn = () => {

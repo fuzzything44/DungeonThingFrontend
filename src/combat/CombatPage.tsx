@@ -8,8 +8,8 @@ import { EnemyDisplay } from './EnemyDisplay';
 import { PlayerDisplay } from './PlayerDisplay';
 import { CombatLog } from './CombatLog';
 import { PlayerState } from '../redux/player/types';
-import { border, backgroundSecondary } from '../styles';
-import { setChallengeBoss, setAutoChallenge } from '../redux/combat/actions';
+import { border, backgroundSecondary, buttonStyle } from '../styles';
+import { setChallengeBoss, setAutoChallenge, clearAutoChallenge } from '../redux/combat/actions';
 import { getLocationInfo } from './locationInfo';
 import { isLoggedIn } from '../api/makeCall';
 import { Redirect } from 'react-router-dom';
@@ -103,6 +103,18 @@ const CombatPageUnmapped: React.FC<CombatPageProps> = (props) => {
             onClick={() => props.dispatch(setAutoChallenge())}
         >
             {props.combatState.autoChallengeEnabled ? "Auto-challenging..." : "Auto-Challenge"}
+        </button> : null}
+        {props.combatState.autoChallengeEnabled ? <button
+            style={{
+                ...buttonStyle,
+                position: "absolute",
+                padding: "0.5em",
+                top: "calc(20% + 4em)",
+                left: "calc(50% + 8em)"
+            }}
+            onClick={() => props.dispatch(clearAutoChallenge())}
+        >
+            Disable Auto-challenge
         </button> : null}
         <div style={{
             borderBottom: border.border,

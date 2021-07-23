@@ -15,6 +15,8 @@ import { Redirect } from 'react-router-dom';
 import { PAGES } from '../pages';
 import { SkillMenu } from './Skills/SkillMenu';
 import { SkillElement } from './Skills/SkillData';
+import { ATTACKS_PER_MIN } from '../combat/combatRunner';
+import { DAMAGE_FUZZING } from '../combat/CombatSim/CombatActor';
 
 interface StateProps {
     name: string;
@@ -43,6 +45,10 @@ const CharacterPageUnmapped: React.FC<CharacterProps> = (props) => {
     if (!isLoggedIn()) {
         return <Redirect to={PAGES.LOGIN} />;
     }
+
+    const avgdamage = props.attack / ATTACKS_PER_MIN;
+    const minDmg = formatNumber(avgdamage * (1 - DAMAGE_FUZZING));
+    const maxDmg = formatNumber(avgdamage * (1 + DAMAGE_FUZZING));
 
     return <div style={{
         minHeight: "100vh",
@@ -80,7 +86,7 @@ const CharacterPageUnmapped: React.FC<CharacterProps> = (props) => {
                 <table>
                     <tbody style={{ textAlign: "left" }}>
                         <tr><th>Max HP</th><td>{formatNumber(props.hp)}</td></tr>
-                        <tr><th>Attack</th><td>{formatNumber(props.attack)}</td></tr>
+                        <tr><th>Damage</th><td>{minDmg} ~ {maxDmg}</td></tr>
                         <tr><th>Crit Rate</th><td>{formatNumber(props.critRate)}%</td></tr>
                         <tr><th>Crit Damage</th><td>{formatNumber(props.critDmg * 100)}%</td></tr>
                         {(() => {

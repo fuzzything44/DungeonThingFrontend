@@ -1,5 +1,19 @@
 [
   {
+    "date": "July 23rd, 2021",
+    "updates": [
+      "Lots of small QoL changes!",
+      "Added a forge in town, where you can combine rank orbs or reinforce coupons into stronger versions, in mass quantities",
+      "The first 10 level ups on equipment upgrades give much more strength",
+      "In the stats section of the character page, changed \"Attack\" to now display the actual damage range",
+      "Added a button to disable auto-challenge",
+      "Equips now say what rank number they are in the rank-up menu",
+      "Fixed bug where dropped skills wouldn't appear in the combat log",
+      "Reduced the amount of API calls sent to the server at once, to hopefully reduce or remove timeout issues when destroying large amounts of equipment",
+      "Fixed bug where char (skill) would sometimes display as incinerate"
+    ]
+  },
+  {
     "date": "July 10th, 2021",
     "updates": [
       "Added art for all elemental skills",
