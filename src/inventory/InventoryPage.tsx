@@ -3,11 +3,11 @@ import { InstanceMenu } from '../InstanceMenu';
 import { connect } from 'react-redux';
 import { RootState, store } from '../redux/store';
 import { border, backgroundSecondary, backgroundColor } from '../styles';
-import { ItemInfo, callGetInventory, EquipInfo as EquipInfoData } from '../api/ApiObjects';
+import { ItemInfo, callGetInventory, EquipInfo as EquipInfoData, callGetGifts } from '../api/ApiObjects';
 import { TitleContent } from '../Util/TitleContent';
 import { InventoryDisplay } from './InventoryDisplay';
 import { EquipInfo } from './EquipInfo';
-import { setInventory } from '../redux/inventory/actions';
+import { setInventory, setGifts } from '../redux/inventory/actions';
 import { MassDestroy } from './MassDestroy';
 import { PlayerGif, PlayerActions } from '../Util/PlayerGif';
 import { DEFAULT_ACTION_TIME } from '../combat/combatRunner';
@@ -37,6 +37,10 @@ const InventoryPageUnmapped: React.FC<InventoryProps> = (_props) => {
     React.useEffect(() => {
         callGetInventory({}).then(inventory => {
             store.dispatch(setInventory(inventory));
+
+            callGetGifts({}).then(result => {
+                store.dispatch(setGifts(result.gifts));
+            });
         }).catch(() => null);
     }, []);
 

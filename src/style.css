@@ -18,6 +18,28 @@ button:focus {
     outline: auto;
 }
 
+@keyframes wiggle {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    70% {
+        transform: rotate(0deg);
+    }
+
+    80% {
+        transform: rotate(7deg);
+    }
+
+    90% {
+        transform: rotate(-7deg);
+    }
+
+    100% {
+        transform: rotate(7deg);
+    }
+}
+
 @keyframes slide {
     0% {
         transform: translate(25em, 0);

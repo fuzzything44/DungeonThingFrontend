@@ -1,6 +1,4 @@
 import * as React from 'react';
-import { Modal } from '../../Util/Modal';
-import { ErrorBox } from '../../Util/ErrorBox';
 import { connect } from 'react-redux';
 import { RootState } from '../../redux/store';
 

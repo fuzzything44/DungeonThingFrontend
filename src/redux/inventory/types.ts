@@ -1,6 +1,6 @@
-import { ItemInfo, EquipInfo } from "../../api/ApiObjects";
+import { ItemInfo, EquipInfo, GiftInfo } from "../../api/ApiObjects";
 
-export interface InventoryState {
+interface Inventory {
     hat: EquipInfo;
     shirt: EquipInfo;
     pants: EquipInfo;
@@ -8,10 +8,14 @@ export interface InventoryState {
     weapon: EquipInfo;
     equips: EquipInfo[];
     items: ItemInfo[];
+}
+
+export type InventoryState = Inventory & {
+    gifts: GiftInfo[];
 };
 
 export const SET_INVENTORY = "SET_INVENTORY";
-export type SetInventoryAction = InventoryState & {
+export type SetInventoryAction = Inventory & {
     type: typeof SET_INVENTORY;
 }
 
@@ -39,8 +43,16 @@ export type ChangeItemAmountAction = {
     item: ItemInfo;
     newAmount: number;
 }
+
+export const SET_GIFTS = "SET_GIFTS";
+export type SetGiftsAction = {
+    type: typeof SET_GIFTS;
+    gifts: GiftInfo[];
+}
+
 export type InventoryAction = SetInventoryAction |
     SetEquipInfoAction |
     RemoveEquipAction |
     EquipItemAction |
-    ChangeItemAmountAction;
+    ChangeItemAmountAction |
+    SetGiftsAction;

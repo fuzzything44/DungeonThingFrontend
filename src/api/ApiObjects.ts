@@ -40,6 +40,7 @@ export interface GiftInfo {
     amount: number;
     itemData: number;
     itemId: number;
+    message: string;
 }
 export interface EquipInfo {
     id: number;
@@ -71,7 +72,8 @@ export interface ItemListing {
 }
 export interface QuestInfo {
     num: number;
-    complete: boolean;
+    progress: number;
+    max_progress: number;
     claimed: boolean;
     name: string;
     desc: string;
@@ -385,7 +387,7 @@ export interface GetGiftsParams {
     
 }
 export interface GetGiftsResponse {
-    gifts: GiftInfo;
+    gifts: GiftInfo[];
 }
 export function callGetGifts(params: GetGiftsParams): Promise<GetGiftsResponse> {
     return makeCall<GetGiftsResponse>({...params, api: "gifts"}).then(data => { 

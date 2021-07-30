@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { UpdateInformation, callStatus, callUpdate, BossLog, callGetAssignedSkills } from '../api/ApiObjects';
+import { UpdateInformation, callStatus, callUpdate, BossLog, callGetAssignedSkills, callGetGifts } from '../api/ApiObjects';
 import { Redirect } from 'react-router-dom';
 import { PAGES } from '../pages';
 import { ScrollingBackground } from '../combat/ScrollingBackground';
@@ -12,6 +12,7 @@ import { store } from '../redux/store';
 import { setPlayerInfo, setMana, setManaRate, setUsedSkills } from '../redux/player/actions';
 import { setChallengeBoss } from '../redux/combat/actions';
 import { isLoggedIn } from '../api/makeCall';
+import { setGifts } from '../redux/inventory/actions';
 
 interface WelcomeBackProps {
 };
@@ -45,6 +46,10 @@ const WelcomeBackPage: React.FC<WelcomeBackProps> = (props) => {
                 store.dispatch(setManaRate(update.result.per_min));
                 runCombat();
             }
+
+            callGetGifts({}).then(result => {
+                store.dispatch(setGifts(result.gifts));
+            });
         }).catch((error) => {
             if (error.message === "You're not in a dungeon") {
                 changeRedirect(PAGES.INTRODUCTION);

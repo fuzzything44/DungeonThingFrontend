@@ -1,4 +1,4 @@
-import { InventoryState, InventoryAction, SET_INVENTORY, SET_EQUIP_INFO, REMOVE_EQUIP, EQUIP_ITEM, CHANGE_ITEM_AMOUNT } from "./types";
+import { InventoryState, InventoryAction, SET_INVENTORY, SET_EQUIP_INFO, REMOVE_EQUIP, EQUIP_ITEM, CHANGE_ITEM_AMOUNT, SET_GIFTS } from "./types";
 import { EquipInfo, ItemInfo } from "../../api/ApiObjects";
 import { EQUIP_TYPES } from "../../inventory/itemInfo";
 
@@ -23,7 +23,8 @@ const initialState: InventoryState = {
     shoes: NULL_EQUIP,
     weapon: NULL_EQUIP,
     equips: [],
-    items: []
+    items: [],
+    gifts: []
 };
 
 const equipSorting = (eq1: EquipInfo, eq2: EquipInfo) => eq1.rankId - eq2.rankId;
@@ -95,7 +96,13 @@ export function inventoryReducer(state = initialState, action: InventoryAction):
                 ...state,
                 items: newItems.filter(item => item.amount !== 0)
             }
+        case SET_GIFTS:
+            return {
+                ...state,
+                gifts: action.gifts
+            }
         default:
+            ((_: never) => null)(action);
             return state;
     }
 }

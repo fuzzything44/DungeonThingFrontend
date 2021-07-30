@@ -1,5 +1,6 @@
-import { SetInventoryAction, SET_INVENTORY, SetEquipInfoAction, SET_EQUIP_INFO, RemoveEquipAction, REMOVE_EQUIP, EquipItemAction, EQUIP_ITEM, ChangeItemAmountAction, CHANGE_ITEM_AMOUNT } from "./types";
-import { GetInventoryResponse, EquipInfo, ItemInfo } from "../../api/ApiObjects";
+import { SetInventoryAction, SET_INVENTORY, SetEquipInfoAction, SET_EQUIP_INFO, RemoveEquipAction, REMOVE_EQUIP, EquipItemAction, EQUIP_ITEM, ChangeItemAmountAction, CHANGE_ITEM_AMOUNT, SetGiftsAction, SET_GIFTS } from "./types";
+import { GetInventoryResponse, EquipInfo, ItemInfo, GiftInfo } from "../../api/ApiObjects";
+import { store } from "../store";
 
 export function setInventory(response: GetInventoryResponse): SetInventoryAction {
     return {
@@ -40,5 +41,19 @@ export function changeItemAmount(item: ItemInfo, amount: number): ChangeItemAmou
         type: CHANGE_ITEM_AMOUNT,
         item: item,
         newAmount: amount
+    }
+}
+
+export function setGifts(gifts: GiftInfo[]): SetGiftsAction {
+    return {
+        type: SET_GIFTS,
+        gifts: gifts
+    }
+}
+
+export function removeGift(id: number): SetGiftsAction {
+    return {
+        type: SET_GIFTS,
+        gifts: store.getState().inventory.gifts.filter(gift => gift.id !== id)
     }
 }

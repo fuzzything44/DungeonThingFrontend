@@ -1,5 +1,13 @@
 [
   {
+    "date": "July 30th, 2021",
+    "updates": [
+      "Added 3 new weekly quests: an alternate for high-level destruction, one for fusing orbs, and a placeholder",
+      "Added a gifts component, so you can see when you have a gift to claim, and claim it.",
+      "Gifts are likely not relavant for most people, so don't expect this to appear."
+    ]
+  },
+  {
     "date": "July 23rd, 2021",
     "updates": [
       "Lots of small QoL changes!",
