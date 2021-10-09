@@ -44,7 +44,7 @@ const QuestListUnmapped: React.FC<QuestListProps> = (props) => {
         >
             <img
                 style={{ height: "15em" }}
-                src={require("../../../images/list.png")}
+                src={require("../../../images/tavern/list.png")}
                 alt="Quests"
                 title="Quests"
             />

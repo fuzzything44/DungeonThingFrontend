@@ -4,14 +4,16 @@ import { playerReducer } from "./player/reducers";
 import { inventoryReducer } from "./inventory/reducers";
 import { preferenceReducer } from "./preferences/reducers";
 import { questReducer } from "./quests/reducers";
+import { guildReducer } from "./guild/reducers";
 
 const rootReducer = combineReducers({
     combat: combatReducer,
     player: playerReducer,
     inventory: inventoryReducer,
     preferences: preferenceReducer,
-    quests: questReducer
+    quests: questReducer,
+    guild: guildReducer
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
-export let store = createStore(rootReducer);
+export const store = createStore(rootReducer);

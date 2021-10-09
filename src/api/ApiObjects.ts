@@ -1,6 +1,11 @@
 /* This is an automatically generated file. If you want to make changes, message fuzzything44 directly. */
 import { makeCall } from "./makeCall";
 
+export interface ApplicationInfo {
+    id: number;
+    name: string;
+    max_floor: number;
+}
 export interface BossLog {
     time: number;
     damageDealt: number;
@@ -42,6 +47,14 @@ export interface GiftInfo {
     itemId: number;
     message: string;
 }
+export interface GuildBonuses {
+    members: number;
+    crit_rate: number;
+    crit_dmg: number;
+    dmg: number;
+    skill_slots: number;
+    cost_reduce: number;
+}
 export interface EquipInfo {
     id: number;
     level: number;
@@ -69,6 +82,12 @@ export interface ItemListing {
     price: number;
     sellerId: number;
     purchase: string;
+}
+export interface PlayerInfo {
+    id: number;
+    name: string;
+    last_login: Date;
+    position: 'GM' | 'SUBMASTER' | 'MEMBER';
 }
 export interface QuestInfo {
     num: number;
@@ -273,6 +292,32 @@ export interface EquipInfoResponse {
 }
 export function callEquipInfo(params: EquipInfoParams): Promise<EquipInfoResponse> {
     return makeCall<EquipInfoResponse>({...params, api: "equip_info"}).then(data => { 
+        if ("error" in data) {
+            throw new Error(data["error"]);
+        } else { 
+            return data; 
+        } 
+    });
+}
+ 
+export interface GuildInfoParams {
+    id: number;
+}
+export interface GuildInfoResponse {
+    name: string;
+    players: PlayerInfo[];
+    max_size: number;
+    message: string;
+    discord: string;
+    bonus: GuildBonuses;
+    applications: ApplicationInfo[];
+    mana: number;
+    gold: number;
+    gp: number;
+    items: ItemInfo[];
+}
+export function callGuildInfo(params: GuildInfoParams): Promise<GuildInfoResponse> {
+    return makeCall<GuildInfoResponse>({...params, api: "guild_info"}).then(data => { 
         if ("error" in data) {
             throw new Error(data["error"]);
         } else { 
@@ -576,6 +621,7 @@ export interface StatusResponse {
     gold: number;
     skill_slots: number;
     element: number;
+    guild: number;
 }
 export function callStatus(params: StatusParams): Promise<StatusResponse> {
     return makeCall<StatusResponse>({...params, api: "status"}).then(data => { 

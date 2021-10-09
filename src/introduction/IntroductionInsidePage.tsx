@@ -42,7 +42,7 @@ const IntroductionInsidePage: React.FC<IntroductionProps> = (props) => {
                 float: "left",
                 width: "25em",
                 height: "100%",
-                backgroundImage: `url(${require("../images/tavern_left.png")})`,
+                backgroundImage: `url(${require("../images/tavern/tavern_left.png")})`,
                 backgroundSize: "25em 100%",
             }}>
             </div>
@@ -50,7 +50,7 @@ const IntroductionInsidePage: React.FC<IntroductionProps> = (props) => {
                 float: "left",
                 width: "calc(100% - 25em)",
                 height: "100%",
-                backgroundImage: `url(${require("../images/tavern_inside_repeat.png")})`,
+                backgroundImage: `url(${require("../images/tavern/tavern_inside_repeat.png")})`,
                 backgroundSize: "25em 100%",
                 backgroundRepeat: "repeat-x"
             }}>
@@ -62,7 +62,7 @@ const IntroductionInsidePage: React.FC<IntroductionProps> = (props) => {
                 bottom: "63.7vh",
                 height: "9em"
             }}
-            src={require("../images/door.png")}
+            src={require("../images/tavern/door.png")}
             alt="Some door"
             title="Some door"
         />
@@ -73,7 +73,7 @@ const IntroductionInsidePage: React.FC<IntroductionProps> = (props) => {
                 top: "calc(36.2vh - 7em)",
                 height: "7em"
             }}
-            src={require("../images/barkeeper.png")}
+            src={require("../images/tavern/barkeeper.png")}
             alt="Barkeeper"
             title="Barkeeper"
         />

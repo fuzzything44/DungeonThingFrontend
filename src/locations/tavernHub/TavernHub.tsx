@@ -12,6 +12,7 @@ import { Redirect } from 'react-router-dom';
 import { PAGES } from '../../pages';
 import { ExitDoor } from './ExitDoor';
 import { QuestList } from './quests/QuestList';
+import { GuildEntry } from './GuildEntry';
 
 interface StateProps {
     dungeonName: string;
@@ -36,7 +37,7 @@ const TavernHubUnmapped: React.FC<TavernHubProps> = (props) => {
             float: "left",
             width: "25em",
             height: "100%",
-            backgroundImage: `url(${require("../../images/tavern_left.png")})`,
+            backgroundImage: `url(${require("../../images/tavern/tavern_left.png")})`,
             backgroundSize: "25em 100%",
         }}>
         </div>
@@ -44,7 +45,7 @@ const TavernHubUnmapped: React.FC<TavernHubProps> = (props) => {
             float: "left",
             width: "calc(100% - 25em)",
             height: "100%",
-            backgroundImage: `url(${require("../../images/tavern_inside_repeat.png")})`,
+            backgroundImage: `url(${require("../../images/tavern/tavern_inside_repeat.png")})`,
             backgroundSize: "25em 100%",
             backgroundRepeat: "repeat-x"
         }}>
@@ -55,7 +56,7 @@ const TavernHubUnmapped: React.FC<TavernHubProps> = (props) => {
         <TavernDoor {...props} />
         <ExitDoor />
         <Barkeeper {...props} />
-        
+        <GuildEntry />
         <InstanceMenu />
     </div>;
 }

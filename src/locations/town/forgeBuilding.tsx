@@ -13,7 +13,7 @@ export const ForgeBuilding: React.FC<{}> = () => {
     >
         <img
             style={{ width: "20em" }}
-            src={require("../../images/forge.png")}
+            src={require("../../images/forge/forge.png")}
             alt="The forge"
             title="The forge"
         />

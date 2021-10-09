@@ -22,7 +22,8 @@ const initialState: PlayerState = {
     skill_slots: 0,
     skills: [],
     usedSkills: [],
-    element: 0
+    element: 0,
+    guild: -1
 };
 
 export function playerReducer(state = initialState, action: PlayerAction): PlayerState {

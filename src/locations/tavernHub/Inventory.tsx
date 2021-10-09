@@ -17,7 +17,7 @@ const Inventory: React.FC<InventoryProps> = (props) => {
     >
         <img
             style={{ height: "100%" }}
-            src={require("../../images/lootbag.png")}
+            src={require("../../images/tavern/lootbag.png")}
             alt="Inventory"
             title="Inventory"
         />

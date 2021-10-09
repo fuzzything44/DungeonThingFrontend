@@ -55,7 +55,7 @@ const IntroductionPage: React.FC<IntroductionProps> = (props) => {
             overflowX: "hidden"
         }}>
             <img
-                src={require("../images/tavern.png")}
+                src={require("../images/tavern/tavern.png")}
                 style={{
                     width: "100%",
                     animation: "slide 3s linear"

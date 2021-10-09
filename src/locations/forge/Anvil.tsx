@@ -51,7 +51,7 @@ const AnvilUnmapped: React.FC<AnvilProps> = (props) => {
         >
             <img
                 style={{ height: "5em" }}
-                src={require("../../images/anvil.png")}
+                src={require("../../images/forge/anvil.png")}
                 alt="Anvil"
                 title="Anvil"
             />

@@ -24,7 +24,7 @@ const ExitDoor: React.FC<ExitDoorProps> = (props) => {
     >
         <img
             style={{ height: "100%" }}
-            src={require("../../images/door.png")}
+            src={require("../../images/tavern/door.png")}
             alt="To town"
             title="To town"
         />

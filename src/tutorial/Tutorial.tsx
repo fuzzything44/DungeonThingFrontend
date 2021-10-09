@@ -13,6 +13,7 @@ import { AutoChallengeTutorial } from "./AutoChallenge";
 import { MassDestroyTutorial } from "./MassDestroy";
 import { ArmoryTutorial } from "./ArmoryTutorial";
 import { SkillTutorial } from "./SkillTutorial";
+import { GuildTutorial } from "./GuildTutorial";
 
 interface TutorialPossibilities {
     floor: number;
@@ -35,7 +36,8 @@ const tutorials: Tutorial[] = [
     AutoChallengeTutorial,
     MassDestroyTutorial,
     ArmoryTutorial,
-    SkillTutorial
+    SkillTutorial,
+    GuildTutorial
 ];
 
 interface TutorialProps {

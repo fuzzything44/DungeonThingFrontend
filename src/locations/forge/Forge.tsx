@@ -26,7 +26,7 @@ export const Forge: React.FC<ForgeProps> = (props) => {
             float: "left",
             width: "100%",
             height: "100%",
-            backgroundImage: `url(${require("../../images/forge_repeat.png")})`,
+            backgroundImage: `url(${require("../../images/forge/forge_repeat.png")})`,
             backgroundSize: "25em 100%",
             backgroundRepeat: "repeat-x"
         }} />

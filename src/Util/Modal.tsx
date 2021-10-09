@@ -39,7 +39,7 @@ const Modal: React.FC<ModalProps> = (props) => {
                 <TitleContent
                     title={
                         <div style={{ position: "relative" }}>
-                            <h1>{props.title}</h1>
+                            <h1 style={{paddingRight: "2.5em"}}>{props.title}</h1>
                             <button style={{
                                 ...errorBackground,
                                 display: props.hideClose ? "none" : "flex",
@@ -65,7 +65,7 @@ const Modal: React.FC<ModalProps> = (props) => {
                 >
                     <div style={{
                         padding: props.noPad ? "" : "0.5em",
-                        maxHeight: "65vh",
+                        maxHeight: "75vh",
                         maxWidth: "90vw",
                         overflowY: "auto"
                     }}>

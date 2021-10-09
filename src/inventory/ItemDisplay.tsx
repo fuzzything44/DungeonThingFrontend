@@ -17,7 +17,7 @@ function getImageLoc(itemId: number, itemData: number): string {
     if (folder.img.length <= itemData) {
         return folder.base;
     }
-    return folder.img[itemData - 1];
+    return folder.img[itemData];
 }
 
 function getBorderColor(itemId: number, itemData: number) {

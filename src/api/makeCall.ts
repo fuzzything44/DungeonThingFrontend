@@ -1,8 +1,8 @@
 let charId: number = -1;
 let auth: string = "";
 
-//let endpoint: string = "http://localhost:5000/api";
-let endpoint: string = "https://fuzzything44.xyz/DungeonThing/api";
+const endpoint: string = "http://localhost:5000/api";
+//const endpoint: string = "https://fuzzything44.xyz/DungeonThing/api";
 
 function realMakeCall(requests: any[]): Promise<any[]> {
     let header = new Headers();
@@ -43,6 +43,8 @@ export function setUser(id: number, authToken: string) {
     charId = id;
     auth = authToken;
 }
+
+export function playerId() { return charId; }
 
 let callsToMake: CallbackListElement[] = [];
 export function makeCall<T>(request: object): Promise<T | { error: string }> {

@@ -35,7 +35,7 @@ export const ATTRIBUTES = {
     skill_slots: {
         name: "Skill Slots",
         description: "+1 equippable skill per level",
-        cost: (level: number) => [10 * 1000 * 1000, 100 * 1000 * 1000][level],
+        cost: (level: number) => [1.5 * 1000 * 1000, 25 * 1000 * 1000][level],
         max: 2,
         floorVisible: 30
     }

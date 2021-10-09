@@ -16,13 +16,13 @@ const TavernBuilding: React.FC<TavernBuildingProps> = (props) => {
     >
         <img
             style={{ width: "8em" }}
-            src={require("../../images/tavern.png")}
+            src={require("../../images/tavern/tavern.png")}
             alt="The tavern"
             title="The tavern"
         />
         <img
             style={{ width: "8em", transform: "scaleX(-1)" }}
-            src={require("../../images/tavern.png")}
+            src={require("../../images/tavern/tavern.png")}
             alt="The tavern"
             title="The tavern"
         />

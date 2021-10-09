@@ -38,7 +38,7 @@ const Barkeeper: React.FC<BarkeeperProps> = (props) => {
         >
             <img
                 style={{ height: "100%" }}
-                src={require("../../images/barkeeper.png")}
+                src={require("../../images/tavern/barkeeper.png")}
                 alt="Barkeeper"
                 title="Barkeeper"
             />

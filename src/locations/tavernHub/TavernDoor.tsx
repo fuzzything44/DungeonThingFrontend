@@ -12,8 +12,8 @@ const TavernDoor: React.FC<TavernDoorProps> = (props) => {
         style={{
             position: "absolute",
             left: "31em",
-            bottom: "63.7vh",
-            height: "9em"
+            top: "calc(36.3vh - 10em)",
+            height: "10em"
         }}
     >
         <DungeonEntrance
@@ -23,7 +23,7 @@ const TavernDoor: React.FC<TavernDoorProps> = (props) => {
         >
             <img
                 style={{ height: "100%" }}
-                src={require("../../images/door.png")}
+                src={require("../../images/tavern/door.png")}
                 alt="To Cellar"
                 title="To Cellar"
             />

@@ -17,7 +17,7 @@ const SmelterUnmapped: React.FC<SmelterProps> = (props) => {
         >
             <img
                 style={{ height: "40em" }}
-                src={require("../../images/smelter.png")}
+                src={require("../../images/forge/smelter.png")}
                 alt="Smelter"
                 title="Smelter"
             />

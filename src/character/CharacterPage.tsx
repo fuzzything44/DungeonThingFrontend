@@ -29,7 +29,11 @@ interface StateProps {
     element: SkillElement;
 };
 
-type CharacterProps = StateProps;
+interface PassedProps {
+
+};
+
+type CharacterProps = StateProps & PassedProps;
 
 const CharacterPageUnmapped: React.FC<CharacterProps> = (props) => {
     const [attributeError, changeAttributeError] = React.useState("");
@@ -165,6 +169,6 @@ const mapStateToProps = (state: RootState): StateProps => {
     };
 }
 
-let CharacterPage = connect(mapStateToProps)(CharacterPageUnmapped);
+const CharacterPage = connect(mapStateToProps)(CharacterPageUnmapped);
 
 export { CharacterPage };

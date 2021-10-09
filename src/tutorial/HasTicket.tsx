@@ -25,7 +25,8 @@ const HasTicket: React.FC<{}> = () => {
             The other use of tickets is to enter a new dungeon. 
             You exit your current dungeon, and start on floor 1 of the new dungeon (no matter where you were previously).
             In a way, you can think of resetting a dungeon as exiting and re-entering your current dungeon.
-            (Note: currently, there are no other available dungeons to enter. The Armory is coming soon!)
+            As you play, more dungeons will unlock for you to explore! 
+            In a few days, you should have access to the 2nd dungeon, the Armory.
         </p>
     </>;
 };
