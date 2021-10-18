@@ -27,8 +27,8 @@ const initialState: InventoryState = {
     gifts: []
 };
 
-const equipSorting = (eq1: EquipInfo, eq2: EquipInfo) => eq1.rankId - eq2.rankId;
-const itemSorting = (i1: ItemInfo, i2: ItemInfo) => i1.itemId === i2.itemId ?
+export const equipSorting = (eq1: EquipInfo, eq2: EquipInfo) => eq1.rankId - eq2.rankId;
+export const itemSorting = (i1: ItemInfo, i2: ItemInfo) => i1.itemId === i2.itemId ?
     i1.itemData - i2.itemData :
     i1.itemId - i2.itemId;
 

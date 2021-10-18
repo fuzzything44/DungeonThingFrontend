@@ -12,7 +12,8 @@ export const EQUIP_TYPES = {
 export const ITEM_MAPPINGS = {
     RANK_ORB: 1,
     REINFORCE_COUPON: 2,
-    ELEMENT_TOTEM: 3
+    ELEMENT_TOTEM: 3,
+    CONSTRUCTION_MATERIAL: 4
 }
 
 interface FullItemInformation {
@@ -50,6 +51,12 @@ export function getItemInformation(id: number, data: number): FullItemInformatio
                 description: "This is a totem used to change your mastered element, allowing you to acquire and use skills of that element. Use it to choose an element to align with. \nFire tends to focus around dealing as much damage as possible, even to the detriment of your  own health.\nWater focuses around healing and slowing your opponent.\nEarth focuses around preventing and reducing damage you take.\nAir focuses around increasing your own stats.",
                 useOptions: ["fire", "water", "earth", "air"]
             };
+        case ITEM_MAPPINGS.CONSTRUCTION_MATERIAL:
+            return {
+                name: "Coming Soon!",
+                imageFolder: none,
+                description: "This will be a unique series of items mainly used for upgrading guild bonuses. They'll be acquired from a new dungeon!"
+            }
         default:
             return {
                 name: "Unknown item " + id.toString() + " +" + data.toString(), imageFolder: none, description: "???"

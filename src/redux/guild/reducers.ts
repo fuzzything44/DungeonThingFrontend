@@ -1,4 +1,6 @@
-import { GuildState, GuildAction, SET_GUILD_INFO, SET_GUILD_MESSAGE, SET_GUILD_DISCORD } from "./types";
+import { GuildState, GuildAction, SET_GUILD_INFO, SET_GUILD_MESSAGE, SET_GUILD_DISCORD, REMOVE_GUILD_APPLICATION, REMOVE_GUILD_MEMBER, SET_GUILD_ITEM_AMOUNT } from "./types";
+import { ItemInfo } from "../../api/ApiObjects";
+import { itemSorting } from "../inventory/reducers";
 
 const initialState: GuildState = {
     name: "Loading...",
@@ -37,6 +39,27 @@ export function guildReducer(state = initialState, action: GuildAction): GuildSt
             return {
                 ...state,
                 discord: action.discord
+            }
+        case REMOVE_GUILD_APPLICATION:
+            return {
+                ...state,
+                applications: state.applications.filter(app => app.id !== action.id)
+            }
+        case REMOVE_GUILD_MEMBER:
+            return {
+                ...state,
+                players: state.players.filter(p => p.id !== action.id)
+            }
+        case SET_GUILD_ITEM_AMOUNT:
+            const sameItem = (item: ItemInfo) => item.itemData === action.info.itemData &&
+                item.itemId === action.info.itemId;
+            // If item doesn't exist, add new item. Otherwise, change amount
+            const newItems = state.items.findIndex(sameItem) === -1 ?
+                [...state.items, { ...action.info, amount: action.amount }].sort(itemSorting) :
+                state.items.map(item => sameItem(item) ? { ...action.info, amount: action.amount } : item);
+            return {
+                ...state,
+                items: newItems.filter(item => item.amount !== 0)
             }
         default:
             return ((_: never) => state)(action);

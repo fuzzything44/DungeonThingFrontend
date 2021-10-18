@@ -1,16 +1,19 @@
 import * as React from 'react';
 import { buttonStyle, border } from '../../styles';
 import { formatNumber } from '../../Util/numberFormat';
-import { GuildBonuses } from '../../api/ApiObjects';
+import { GuildBonuses, callUpgradeGuildBonus, callGuildInfo } from '../../api/ApiObjects';
 import { Icon } from '../../Util/Icon';
 import { ItemDisplay } from '../../inventory/ItemDisplay';
 import { ITEM_MAPPINGS } from '../../inventory/itemInfo';
+import { store } from '../../redux/store';
+import { setGuildInfo } from '../../redux/guild/actions';
 
 
 interface GuildBonusProps {
     level: number;
     type: keyof GuildBonuses;
     canUpgrade: boolean;
+    changeError: (error: string) => void;
 }
 
 interface BonusDetails {
@@ -82,10 +85,20 @@ const BONUSES: {[t in keyof GuildBonuses] : BonusDetails} = {
         effect: "% critical hit rate",
         strength: (level: number) => level / 2,
         maxLevel: 20,
-        upgradeCost: (level: number) => [
-            { amount: 5, item: <ItemDisplay itemId={ITEM_MAPPINGS.RANK_ORB} itemData={level + 1} amount={5} /> },
-            { amount: 25, item: "GP" }
-        ]
+        upgradeCost: (level: number) => {
+            if (level >= 10) {
+                return [
+                    { amount: 5, item: <ItemDisplay itemId={ITEM_MAPPINGS.RANK_ORB} itemData={level + 1} amount={5} /> },
+                    { amount: 250 * (level - 9), item: <ItemDisplay itemId={ITEM_MAPPINGS.CONSTRUCTION_MATERIAL} itemData={1} amount={250 * (level - 9)} /> },
+                    { amount: 25, item: "GP" }
+                ];
+            } else {
+                return [
+                    { amount: 5, item: <ItemDisplay itemId={ITEM_MAPPINGS.RANK_ORB} itemData={level + 1} amount={5} /> },
+                    { amount: 25, item: "GP" }
+                ];
+            }
+        }
     },
     crit_dmg: {
         name: "Giant sandbags",
@@ -93,7 +106,12 @@ const BONUSES: {[t in keyof GuildBonuses] : BonusDetails} = {
         strength: (level: number) => level,
         maxLevel: 50,
         upgradeCost: (level: number) => [
-            { amount: 200 * (level + 1), item: <ItemDisplay itemId={ITEM_MAPPINGS.REINFORCE_COUPON} itemData={1} amount={200 * (level + 1)} /> },
+            { amount: 200 * (level + 1), item: <ItemDisplay 
+                itemId={ITEM_MAPPINGS.REINFORCE_COUPON}
+                itemData={1}
+                amount={200 * (level + 1)}
+            />
+            },
             { amount: 15, item: "GP" }
         ]
     },
@@ -102,7 +120,13 @@ const BONUSES: {[t in keyof GuildBonuses] : BonusDetails} = {
         effect: "% damage (applied before AND after raid softcap)",
         strength: (level: number) => level / 4,
         maxLevel: 100,
-        upgradeCost: (level: number) => [{ amount: 17, item: "thingy" }]
+        upgradeCost: (level: number) => [{
+            amount: 1, item: <ItemDisplay
+                itemId={ITEM_MAPPINGS.CONSTRUCTION_MATERIAL}
+                itemData={1}
+                amount={1}
+            />
+        }]
     },
     skill_slots: {
         name: "Library",
@@ -124,7 +148,13 @@ const BONUSES: {[t in keyof GuildBonuses] : BonusDetails} = {
         maxLevel: 50,
         upgradeCost: (level: number) => {
             if (level + 1 < 25) {
-                return []; // Normal stuff?
+                return [{
+                    amount: 1, item: <ItemDisplay
+                        itemId={ITEM_MAPPINGS.CONSTRUCTION_MATERIAL}
+                        itemData={1}
+                        amount={1}
+                    />
+                }]; // Normal stuff?
             } else {
                 return []; // Maybe take a raid drop?
             }
@@ -140,7 +170,17 @@ export const GuildBonus: React.FC<GuildBonusProps> = (props) => {
         <div style={{ ...border, borderRadius: "0.3em", marginTop: "0.2em" }}>
             +{formatNumber(details.strength(props.level))}{details.effect}
             {props.canUpgrade && props.level < details.maxLevel ? <div style={{ paddingLeft: "2em"}}>
-                <button style={buttonStyle}>Upgrade</button> for:
+                <button
+                    style={buttonStyle}
+                    onClick={() => {
+                        callUpgradeGuildBonus({ name: props.type }).catch(e => props.changeError(e.message));
+                        callGuildInfo({ id: store.getState().player.guild })
+                            .then(info => store.dispatch(setGuildInfo(info)))
+                            .catch(e => props.changeError(e.message));
+                    }}
+                >
+                    Upgrade
+                </button> for:
                 <ul style={{ listStyleType: "none", margin: "0.1em" }}>
                     {details.upgradeCost(props.level).map((cost, i) => <li key={i}>{formatNumber(cost.amount)} {cost.item}</li>)}
                 </ul>

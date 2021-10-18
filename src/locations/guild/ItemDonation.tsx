@@ -1,10 +1,14 @@
 import * as React from 'react';
 import { buttonStyle } from '../../styles';
 import { ItemDisplay } from '../../inventory/ItemDisplay';
-import { ItemInfo } from '../../api/ApiObjects';
+import { ItemInfo, callAddToGuildStorage } from '../../api/ApiObjects';
+import { store } from '../../redux/store';
+import { changeItemAmount } from '../../redux/inventory/actions';
+import { setGuildItemAmount } from '../../redux/guild/actions';
 
 interface DonateProps {
     item: ItemInfo;
+    changeError: (error: string) => void;
 }
 
 export const ItemDonation: React.FC<DonateProps> = (props) => {
@@ -21,11 +25,20 @@ export const ItemDonation: React.FC<DonateProps> = (props) => {
             />
             <button
                 style={buttonStyle}
-                onClick={() => alert(donated)}
+                onClick={() => {
+                    callAddToGuildStorage({
+                        item_id: props.item.itemId,
+                        item_data: props.item.itemData,
+                        item_amount: donated
+                    }).then(() => {
+                        store.dispatch(changeItemAmount(props.item, props.item.amount - donated));
+                        const heldInGuild = store.getState().guild.items.find(item => item.itemId === props.item.itemId && item.itemData === props.item.itemData);
+                        store.dispatch(setGuildItemAmount(props.item, (heldInGuild ? heldInGuild.amount : 0) + donated));
+                    }).catch(e => props.changeError(e.message));
+                }}
             >
                 Donate
             </button>
         </div>
-        
     </div>;
 }

@@ -17,7 +17,7 @@ export type GuildState =  {
 export const SET_GUILD_INFO = "SET_GUILD_INFO";
 export interface SetGuildInfoAction {
     type: typeof SET_GUILD_INFO;
-    info: GuildInfoResponse;
+    info: Partial<GuildInfoResponse>;
 }
 
 export const SET_GUILD_MESSAGE = "SET_GUILD_MESSAGE";
@@ -32,4 +32,28 @@ export interface SetGuildDiscordAction {
     discord: string;
 }
 
-export type GuildAction = SetGuildInfoAction | SetGuildMessageAction | SetGuildDiscordAction;
+export const REMOVE_GUILD_APPLICATION = "REMOVE_GUILD_APPLICATION";
+export interface RemoveGuildApplicationAction {
+    type: typeof REMOVE_GUILD_APPLICATION;
+    id: number;
+}
+
+export const REMOVE_GUILD_MEMBER = "REMOVE_GUILD_MEMBER";
+export interface RemoveGuildMemberAction {
+    type: typeof REMOVE_GUILD_MEMBER;
+    id: number;
+}
+
+export const SET_GUILD_ITEM_AMOUNT = "SET_GUILD_ITEM_AMOUNT";
+export interface SetGuildItemAmountAction {
+    type: typeof SET_GUILD_ITEM_AMOUNT;
+    info: ItemInfo;
+    amount: number;
+}
+
+export type GuildAction = SetGuildInfoAction
+    | SetGuildMessageAction
+    | SetGuildDiscordAction
+    | RemoveGuildApplicationAction
+    | RemoveGuildMemberAction
+    | SetGuildItemAmountAction;

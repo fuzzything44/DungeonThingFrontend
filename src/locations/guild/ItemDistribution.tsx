@@ -1,12 +1,16 @@
 import * as React from 'react';
 import { buttonStyle } from '../../styles';
 import { ItemDisplay } from '../../inventory/ItemDisplay';
-import { ItemInfo, PlayerInfo } from '../../api/ApiObjects';
+import { ItemInfo, PlayerInfo, callSendFromGuildStorage, callGetGifts } from '../../api/ApiObjects';
+import { store } from '../../redux/store';
+import { setGuildItemAmount } from '../../redux/guild/actions';
+import { setGifts } from '../../redux/inventory/actions';
 
 interface DistributionProps {
     item: ItemInfo;
     self: PlayerInfo;
     members: PlayerInfo[];
+    changeError: (error: string) => void;
 }
 
 export const ItemDistribution: React.FC<DistributionProps> = (props) => {
@@ -36,7 +40,19 @@ export const ItemDistribution: React.FC<DistributionProps> = (props) => {
             <br/>
             <button
                 style={{ ...buttonStyle, marginTop: "0.2em", backgroundColor: player === -1 ? "gray" : buttonStyle.backgroundColor }}
-                onClick={() => alert(distributeAmt + "," + player)}
+                onClick={() => {
+                    callSendFromGuildStorage({
+                        player: player,
+                        item_id: props.item.itemId,
+                        item_data: props.item.itemData,
+                        amount: distributeAmt
+                    }).then(() => {
+                        store.dispatch(setGuildItemAmount(props.item, props.item.amount - distributeAmt));
+                        if (player === props.self.id) {
+                            callGetGifts({}).then(gifts => store.dispatch(setGifts(gifts.gifts)));
+                        }
+                    }).catch(e => props.changeError(e.message));
+                }}
                 disabled={player === -1}
             >
                 Distribute

@@ -8,6 +8,7 @@ import { setQuestDays, setQuests } from '../../../redux/quests/actions';
 import { ErrorBox } from '../../../Util/ErrorBox';
 import { QuestShop } from './QuestShop';
 import { TextRadioGroup } from '../../../Util/TextRadioGroup';
+import { GuildQuests } from './GuildQuests';
 
 interface QuestListProps {
     weeklyRefresh: number | "?";
@@ -16,6 +17,7 @@ interface QuestListProps {
 }
 
 const TOTAL_WEEKLY_QUESTS = 5;
+const TOTAL_GUILD_QUESTS = 5;
 
 const QuestListUnmapped: React.FC<QuestListProps> = (props) => {
     const [showQuests, changeShowQuests] = React.useState(false);
@@ -31,7 +33,8 @@ const QuestListUnmapped: React.FC<QuestListProps> = (props) => {
     }, []);
 
     const weeklies = props.allQuests.slice(0, TOTAL_WEEKLY_QUESTS);
-    const rest = props.allQuests.slice(TOTAL_WEEKLY_QUESTS, props.allQuests.length);
+    const guild = props.allQuests.slice(TOTAL_WEEKLY_QUESTS, TOTAL_WEEKLY_QUESTS + TOTAL_GUILD_QUESTS);
+    const rest = props.allQuests.slice(TOTAL_WEEKLY_QUESTS + TOTAL_GUILD_QUESTS, props.allQuests.length);
 
     return <>
         <button
@@ -64,6 +67,7 @@ const QuestListUnmapped: React.FC<QuestListProps> = (props) => {
             </div>
             {tab === "QUESTS" ? <>
                 <WeeklyQuests refreshDays={props.weeklyRefresh} quests={weeklies} />
+                <GuildQuests quests={guild} />
                 {rest.length ? <h2>Other Quests - how did you get this? </h2> : null}
             </> : <QuestShop gold={props.gold} />}
             

@@ -8,6 +8,7 @@ import { Icon } from '../../Util/Icon';
 import { ResourceDonation } from './ResourceDonation';
 import { ItemDonation } from './ItemDonation';
 import { ItemDistribution } from './ItemDistribution';
+import { ErrorBox } from '../../Util/ErrorBox';
 
 interface StateProps {
     playerItems: ItemInfo[];
@@ -28,6 +29,7 @@ type TreasuryProps = StateProps & PassedProps;
 
 const TreasuryUnmapped: React.FC<TreasuryProps> = (props) => {
     const [modalOpen, changeModalOpen] = React.useState(false);
+    const [error, changeError] = React.useState("");
 
     React.useEffect(() => {
         callGetInventory({}).then(data => {
@@ -54,7 +56,8 @@ const TreasuryUnmapped: React.FC<TreasuryProps> = (props) => {
             />
         </button>
         {modalOpen ? <Modal title="Guild Treasury" onClose={() => changeModalOpen(false)}>
-            <div style={{ width: "60vw"}} />
+            <div style={{ width: "60vw" }} />
+            {error ? <ErrorBox message={error} /> : null}
             <h2>Guild Resources</h2>
             <section style={{ margin: "0.5em", overflow: "auto" }}>
                 {/* Display resources in 2-column format */}
@@ -73,6 +76,7 @@ const TreasuryUnmapped: React.FC<TreasuryProps> = (props) => {
                     key={JSON.stringify(item)}
                     self={props.self}
                     members={props.members}
+                    changeError={changeError}
                 />)}
             </section>
             <hr />
@@ -80,15 +84,29 @@ const TreasuryUnmapped: React.FC<TreasuryProps> = (props) => {
             <section style={{ margin: "0.5em", overflow: "auto" }}>
                 {/* Display resources in 2-column format */}
                 <div style={{ float: "left", width: "50%" }}>
-                    <ResourceDonation amountHeld={props.playerMana} resource={<Icon icon="mana" />} name="mana" />
+                    <ResourceDonation
+                        amountHeld={props.playerMana}
+                        resource={<Icon icon="mana" />}
+                        name="mana"
+                        changeError={changeError}
+                    />
                 </div>
                 <div>
-                    <ResourceDonation amountHeld={props.playerGold} resource={<Icon icon="gold" />} name="gold" />
+                    <ResourceDonation
+                        amountHeld={props.playerGold}
+                        resource={<Icon icon="gold" />}
+                        name="gold"
+                        changeError={changeError}
+                    />
                 </div>
             </section>
             <h2>Your Items</h2>
             <section>
-                {props.playerItems.map(item => <ItemDonation item={item} key={JSON.stringify(item)} />)}
+                {props.playerItems.map(item => <ItemDonation
+                    item={item}
+                    key={JSON.stringify(item)}
+                    changeError={changeError}
+                />)}
             </section>
         </Modal> : null}
     </>;

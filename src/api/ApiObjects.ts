@@ -86,7 +86,7 @@ export interface ItemListing {
 export interface PlayerInfo {
     id: number;
     name: string;
-    last_login: Date;
+    last_login: string;
     position: 'GM' | 'SUBMASTER' | 'MEMBER';
 }
 export interface QuestInfo {
@@ -114,6 +114,42 @@ export interface UpdateCombat {
     time_offset: number;
 }
 
+export interface AddToGuildStorageParams {
+    mana?: number;
+    gold?: number;
+    item_id?: number;
+    item_data?: number;
+    item_amount?: number;
+}
+export interface AddToGuildStorageResponse {
+    
+}
+export function callAddToGuildStorage(params: AddToGuildStorageParams): Promise<AddToGuildStorageResponse> {
+    return makeCall<AddToGuildStorageResponse>({...params, api: "add_to_guild_storage"}).then(data => { 
+        if ("error" in data) {
+            throw new Error(data["error"]);
+        } else { 
+            return data; 
+        } 
+    });
+}
+ 
+export interface ApplyToGuildParams {
+    name: string;
+}
+export interface ApplyToGuildResponse {
+    
+}
+export function callApplyToGuild(params: ApplyToGuildParams): Promise<ApplyToGuildResponse> {
+    return makeCall<ApplyToGuildResponse>({...params, api: "apply_guild"}).then(data => { 
+        if ("error" in data) {
+            throw new Error(data["error"]);
+        } else { 
+            return data; 
+        } 
+    });
+}
+ 
 export interface BuyItemParams {
     id: number;
 }
@@ -252,6 +288,22 @@ export function callCreateAccount(params: CreateAccountParams): Promise<CreateAc
     });
 }
  
+export interface CreateGuildParams {
+    name: string;
+}
+export interface CreateGuildResponse {
+    id: number;
+}
+export function callCreateGuild(params: CreateGuildParams): Promise<CreateGuildResponse> {
+    return makeCall<CreateGuildResponse>({...params, api: "create_guild"}).then(data => { 
+        if ("error" in data) {
+            throw new Error(data["error"]);
+        } else { 
+            return data; 
+        } 
+    });
+}
+ 
 export interface DestroyParams {
     id: number;
 }
@@ -318,6 +370,23 @@ export interface GuildInfoResponse {
 }
 export function callGuildInfo(params: GuildInfoParams): Promise<GuildInfoResponse> {
     return makeCall<GuildInfoResponse>({...params, api: "guild_info"}).then(data => { 
+        if ("error" in data) {
+            throw new Error(data["error"]);
+        } else { 
+            return data; 
+        } 
+    });
+}
+ 
+export interface HandleGuildApplicationParams {
+    char_id: number;
+    accept: boolean;
+}
+export interface HandleGuildApplicationResponse {
+    
+}
+export function callHandleGuildApplication(params: HandleGuildApplicationParams): Promise<HandleGuildApplicationResponse> {
+    return makeCall<HandleGuildApplicationResponse>({...params, api: "handle_application"}).then(data => { 
         if ("error" in data) {
             throw new Error(data["error"]);
         } else { 
@@ -554,6 +623,22 @@ export function callReinforce(params: ReinforceParams): Promise<ReinforceRespons
     });
 }
  
+export interface RemoveFromGuildParams {
+    id: number;
+}
+export interface RemoveFromGuildResponse {
+    
+}
+export function callRemoveFromGuild(params: RemoveFromGuildParams): Promise<RemoveFromGuildResponse> {
+    return makeCall<RemoveFromGuildResponse>({...params, api: "remove_from_guild"}).then(data => { 
+        if ("error" in data) {
+            throw new Error(data["error"]);
+        } else { 
+            return data; 
+        } 
+    });
+}
+ 
 export interface ReturnSaleItemParams {
     id: number;
 }
@@ -570,6 +655,25 @@ export function callReturnSaleItem(params: ReturnSaleItemParams): Promise<Return
     });
 }
  
+export interface SendFromGuildStorageParams {
+    player: number;
+    item_id: number;
+    item_data: number;
+    amount: number;
+}
+export interface SendFromGuildStorageResponse {
+    
+}
+export function callSendFromGuildStorage(params: SendFromGuildStorageParams): Promise<SendFromGuildStorageResponse> {
+    return makeCall<SendFromGuildStorageResponse>({...params, api: "send_from_guild_storage"}).then(data => { 
+        if ("error" in data) {
+            throw new Error(data["error"]);
+        } else { 
+            return data; 
+        } 
+    });
+}
+ 
 export interface SetAssignedSkillsParams {
     skills: number[];
 }
@@ -578,6 +682,40 @@ export interface SetAssignedSkillsResponse {
 }
 export function callSetAssignedSkills(params: SetAssignedSkillsParams): Promise<SetAssignedSkillsResponse> {
     return makeCall<SetAssignedSkillsResponse>({...params, api: "set_assigned_skills"}).then(data => { 
+        if ("error" in data) {
+            throw new Error(data["error"]);
+        } else { 
+            return data; 
+        } 
+    });
+}
+ 
+export interface SetGuildInfoParams {
+    discord?: string;
+    motd?: string;
+}
+export interface SetGuildInfoResponse {
+    
+}
+export function callSetGuildInfo(params: SetGuildInfoParams): Promise<SetGuildInfoResponse> {
+    return makeCall<SetGuildInfoResponse>({...params, api: "set_guild_info"}).then(data => { 
+        if ("error" in data) {
+            throw new Error(data["error"]);
+        } else { 
+            return data; 
+        } 
+    });
+}
+ 
+export interface SetGuildRankParams {
+    player: number;
+    rank: string;
+}
+export interface SetGuildRankResponse {
+    
+}
+export function callSetGuildRank(params: SetGuildRankParams): Promise<SetGuildRankResponse> {
+    return makeCall<SetGuildRankResponse>({...params, api: "set_guild_rank"}).then(data => { 
         if ("error" in data) {
             throw new Error(data["error"]);
         } else { 
@@ -658,6 +796,22 @@ export interface UpgradeAttributeResponse {
 }
 export function callUpgradeAttribute(params: UpgradeAttributeParams): Promise<UpgradeAttributeResponse> {
     return makeCall<UpgradeAttributeResponse>({...params, api: "upgrade_attribute"}).then(data => { 
+        if ("error" in data) {
+            throw new Error(data["error"]);
+        } else { 
+            return data; 
+        } 
+    });
+}
+ 
+export interface UpgradeGuildBonusParams {
+    name: string;
+}
+export interface UpgradeGuildBonusResponse {
+    
+}
+export function callUpgradeGuildBonus(params: UpgradeGuildBonusParams): Promise<UpgradeGuildBonusResponse> {
+    return makeCall<UpgradeGuildBonusResponse>({...params, api: "upgrade_guild_bonus"}).then(data => { 
         if ("error" in data) {
             throw new Error(data["error"]);
         } else { 

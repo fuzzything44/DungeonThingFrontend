@@ -1,13 +1,14 @@
 [
   {
-    "date": "??? - Guilds!",
+    "date": "October 17th, 2021 - Guilds!",
     "updates": [
       "Added player guilds. Band together with up to 9 (or 19, eventually) other players",
       "You can donate your stuff to your guild, and items can be redistributed to different players",
       "Items and resources are also used to upgrade guild bonuses, which are extra stats given to everyone in the guild!",
       "TODO: Guilds come with various new quests, resetting on a monthly basis",
       "Skill slot attribute cost nerf: 10m/100m -> 1.5m/25m",
-      "Added a couple more images for items, before it uses the fallback version"
+      "Added a couple more images for items, before it uses the fallback version",
+      "Changed some backend things to hopefully prevent concurrency issues. This may have unintended side effects though."
     ]
   },
   {

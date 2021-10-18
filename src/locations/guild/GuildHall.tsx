@@ -17,6 +17,7 @@ interface StateProps {
     guildName: string;
     players: PlayerInfo[];
     playerId: number;
+    guildId: number;
     maxSize: number;
     message: string;
     discord: string;
@@ -34,10 +35,10 @@ const GuildHallUnmapped: React.FC<GuildHallProps> = (props) => {
     const [error, changeError] = React.useState("");
 
     React.useEffect(() => {
-        callGuildInfo({ id: props.playerId })
+        callGuildInfo({ id: props.guildId })
             .then(info => store.dispatch(setGuildInfo(info)))
             .catch((e) => changeError(e.message));
-    }, []);
+    }, [props.guildId]);
 
     if (!isLoggedIn()) {
         return <Redirect to={PAGES.LOGIN} />;
@@ -48,7 +49,7 @@ const GuildHallUnmapped: React.FC<GuildHallProps> = (props) => {
         self = {
             id: props.playerId,
             name: "",
-            last_login: new Date(),
+            last_login: new Date().toString(),
             position: "MEMBER"
         };
     }
@@ -97,6 +98,7 @@ function mapStateToProps(state: RootState): StateProps {
         guildName: state.guild.name,
         players: state.guild.players,
         playerId: playerId(),
+        guildId: state.player.guild,
         maxSize: state.guild.max_size,
         message: state.guild.message,
         discord: state.guild.discord,
