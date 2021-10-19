@@ -46,6 +46,7 @@ export function setUser(id: number, authToken: string) {
 
 export function playerId() { return charId; }
 
+let callInProgress: boolean;
 let callsToMake: CallbackListElement[] = [];
 export function makeCall<T>(request: object): Promise<T | { error: string }> {
     return new Promise((resolve, reject) => {
@@ -55,8 +56,9 @@ export function makeCall<T>(request: object): Promise<T | { error: string }> {
             reject: reject,
             call: request
         });
-        // If list was empty, add a resolver
-        if (callsToMake.length === 1) {
+        // If no call already in progress, set it to be.
+        if (!callInProgress) {
+            callInProgress = true;
             setTimeout(callResolver, 10);
         }
     })
@@ -68,8 +70,6 @@ function callResolver() {
 
     // Only send 25 requests at a time.
     let toMake = callsToMake.splice(0, 25);
-    // If there were more than that, we'll chain this again.
-    let doChain = callsToMake.length > 0;
     realMakeCall(toMake.map(call => call.call)).then(results => {
         results.forEach((result, index) => {
             if (toMake[index].call["api"] === "login" || toMake[index].call["api"] === "create_account") {
@@ -83,9 +83,11 @@ function callResolver() {
             call.reject(error);
         });
     }).finally(() => {
-        if (doChain) {
+        if (callsToMake.length > 0) {
             // Another 10ms delay incase the resolved promises add new calls that we could also handle.
             setTimeout(callResolver, 10);
+        } else {
+            callInProgress = false;
         }
     });
 }

@@ -72,7 +72,7 @@ const GuildHallUnmapped: React.FC<GuildHallProps> = (props) => {
         </div> : null}
         <BackArrow />
         <GuildManagement
-            guildName={props.guildName}
+            guildName={props.guildName.replace(/_/g, " ")}
             players={props.players}
             self={self}
             maxSize={props.maxSize}

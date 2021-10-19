@@ -191,7 +191,7 @@ export const createCombatTimeouts = (log: BossLog[], startHp: number, secondOffs
 
 export const runCombat = async () => {
     const { log, start_hp } = store.getState().combat.challengeBossNext ?
-        await callChallengeBoss({}) :
+        await callChallengeBoss({}).catch(() => generateMockCombat()) :
         generateMockCombat();
     createCombatTimeouts(log, start_hp, log[log.length - 1].time);
 };

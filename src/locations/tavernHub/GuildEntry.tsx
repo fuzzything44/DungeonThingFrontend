@@ -27,7 +27,7 @@ const GuildEntryUnmapped: React.FC<GuildEntryProps> = (props) => {
         try {
             changeError("");
             changeApplied("APPLY");
-            await callApplyToGuild({ name: guildName });
+            await callApplyToGuild({ name: guildName.replace(/ /g, "_") });
         } catch (e) {
             changeError(e.message);
             changeApplied("NONE");
@@ -38,7 +38,7 @@ const GuildEntryUnmapped: React.FC<GuildEntryProps> = (props) => {
         try {
             changeError("");
             changeApplied("CREATE");
-            const guildId = await callCreateGuild({ name: newGuildName });
+            const guildId = await callCreateGuild({ name: newGuildName.replace(/ /g, "_") });
             store.dispatch(setPlayerInfo({ guild: guildId.id }));
         } catch (e) {
             changeError(e.message);
