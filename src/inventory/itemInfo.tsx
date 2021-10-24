@@ -90,7 +90,7 @@ export function getItemInformation(id: number, data: number): FullItemInformatio
             }
         case ITEM_MAPPINGS.FLOOR_100_DROPS:
             return {
-                name: "Reality " + ["Fragment", "Shard", "Piece"][data],
+                name: "Reality " + ["", "Fragment", "Shard", "Piece"][data],
                 description: "A part of the fabric of reality, made solid. Only the strongest mages are able to create this.",
                 imageFolder: reality
             }
@@ -110,7 +110,7 @@ export function getItemInformation(id: number, data: number): FullItemInformatio
                     }
             }
         case ITEM_MAPPINGS.MONEY_EXCHANGE:
-            const resource = ["Mana", "Gold"][data];
+            const resource = ["", "Mana", "Gold"][data];
             return {
                 name: resource + " exchange voucher",
                 description: "On use, gives 1 " + resource + ". Hopefully you have a lot of these. ",

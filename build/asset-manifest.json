@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/TavernCellar/static/css/main.673ee383.chunk.css",
-    "main.js": "/TavernCellar/static/js/main.5f42bcd9.chunk.js",
-    "main.js.map": "/TavernCellar/static/js/main.5f42bcd9.chunk.js.map",
+    "main.js": "/TavernCellar/static/js/main.ab183c6c.chunk.js",
+    "main.js.map": "/TavernCellar/static/js/main.ab183c6c.chunk.js.map",
     "runtime-main.js": "/TavernCellar/static/js/runtime-main.0792966a.js",
     "runtime-main.js.map": "/TavernCellar/static/js/runtime-main.0792966a.js.map",
     "static/js/2.daa60a52.chunk.js": "/TavernCellar/static/js/2.daa60a52.chunk.js",
     "static/js/2.daa60a52.chunk.js.map": "/TavernCellar/static/js/2.daa60a52.chunk.js.map",
     "index.html": "/TavernCellar/index.html",
-    "precache-manifest.d97b1c1594fe593b4f64bb73ea1a8bbc.js": "/TavernCellar/precache-manifest.d97b1c1594fe593b4f64bb73ea1a8bbc.js",
+    "precache-manifest.f19bb8d65352f19f1dc9e4914272bf95.js": "/TavernCellar/precache-manifest.f19bb8d65352f19f1dc9e4914272bf95.js",
     "service-worker.js": "/TavernCellar/service-worker.js",
     "static/css/main.673ee383.chunk.css.map": "/TavernCellar/static/css/main.673ee383.chunk.css.map",
     "static/js/2.daa60a52.chunk.js.LICENSE.txt": "/TavernCellar/static/js/2.daa60a52.chunk.js.LICENSE.txt",
@@ -44,6 +44,6 @@
     "static/js/runtime-main.0792966a.js",
     "static/js/2.daa60a52.chunk.js",
     "static/css/main.673ee383.chunk.css",
-    "static/js/main.5f42bcd9.chunk.js"
+    "static/js/main.ab183c6c.chunk.js"
   ]
 }
