@@ -211,8 +211,8 @@ export const GuildBonus: React.FC<GuildBonusProps> = (props) => {
         <summary><span style={buttonStyle}>{details.name} ({props.level}/{details.maxLevel})</span></summary>
         <div style={{ ...border, borderRadius: "0.3em", marginTop: "0.2em" }}>
             +{formatNumber(details.strength(props.level))}{details.effect}
-            {props.canUpgrade && props.level < details.maxLevel ? <div style={{ paddingLeft: "2em"}}>
-                <button
+            {props.level < details.maxLevel ? <div style={{ paddingLeft: "2em"}}>
+                {props.canUpgrade ? <button
                     style={buttonStyle}
                     onClick={() => {
                         callUpgradeGuildBonus({ name: props.type }).catch(e => props.changeError(e.message));
@@ -222,7 +222,7 @@ export const GuildBonus: React.FC<GuildBonusProps> = (props) => {
                     }}
                 >
                     Upgrade
-                </button> for:
+                </button> : "Upgrade "} for:
                 <ul style={{ listStyleType: "none", margin: "0.1em" }}>
                     {details.upgradeCost(props.level).map((cost, i) => {
                         return <li key={i}>{formatNumber(cost.amount)} {cost.item}</li>;

@@ -73,6 +73,7 @@ export const totem: ItemFolder = {
 
 export const construction: ItemFolder = {
     img: [
+        require("./construction/base.png"),
         require("./construction/1.png"),
         require("./construction/2.png"),
         require("./construction/3.png"),
@@ -83,6 +84,7 @@ export const construction: ItemFolder = {
 
 export const reality: ItemFolder = {
     img: [
+        require("./reality/base.png"),
         require("./reality/1.png")
     ],
     base: require("./reality/base.png")
@@ -90,6 +92,7 @@ export const reality: ItemFolder = {
 
 export const gem_coupon: ItemFolder = {
     img: [
+        require("./gem_coupon/base.png"),
         require("./gem_coupon/1.png")
     ],
     base: require("./gem_coupon/base.png")
@@ -97,6 +100,7 @@ export const gem_coupon: ItemFolder = {
 
 export const money_coupon: ItemFolder = {
     img: [
+        require("./money_coupon/base.png"),
         require("./money_coupon/1.png"),
         require("./money_coupon/2.png")
     ],

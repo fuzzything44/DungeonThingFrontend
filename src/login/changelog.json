@@ -15,6 +15,7 @@
       "Buffed crit rate/crit dmg guild bonuses (2x effect)",
       "Reduced coupon cost of crit dmg guild bonus (1/2 cost)",
       "Finalized costs of 2 final guild bonuses. These items can't yet be acquired.",
+      "Allow guild members to see bonus upgrade costs",
       "Bug fix: guild crit rate bonus counted 100x",
       "Bug fix: 1500 Boss kill guild monthly only counted Tavern bosses, not all bosses."
     ]
