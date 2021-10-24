@@ -1,5 +1,25 @@
 [
   {
+    "date": "October 23, 2021",
+    "updates": [
+      "Buffed water and earth skills.",
+      "- Healing Spring: 2-3x heal",
+      "- Rejuvenation: 2x heal",
+      "- Freeze: +~2 more seconds",
+      "- Chill: 2x slow",
+      "- Frostbite: +2% slow per cast",
+      "- Rock Wall: charge time 4 -> 2",
+      "- Clay Armor: increased block for higher levels of skill (level 3 gives 50% instead of 30%)",
+      "- Strength of the Mountain: increase block, charge time 4 -> 3",
+      "- Iron Skin: no changes",
+      "Buffed crit rate/crit dmg guild bonuses (2x effect)",
+      "Reduced coupon cost of crit dmg guild bonus (1/2 cost)",
+      "Finalized costs of 2 final guild bonuses. These items can't yet be acquired.",
+      "Bug fix: guild crit rate bonus counted 100x",
+      "Bug fix: 1500 Boss kill guild monthly only counted Tavern bosses, not all bosses."
+    ]
+  },
+  {
     "date": "October 17th, 2021 - Guilds!",
     "updates": [
       "Added player guilds. Band together with up to 9 (or 19, eventually) other players",

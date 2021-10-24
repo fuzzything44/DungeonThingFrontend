@@ -1,4 +1,4 @@
-import { ItemFolder, rank_orb, reinforce, none, totem } from "../images/items";
+import { ItemFolder, rank_orb, reinforce, none, totem, construction, reality, gem_coupon, money_coupon } from "../images/items";
 import { equipImages } from "../images/equips";
 
 export const EQUIP_TYPES = {
@@ -13,7 +13,11 @@ export const ITEM_MAPPINGS = {
     RANK_ORB: 1,
     REINFORCE_COUPON: 2,
     ELEMENT_TOTEM: 3,
-    CONSTRUCTION_MATERIAL: 4
+
+    CONSTRUCTION_MATERIAL: 4,
+    FLOOR_100_DROPS: 5,
+    GEM_COUPON: 6,
+    MONEY_EXCHANGE: 7
 }
 
 interface FullItemInformation {
@@ -52,10 +56,65 @@ export function getItemInformation(id: number, data: number): FullItemInformatio
                 useOptions: ["fire", "water", "earth", "air"]
             };
         case ITEM_MAPPINGS.CONSTRUCTION_MATERIAL:
+            switch (data) {
+                case 1:
+                    return {
+                        name: "Oak Logs",
+                        description: "Sturdy oak logs, perfect for building with.",
+                        imageFolder: construction
+                    }
+                case 2:
+                    return {
+                        name: "Bricks",
+                        description: "A small pile of high-quality bricks to build with.",
+                        imageFolder: construction
+                    }
+                case 3:
+                    return {
+                        name: "Magic Logs",
+                        description: "The tree grew in a swamp with an unusual amount of mana in the water. A much sought-after building material.",
+                        imageFolder: construction
+                    }
+                case 4:
+                    return {
+                        name: "Marble Slab",
+                        description: "Oh my, how fancy. Whatever you build with this will look great!",
+                        imageFolder: construction
+                    }
+                default:
+                    return {
+                        name: "Unknown material",
+                        description: "This is some unknown construction-related material. If you're seeing this, there's probably a bug somewhere.",
+                        imageFolder: construction
+                    }
+            }
+        case ITEM_MAPPINGS.FLOOR_100_DROPS:
             return {
-                name: "Coming Soon!",
-                imageFolder: none,
-                description: "This will be a unique series of items mainly used for upgrading guild bonuses. They'll be acquired from a new dungeon!"
+                name: "Reality " + ["Fragment", "Shard", "Piece"][data],
+                description: "A part of the fabric of reality, made solid. Only the strongest mages are able to create this.",
+                imageFolder: reality
+            }
+        case ITEM_MAPPINGS.GEM_COUPON:
+            switch (data) {
+                case 1:
+                    return {
+                        name: "Gem Coupon - Sapphire",
+                        description: "Use this coupon to acquire a sapphire gemstone to slot into your equipment.",
+                        imageFolder: gem_coupon
+                    }
+                default:
+                    return {
+                        name: "Unknown gem coupon",
+                        description: "This is a gem coupon, but I don't know what gem it's for. If you're seeing this, it's probably a bug.",
+                        imageFolder: gem_coupon
+                    }
+            }
+        case ITEM_MAPPINGS.MONEY_EXCHANGE:
+            const resource = ["Mana", "Gold"][data];
+            return {
+                name: resource + " exchange voucher",
+                description: "On use, gives 1 " + resource + ". Hopefully you have a lot of these. ",
+                imageFolder: money_coupon
             }
         default:
             return {

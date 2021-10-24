@@ -1,8 +1,5 @@
 import * as React from 'react';
 import { InstanceMenu } from '../../InstanceMenu';
-import { isLoggedIn } from '../../api/makeCall';
-import { Redirect } from 'react-router-dom';
-import { PAGES } from '../../pages';
 import { ExitDoor } from '../tavernHub/ExitDoor';
 import { Anvil } from './Anvil';
 import { Smelter } from './Smelter';
@@ -13,10 +10,6 @@ interface StateProps {
 type ForgeProps = StateProps;
 
 export const Forge: React.FC<ForgeProps> = (props) => {
-    if (!isLoggedIn()) {
-        return <Redirect to={PAGES.LOGIN} />;
-    }
-    
     return <div style={{
         height: "100vh",
         width: "max(100vw, 60em)"

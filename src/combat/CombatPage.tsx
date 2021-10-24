@@ -11,9 +11,6 @@ import { PlayerState } from '../redux/player/types';
 import { border, backgroundSecondary, buttonStyle } from '../styles';
 import { setChallengeBoss, setAutoChallenge, clearAutoChallenge } from '../redux/combat/actions';
 import { getLocationInfo } from './locationInfo';
-import { isLoggedIn } from '../api/makeCall';
-import { Redirect } from 'react-router-dom';
-import { PAGES } from '../pages';
 
 interface StateProps {
     playerState: PlayerState;
@@ -26,10 +23,6 @@ type CombatPageProps = StateProps & DispatchProps;
 const CombatPageUnmapped: React.FC<CombatPageProps> = (props) => {
     const locationInfo = getLocationInfo(props.playerState.dungeon, props.playerState.floor);
     const scrollBackground = props.combatState.enemyType === "NONE" || props.combatState.actions.enemy.type === "ENTERING";
-
-    if (!isLoggedIn()) {
-        return <Redirect to={PAGES.LOGIN} />;
-    }
 
     let enemy: JSX.Element | null;
     if (props.combatState.enemyType === "NONE") {

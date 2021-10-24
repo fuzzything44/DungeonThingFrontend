@@ -10,6 +10,7 @@ import { LOCATIONS } from './locations/locations';
 import { GiftInfo } from './api/ApiObjects';
 import { Gift } from './inventory/Gift';
 import { Modal } from './Util/Modal';
+import { isLoggedIn } from './api/makeCall';
 
 interface StateProps {
     mana: number;
@@ -23,6 +24,10 @@ type InstanceMenuProps = StateProps & {
 
 const InstanceMenuBase: React.FC<InstanceMenuProps> = (props) => {
     const [giftsOpen, changeGiftsOpen] = React.useState(false);
+
+    if (!isLoggedIn()) {
+        window.location.reload();
+    }
 
     return <>
         <div style={{

@@ -24,10 +24,10 @@ export const getLocationInfo = (dungeonId: number, dungeonFloor: number): Locati
             return {
                 backgroundImage: require("../images/tavern_repeat.png"),
                 enemyName: "barrel",
-                bossName: "giant rat",
+                bossName: dungeonFloor !== 100 ? "giant rat" : "Mavrith",
                 enemyHp: linearExponentialScaling(5, 25, 1.05, dungeonFloor),
                 dungeonName: "Tavern Cellar",
-                enemyImages: enemy.cellar
+                enemyImages: dungeonFloor !== 100 ? enemy.cellar : enemy.cellar
             };
         case DUNGEONS.ARMORY:
             return {

@@ -70,3 +70,35 @@ export const totem: ItemFolder = {
     img: [],
     base: require("./totem/base.png")
 }
+
+export const construction: ItemFolder = {
+    img: [
+        require("./construction/1.png"),
+        require("./construction/2.png"),
+        require("./construction/3.png"),
+        require("./construction/4.png")
+    ],
+    base: require("./construction/base.png")
+}
+
+export const reality: ItemFolder = {
+    img: [
+        require("./reality/1.png")
+    ],
+    base: require("./reality/base.png")
+}
+
+export const gem_coupon: ItemFolder = {
+    img: [
+        require("./gem_coupon/1.png")
+    ],
+    base: require("./gem_coupon/base.png")
+}
+
+export const money_coupon: ItemFolder = {
+    img: [
+        require("./money_coupon/1.png"),
+        require("./money_coupon/2.png")
+    ],
+    base: require("./money_coupon/base.png")
+}

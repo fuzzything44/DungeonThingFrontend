@@ -139,7 +139,7 @@ export const getSkillData = (id: number, level: number): SkillData => {
         case WaterSkill.HEALING_SPRING_ID:
             return {
                 name: "Healing Spring - " + SKILL_LEVEL_NAMES[level],
-                desc: `Recover ${[5, 10, 10][level]}% of your max HP`,
+                desc: `Recover ${[15, 25, 30][level]}% of your max HP`,
                 elem: SkillElement.WATER,
                 uses: [1, 2, 2][level],
                 charge: 3,
@@ -150,7 +150,7 @@ export const getSkillData = (id: number, level: number): SkillData => {
         case WaterSkill.REJUVENATION_ID:
             return {
                 name: "Rejuvenation - " + SKILL_LEVEL_NAMES[level],
-                desc: `Recover HP equal to ${[5, 7, 7, 8][level]}% of your attack`,
+                desc: `Recover HP equal to ${[10, 15, 15, 20][level]}% of your attack`,
                 elem: SkillElement.WATER,
                 uses: [1, 1, 2, 3][level],
                 charge: 3,
@@ -161,7 +161,7 @@ export const getSkillData = (id: number, level: number): SkillData => {
         case WaterSkill.FREEZE_ID:
             return {
                 name: "Freeze - " + SKILL_LEVEL_NAMES[level],
-                desc: `Stop all enemy action for ${[2, 3, 3, 4][level]} seconds`,
+                desc: `Stop all enemy action for ${[3, 5, 5, 7][level]} seconds`,
                 elem: SkillElement.WATER,
                 uses: [1, 1, 2, 2][level],
                 charge: 4,
@@ -172,7 +172,7 @@ export const getSkillData = (id: number, level: number): SkillData => {
         case WaterSkill.CHILL_ID:
             return {
                 name: "Chill - " + SKILL_LEVEL_NAMES[level],
-                desc: `Slow the enemy's actions by ${[10, 10, 15, 20][level]}% for 30 seconds`,
+                desc: `Slow the enemy's actions by ${[20, 20, 30, 40][level]}% for 30 seconds`,
                 elem: SkillElement.WATER,
                 uses: [1, 2, 3, 3][level],
                 charge: 4,
@@ -183,7 +183,7 @@ export const getSkillData = (id: number, level: number): SkillData => {
         case WaterSkill.FROSTBITE_ID:
             return {
                 name: "Frostbite - " + SKILL_LEVEL_NAMES[level],
-                desc: `Slow the enemy's action rate by ${[3, 5, 5, 5][level]}%. This lasts until the end of combat. Stacks multiplicatively.`,
+                desc: `Slow the enemy's action rate by ${[5, 7, 7, 10][level]}%. This lasts until the end of combat. Stacks multiplicatively.`,
                 elem: SkillElement.WATER,
                 uses: [1, 1, 2, 3][level],
                 charge: 4,
@@ -198,7 +198,7 @@ export const getSkillData = (id: number, level: number): SkillData => {
                 desc: `Reduces the damage taken from the next attack by ${[50, 75, 100, 100][level]}%.`,
                 elem: SkillElement.EARTH,
                 uses: [2, 2, 3, 4][level],
-                charge: 4,
+                charge: 2,
                 image: require("../../images/skills/earth/rock_wall.png"),
                 maxLvl: 3,
                 skill: new RockWall(level)
@@ -206,7 +206,7 @@ export const getSkillData = (id: number, level: number): SkillData => {
         case EarthSkill.CLAY_ARMOR_ID:
             return {
                 name: "Clay Armor - " + SKILL_LEVEL_NAMES[level],
-                desc: `Gain ${[25, 30, 30, 30][level]}% of attack as flat damage reduction for ${[15, 15, 20, 20][level]} seconds.`,
+                desc: `Gain ${[25, 35, 50, 75][level]}% of attack as flat damage reduction for ${[15, 15, 20, 20][level]} seconds.`,
                 elem: SkillElement.EARTH,
                 uses: [1, 1, 2, 3][level],
                 charge: 4,
@@ -217,10 +217,10 @@ export const getSkillData = (id: number, level: number): SkillData => {
         case EarthSkill.STRENGTH_OF_MOUNTAIN_ID:
             return {
                 name: "Strength of the Mountain - " + SKILL_LEVEL_NAMES[level],
-                desc: `Reduce damage taken by ${[20, 25, 25][level]}% for ${[15, 15, 20][level]} seconds. Applied before Clay Armor.`,
+                desc: `Reduce damage taken by ${[25, 33, 40][level]}% for ${[15, 15, 20][level]} seconds. Applied before Clay Armor.`,
                 elem: SkillElement.EARTH,
                 uses: [1, 1, 2][level],
-                charge: 4,
+                charge: 3,
                 image: require("../../images/skills/earth/strength_mountain.png"),
                 maxLvl: 2,
                 skill: new StrengthOfMountain(level)

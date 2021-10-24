@@ -1,13 +1,11 @@
 import * as React from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { ScrollingBackground } from '../combat/ScrollingBackground';
 import { DEFAULT_ACTION_TIME } from '../combat/combatRunner';
 import { PlayerGif, PlayerActions } from '../Util/PlayerGif';
 import { Modal } from '../Util/Modal';
 import { buttonStyle } from '../styles';
 import { PAGES } from '../pages';
-import { isLoggedIn } from '../api/makeCall';
-
 
 enum IntroductionStates {
     WALKING,
@@ -39,9 +37,6 @@ const IntroductionPage: React.FC<IntroductionProps> = (props) => {
         }
     }, []);
 
-    if (!isLoggedIn()) {
-        return <Redirect to={PAGES.LOGIN} />;
-    }
     return <div>
         <ScrollingBackground paused={phase === IntroductionStates.WALKING_ACROSS ||
             phase === IntroductionStates.AT_TAVERN}

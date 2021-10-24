@@ -1,15 +1,13 @@
 import * as React from 'react';
 import { InstanceMenu } from '../../InstanceMenu';
-import { isLoggedIn, playerId } from '../../api/makeCall';
+import { playerId } from '../../api/makeCall';
 import { BackArrow } from './BackArrow';
 import { GuildManagement } from './GuildManagement';
 import { Treasury } from './Treasury';
 import { RootState, store } from '../../redux/store';
 import { connect } from 'react-redux';
 import { GuildApplications } from './GuildApplications';
-import { Redirect } from 'react-router-dom';
 import { ItemInfo, PlayerInfo, ApplicationInfo, GuildBonuses, callGuildInfo } from '../../api/ApiObjects';
-import { PAGES } from '../../pages';
 import { setGuildInfo } from '../../redux/guild/actions';
 import { ErrorBox } from '../../Util/ErrorBox';
 
@@ -39,10 +37,6 @@ const GuildHallUnmapped: React.FC<GuildHallProps> = (props) => {
             .then(info => store.dispatch(setGuildInfo(info)))
             .catch((e) => changeError(e.message));
     }, [props.guildId]);
-
-    if (!isLoggedIn()) {
-        return <Redirect to={PAGES.LOGIN} />;
-    }
 
     let self = props.players.find(player => player.id === props.playerId);
     if (self === undefined) {

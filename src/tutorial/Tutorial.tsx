@@ -14,6 +14,7 @@ import { MassDestroyTutorial } from "./MassDestroy";
 import { ArmoryTutorial } from "./ArmoryTutorial";
 import { SkillTutorial } from "./SkillTutorial";
 import { GuildTutorial } from "./GuildTutorial";
+import { Floor100Encounter } from "./Floor100";
 
 interface TutorialPossibilities {
     floor: number;
@@ -25,6 +26,7 @@ export interface Tutorial {
     display: React.FC<{}>;
     name: string;
     id: string;
+    closeMessageOverride?: string;
 }
 
 const tutorials: Tutorial[] = [
@@ -37,7 +39,8 @@ const tutorials: Tutorial[] = [
     MassDestroyTutorial,
     ArmoryTutorial,
     SkillTutorial,
-    GuildTutorial
+    GuildTutorial,
+    Floor100Encounter
 ];
 
 interface TutorialProps {
@@ -65,7 +68,9 @@ const TutorialUnmapped: React.FC<TutorialProps> = (props) => {
         }}>
             <TutorialInfo />
             <div style={{ textAlign: "center" }}>
-                <button style={buttonStyle} onClick={finishTutorial}>I understand</button>
+                <button style={buttonStyle} onClick={finishTutorial}>
+                    {nextTutorial.closeMessageOverride ?? "I understand"}
+                </button>
             </div>
         </Modal>
     } else {
@@ -80,7 +85,7 @@ const mapStateToProps = (state: RootState): TutorialProps => {
         lastTutorialShown: state.preferences.lastTutorial,
         dungeon: state.player.dungeon,
         tutorialInfo: {
-            floor: state.player.floor,
+            floor: state.player.max_floor,
             tickets: state.player.tickets
         }
     };

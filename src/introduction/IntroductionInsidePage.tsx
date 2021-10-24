@@ -12,7 +12,6 @@ import { setPlayerInfo, setMana, setManaRate } from '../redux/player/actions';
 import { runCombat } from '../combat/combatRunner';
 import { Redirect } from 'react-router-dom';
 import { PAGES } from '../pages';
-import { isLoggedIn } from '../api/makeCall';
 
 enum IntroductionStates {
     DIALOG_1,
@@ -27,9 +26,6 @@ const IntroductionInsidePage: React.FC<IntroductionProps> = (props) => {
     const [error, changeError] = React.useState("");
     const [redirect, changeRedirect] = React.useState("");
 
-    if (!isLoggedIn()) {
-        return <Redirect to={PAGES.LOGIN} />;
-    }
     if (redirect) {
         return <Redirect to={redirect} />;
     }

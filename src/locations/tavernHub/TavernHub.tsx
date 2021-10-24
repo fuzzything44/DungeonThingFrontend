@@ -7,9 +7,6 @@ import { Barkeeper } from './Barkeeper';
 import { Player } from './Player';
 import { Inventory } from './Inventory';
 import { TavernDoor } from './TavernDoor';
-import { isLoggedIn } from '../../api/makeCall';
-import { Redirect } from 'react-router-dom';
-import { PAGES } from '../../pages';
 import { ExitDoor } from './ExitDoor';
 import { QuestList } from './quests/QuestList';
 import { GuildEntry } from './GuildEntry';
@@ -24,10 +21,6 @@ interface StateProps {
 type TavernHubProps = StateProps;
 
 const TavernHubUnmapped: React.FC<TavernHubProps> = (props) => {
-    if (!isLoggedIn()) {
-        return <Redirect to={PAGES.LOGIN} />;
-    }
-
     return <div style={{
         height: "100vh",
         width: "max(100vw, 45em)"

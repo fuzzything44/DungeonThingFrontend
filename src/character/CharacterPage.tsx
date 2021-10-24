@@ -10,9 +10,6 @@ import { callGetAttributes, GetAttributesResponse } from '../api/ApiObjects';
 import { setAttributeLevel } from '../redux/player/actions';
 import { PlayerState } from '../redux/player/types';
 import { TitleContent } from '../Util/TitleContent';
-import { isLoggedIn } from '../api/makeCall';
-import { Redirect } from 'react-router-dom';
-import { PAGES } from '../pages';
 import { SkillMenu } from './Skills/SkillMenu';
 import { SkillElement } from './Skills/SkillData';
 import { ATTACKS_PER_MIN } from '../combat/combatRunner';
@@ -45,10 +42,6 @@ const CharacterPageUnmapped: React.FC<CharacterProps> = (props) => {
             }
         });
     }, []);
-
-    if (!isLoggedIn()) {
-        return <Redirect to={PAGES.LOGIN} />;
-    }
 
     const avgdamage = props.attack / ATTACKS_PER_MIN;
     const minDmg = formatNumber(avgdamage * (1 - DAMAGE_FUZZING));

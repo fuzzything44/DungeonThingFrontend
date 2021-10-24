@@ -11,9 +11,6 @@ import { setInventory, setGifts } from '../redux/inventory/actions';
 import { MassDestroy } from './MassDestroy';
 import { PlayerGif, PlayerActions } from '../Util/PlayerGif';
 import { DEFAULT_ACTION_TIME } from '../combat/combatRunner';
-import { isLoggedIn } from '../api/makeCall';
-import { Redirect } from 'react-router-dom';
-import { PAGES } from '../pages';
 import { ErrorBox } from '../Util/ErrorBox';
 
 type StateProps = { loaded: false } | {
@@ -43,10 +40,6 @@ const InventoryPageUnmapped: React.FC<InventoryProps> = (_props) => {
             });
         }).catch(() => null);
     }, []);
-
-    if (!isLoggedIn()) {
-        return <Redirect to={PAGES.LOGIN} />;
-    }
 
     const props = _props.state;
     if (!props.loaded) {

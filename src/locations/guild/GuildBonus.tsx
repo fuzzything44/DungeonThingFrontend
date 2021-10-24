@@ -83,7 +83,7 @@ const BONUSES: {[t in keyof GuildBonuses] : BonusDetails} = {
     crit_rate: {
         name: "Practice targets",
         effect: "% critical hit rate",
-        strength: (level: number) => level / 2,
+        strength: (level: number) => level,
         maxLevel: 20,
         upgradeCost: (level: number) => {
             if (level >= 10) {
@@ -103,13 +103,13 @@ const BONUSES: {[t in keyof GuildBonuses] : BonusDetails} = {
     crit_dmg: {
         name: "Giant sandbags",
         effect: "% critical damage",
-        strength: (level: number) => level,
+        strength: (level: number) => level * 2,
         maxLevel: 50,
         upgradeCost: (level: number) => [
-            { amount: 200 * (level + 1), item: <ItemDisplay 
+            { amount: 100 * (level + 1), item: <ItemDisplay 
                 itemId={ITEM_MAPPINGS.REINFORCE_COUPON}
                 itemData={1}
-                amount={200 * (level + 1)}
+                amount={100 * (level + 1)}
             />
             },
             { amount: 15, item: "GP" }
@@ -120,13 +120,37 @@ const BONUSES: {[t in keyof GuildBonuses] : BonusDetails} = {
         effect: "% damage (applied before AND after raid softcap)",
         strength: (level: number) => level / 4,
         maxLevel: 100,
-        upgradeCost: (level: number) => [{
-            amount: 1, item: <ItemDisplay
-                itemId={ITEM_MAPPINGS.CONSTRUCTION_MATERIAL}
-                itemData={1}
-                amount={1}
-            />
-        }]
+        upgradeCost: (level: number) => {
+            let costs = [
+                {
+                    amount: 10 * (level + 1), item: <ItemDisplay
+                        itemId={ITEM_MAPPINGS.CONSTRUCTION_MATERIAL}
+                        itemData={2}
+                        amount={10 * (level + 1)}
+                    />
+                },
+                { amount: 20, item: "GP" }
+            ];
+            if (level >= 50) {
+                costs.unshift({
+                    amount: Math.ceil((level - 49) / 10), item: <ItemDisplay
+                        itemId={ITEM_MAPPINGS.CONSTRUCTION_MATERIAL}
+                        itemData={4}
+                        amount={Math.ceil((level - 49) / 10)}
+                    />
+                });
+            }
+            if (level >= 75) {
+                costs.unshift({
+                    amount: level >= 90 ? 5 : 3, item: <ItemDisplay
+                        itemId={ITEM_MAPPINGS.FLOOR_100_DROPS}
+                        itemData={1}
+                        amount={level >= 90 ? 5 : 3}
+                    />
+                });
+            }
+            return costs;
+        }
     },
     skill_slots: {
         name: "Library",
@@ -147,17 +171,35 @@ const BONUSES: {[t in keyof GuildBonuses] : BonusDetails} = {
         strength: (level: number) => level,
         maxLevel: 50,
         upgradeCost: (level: number) => {
-            if (level + 1 < 25) {
-                return [{
-                    amount: 1, item: <ItemDisplay
+            let costs = [
+                {
+                    amount: 25 * (level + 1), item: <ItemDisplay
                         itemId={ITEM_MAPPINGS.CONSTRUCTION_MATERIAL}
                         itemData={1}
-                        amount={1}
+                        amount={25 * (level + 1)}
                     />
-                }]; // Normal stuff?
-            } else {
-                return []; // Maybe take a raid drop?
+                },
+                { amount: 25, item: "GP" }
+            ];
+            if (level >= 25) {
+                costs.unshift({
+                    amount: 5 * (level - 24), item: <ItemDisplay
+                        itemId={ITEM_MAPPINGS.CONSTRUCTION_MATERIAL}
+                        itemData={3}
+                        amount={5 * (level - 24)}
+                    />
+                });
             }
+            if (level >= 40) {
+                costs.unshift({
+                    amount: level >= 45 ? 3 : 1, item: <ItemDisplay
+                        itemId={ITEM_MAPPINGS.GEM_COUPON}
+                        itemData={1}
+                        amount={level >= 45 ? 3 : 1}
+                    />
+                });
+            }
+            return costs;
         }
     }
 }
@@ -182,7 +224,9 @@ export const GuildBonus: React.FC<GuildBonusProps> = (props) => {
                     Upgrade
                 </button> for:
                 <ul style={{ listStyleType: "none", margin: "0.1em" }}>
-                    {details.upgradeCost(props.level).map((cost, i) => <li key={i}>{formatNumber(cost.amount)} {cost.item}</li>)}
+                    {details.upgradeCost(props.level).map((cost, i) => {
+                        return <li key={i}>{formatNumber(cost.amount)} {cost.item}</li>;
+                    })}
                 </ul>
             </div> : null}
         </div>

@@ -1,8 +1,5 @@
 import * as React from 'react';
 import { InstanceMenu } from '../../InstanceMenu';
-import { isLoggedIn } from '../../api/makeCall';
-import { Redirect } from 'react-router-dom';
-import { PAGES } from '../../pages';
 import { TavernBuilding } from './tavern';
 import { Castle } from './castle';
 import { ForgeBuilding } from './forgeBuilding';
@@ -13,10 +10,6 @@ interface StateProps {
 type TownProps = StateProps;
 
 export const Town: React.FC<TownProps> = (props) => {
-    if (!isLoggedIn()) {
-        return <Redirect to={PAGES.LOGIN} />;
-    }
-
     return <div style={{
         height: "100vh",
         width: "max(100vw, 65em)"
