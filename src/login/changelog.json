@@ -1,5 +1,17 @@
 [
   {
+    "date": "December 4, 2021",
+    "updates": [
+      "Scrapyard is now open. Adventure there to get guild upgrade materials",
+      "- Better art for it is coming soon.",
+      "Guild mana, GP, and gold are now properly formatted",
+      "Added an actual tab icon",
+      "Inventory page displays a maximum of 50 equips, to keep loading times down for those with way too many.",
+      "Mysterious \"Internal Error\"s will now give a random error ID to help me with debugging",
+      "Healing skills are used smarter when fighting bosses."
+    ]
+  },
+  {
     "date": "October 23, 2021",
     "updates": [
       "Buffed water and earth skills.",

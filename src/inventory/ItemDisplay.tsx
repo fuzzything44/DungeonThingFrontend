@@ -27,6 +27,9 @@ function getBorderColor(itemId: number, itemData: number) {
     if (itemId === ITEM_MAPPINGS.ELEMENT_TOTEM) {
         return "blue";
     }
+    if (itemId === ITEM_MAPPINGS.FLOOR_100_DROPS) {
+        return "red";
+    }
     return "black";
 }
 

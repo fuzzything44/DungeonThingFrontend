@@ -91,7 +91,7 @@ export function getItemInformation(id: number, data: number): FullItemInformatio
         case ITEM_MAPPINGS.FLOOR_100_DROPS:
             return {
                 name: "Reality " + ["", "Fragment", "Shard", "Piece"][data],
-                description: "A part of the fabric of reality, made solid. Only the strongest mages are able to create this.",
+                description: "A part of the fabric of reality, made solid. These are exceedingly difficult to create, but can be incredibly powerful.",
                 imageFolder: reality
             }
         case ITEM_MAPPINGS.GEM_COUPON:

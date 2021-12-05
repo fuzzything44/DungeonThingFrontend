@@ -10,6 +10,7 @@ import { GuildApplications } from './GuildApplications';
 import { ItemInfo, PlayerInfo, ApplicationInfo, GuildBonuses, callGuildInfo } from '../../api/ApiObjects';
 import { setGuildInfo } from '../../redux/guild/actions';
 import { ErrorBox } from '../../Util/ErrorBox';
+import { GuildDungeon } from './GuildDungeon';
 
 interface StateProps {
     guildName: string;
@@ -65,6 +66,7 @@ const GuildHallUnmapped: React.FC<GuildHallProps> = (props) => {
             <ErrorBox message={"Could not get guild information: " + error} />
         </div> : null}
         <BackArrow />
+        <GuildDungeon />
         <GuildManagement
             guildName={props.guildName.replace(/_/g, " ")}
             players={props.players}

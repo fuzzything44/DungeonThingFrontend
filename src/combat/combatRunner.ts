@@ -3,7 +3,7 @@ import { store } from "../redux/store";
 import { setCombatAction, setDamage, startCombat, endCombat, setReward, clearChallengeBoss, setChallengeBoss, clearAutoChallenge } from "../redux/combat/actions";
 import { ENTER_TIME, DEATH_TIME } from "./EnemyDisplay";
 import { setMana, setPlayerInfo, setManaRate } from "../redux/player/actions";
-import { getLocationInfo } from "./locationInfo";
+import { getLocationInfo, DUNGEONS } from "./locationInfo";
 import { CombatActor, PlayerCombatActor } from "./CombatSim/CombatActor";
 
 export const ATTACKS_PER_MIN = 25;
@@ -155,7 +155,7 @@ export const createCombatTimeouts = (log: BossLog[], startHp: number, secondOffs
             const _combatStart = store.getState().combat.combatStart;
             const [update, status] = await Promise.all([callUpdate({}), callStatus({})]);
             store.dispatch(setPlayerInfo(status));
-            if (status.max_floor <= status.floor && status.dungeon === 1) {
+            if (status.max_floor <= status.floor && status.dungeon === DUNGEONS.TAVERN_CELLAR) {
                 store.dispatch(clearAutoChallenge());
             }
             if ("log" in update.result) {

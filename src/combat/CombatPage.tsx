@@ -10,7 +10,7 @@ import { CombatLog } from './CombatLog';
 import { PlayerState } from '../redux/player/types';
 import { border, backgroundSecondary, buttonStyle } from '../styles';
 import { setChallengeBoss, setAutoChallenge, clearAutoChallenge } from '../redux/combat/actions';
-import { getLocationInfo } from './locationInfo';
+import { getLocationInfo, DUNGEONS } from './locationInfo';
 
 interface StateProps {
     playerState: PlayerState;
@@ -80,7 +80,8 @@ const CombatPageUnmapped: React.FC<CombatPageProps> = (props) => {
         >
             {props.combatState.challengeBossNext ? "Challenging..." : "Challenge Boss"}
         </button>
-        {props.playerState.max_floor >= 10 && props.playerState.max_floor > props.playerState.floor ? <button
+        {props.playerState.max_floor >= 10 &&
+            (props.playerState.max_floor > props.playerState.floor || props.playerState.dungeon !== DUNGEONS.TAVERN_CELLAR) ? <button
             style={{
                 ...border,
                 backgroundColor: props.combatState.autoChallengeEnabled ? "darkgray" : backgroundSecondary.backgroundColor,

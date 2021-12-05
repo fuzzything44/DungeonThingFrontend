@@ -167,6 +167,23 @@ export const enemy = createEnemyImageMap({
                 require("./enemy/armory/normal/20.png")
             ]
         }
+    },
+    scrapyard: {
+        boss: {
+            attacking: [require("./enemy/scrapyard/boss/attacking.png")],
+            dying: [require("./enemy/scrapyard/boss/dying.png")],
+            entering: [require("./enemy/scrapyard/boss/entering.png")]
+        },
+        regular: {
+            base: require("./enemy/scrapyard/normal/base.png"),
+            dying: [
+                require("./enemy/scrapyard/normal/1.png"),
+                require("./enemy/scrapyard/normal/2.png"),
+                require("./enemy/scrapyard/normal/3.png"),
+                require("./enemy/scrapyard/normal/4.png"),
+                require("./enemy/scrapyard/normal/5.png"),
+                require("./enemy/scrapyard/normal/6.png")
+            ]
+        }
     }
-
 });

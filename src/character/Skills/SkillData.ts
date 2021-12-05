@@ -83,7 +83,7 @@ export const getSkillData = (id: number, level: number): SkillData => {
         case FireSkill.INCINERATE_ID:
             return {
                 name: "Incinerate - " + SKILL_LEVEL_NAMES[level],
-                desc: `Attack with +${[200, 200, 300, 300][level]}% damage, and deal an additional ${[25, 25, 25, 20][level]}% of that hit's damage to yourself`,
+                desc: `Attack with +${[200, 200, 300, 300][level]}% damage, and deal ${[25, 25, 25, 20][level]}% of that hit's damage to yourself`,
                 elem: SkillElement.FIRE,
                 uses: [1, 2, 2, 2][level],
                 charge: 4,

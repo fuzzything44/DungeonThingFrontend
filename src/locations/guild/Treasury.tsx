@@ -9,6 +9,7 @@ import { ResourceDonation } from './ResourceDonation';
 import { ItemDonation } from './ItemDonation';
 import { ItemDistribution } from './ItemDistribution';
 import { ErrorBox } from '../../Util/ErrorBox';
+import { formatNumber } from '../../Util/numberFormat';
 
 interface StateProps {
     playerItems: ItemInfo[];
@@ -62,11 +63,11 @@ const TreasuryUnmapped: React.FC<TreasuryProps> = (props) => {
             <section style={{ margin: "0.5em", overflow: "auto" }}>
                 {/* Display resources in 2-column format */}
                 <div style={{ float: "left", width: "50%" }}>
-                    {props.mana} <Icon icon="mana" /><br />
-                    {props.gp} Guild Points
+                    {formatNumber(props.mana)} <Icon icon="mana" /><br />
+                    {formatNumber(props.gp)} Guild Points
                 </div>
                 <div>
-                    {props.gold} <Icon icon="gold" />
+                    {formatNumber(props.gold)} <Icon icon="gold" />
                 </div>
             </section>
             <h2>Guild Items</h2>

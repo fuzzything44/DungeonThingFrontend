@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "cc7dfd7c6a0f57bebf0b7a7bec2044ce",
+    "revision": "b9e61896f080fef7c39779fd281b0251",
     "url": "/TavernCellar/index.html"
   },
   {
-    "revision": "11cca2d93091aaf32257",
+    "revision": "aee7d346acd253478aca",
     "url": "/TavernCellar/static/css/main.673ee383.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/TavernCellar/static/js/2.daa60a52.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "11cca2d93091aaf32257",
-    "url": "/TavernCellar/static/js/main.ab183c6c.chunk.js"
+    "revision": "aee7d346acd253478aca",
+    "url": "/TavernCellar/static/js/main.90e05e52.chunk.js"
   },
   {
     "revision": "3f5c61ac9c7e805b3c3e",
@@ -206,5 +206,9 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "dfa1ee9db946fa561d8a2e622201baab",
     "url": "/TavernCellar/static/media/mana.dfa1ee9d.png"
+  },
+  {
+    "revision": "880e073beef1ef65e08ed413559d9751",
+    "url": "/TavernCellar/static/media/scrapyard_repeat.880e073b.png"
   }
 ]);

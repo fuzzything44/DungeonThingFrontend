@@ -15,7 +15,8 @@ const linearExponentialScaling = (linearScale: number, base: number, exponential
 
 export const DUNGEONS = {
     TAVERN_CELLAR: 1,
-    ARMORY: 2
+    ARMORY: 2,
+    CONSTRUCTION_ITEMS: 3
 }
 
 export const getLocationInfo = (dungeonId: number, dungeonFloor: number): LocationInfo => {
@@ -37,6 +38,15 @@ export const getLocationInfo = (dungeonId: number, dungeonFloor: number): Locati
                 enemyHp: linearExponentialScaling(5, 5, 1.05, dungeonFloor),
                 dungeonName: "Armory",
                 enemyImages: enemy.armory
+            };
+        case DUNGEONS.CONSTRUCTION_ITEMS:
+            return {
+                backgroundImage: require("../images/scrapyard_repeat.png"),
+                enemyName: "reanimated board",
+                bossName: "pile of rocks",
+                enemyHp: linearExponentialScaling(250, 500, 1.05, dungeonFloor),
+                dungeonName: "Scrapyard",
+                enemyImages: enemy.scrapyard
             };
         default:
             return {

@@ -30,7 +30,8 @@ const DungeonEntrance: React.FC<DungeonEntranceProps> = (props) => {
     return <>
         <button
             style={{
-                height: "100%"
+                height: "100%",
+                width: "100%"
             }}
             onClick={() => {
                 if (props.playerDungeon === props.thisDungeon) {
